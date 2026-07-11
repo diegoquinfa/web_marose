@@ -116,3 +116,8 @@ export const selectGrandTotal = (state: CartStore): number =>
 
 export const selectIsEmpty = (state: CartStore): boolean =>
   state.lines.length === 0
+
+export const selectLinesByProduct =
+  (productName: string) =>
+  (state: CartStore): CartLine[] =>
+    state.lines.filter((l) => l.productName === productName)
