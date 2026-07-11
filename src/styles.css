@@ -70,11 +70,17 @@
 
   /* Animations */
   --animate-bump: bump 0.3s ease-in-out;
+  --animate-nudge: nudge 1.6s ease-in-out infinite;
 }
 
 @keyframes bump {
   0%, 100% { transform: scale(1); }
   50% { transform: scale(1.35); }
+}
+
+@keyframes nudge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(4px); }
 }
 
 @keyframes marquee {
