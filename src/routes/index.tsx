@@ -49,7 +49,8 @@ const bakeryJsonLd = {
 		addressCountry: "CO",
 	},
 	sameAs: [
-    "https://instagram.com/marosectg"
+    "https://instagram.com/marosectg",
+    "https://www.tiktok.com/@marosepostres",
   ],
 	areaServed: {
 		"@type": "City",

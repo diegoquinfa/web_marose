@@ -1,5 +1,13 @@
 import { WHATSAPP_NUMBER } from "./whatsapp-button"
 
+function TiktokGlyph({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
+      <path d="M16.6 2h-3.2v13.5c0 1.5-1.2 2.7-2.7 2.7s-2.7-1.2-2.7-2.7 1.2-2.7 2.7-2.7c.3 0 .6.05.9.14V9.7a5.9 5.9 0 0 0-.9-.07A5.9 5.9 0 0 0 4.8 15.5 5.9 5.9 0 0 0 10.7 21.4a5.9 5.9 0 0 0 5.9-5.9V8.4a8.1 8.1 0 0 0 4.6 1.4V6.6a4.9 4.9 0 0 1-4.6-4.6Z" />
+    </svg>
+  )
+}
+
 function WhatsappGlyph({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" className={className}>
@@ -52,6 +60,15 @@ export function Footer() {
           >
             <InstagramGlyph className="h-4 w-4" />
             Instagram
+          </a>
+          <a
+            href="https://www.tiktok.com/@marosepostres"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-pill bg-cream-card px-5 py-2.5 text-[15px] font-semibold text-cocoa-ink shadow-soft transition-transform duration-200 hover:-translate-y-0.5"
+          >
+            <TiktokGlyph className="h-4 w-4" />
+            TikTok
           </a>
         </div>
 
