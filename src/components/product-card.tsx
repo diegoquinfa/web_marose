@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import { formatCOP } from '#/lib/format.ts'
 import {
   ProductImageCarousel,
   type ProductImage,
@@ -16,9 +17,10 @@ export type Product = {
   name: string
   images: ProductImage[]
   description: string
-  price: string
+  price: number
   flavors?: Flavor[]
   badge?: string
+  selectFlavor?: boolean
 }
 
 const FLAVOR_PILL_CLASSES =
@@ -107,7 +109,7 @@ export function ProductCard({ product }: { product: Product }) {
 
       <div className="mt-5 flex items-center justify-between gap-3">
         <span className="font-sugar-sans text-xl font-bold text-caramel-swirl">
-          {product.price}
+          {formatCOP(product.price)}
         </span>
       </div>
 

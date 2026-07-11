@@ -20,7 +20,8 @@ const PRODUCTS: Product[] = [
     ],
     description:
       '8 Oz de capas cremosas y galleta, suave y fresquito. Nuestro clásico para compartir (o no).',
-    price: '$15.000',
+    price: 15000,
+    selectFlavor: true,
     flavors: [
       { label: 'Limón', color: '#a7c94a', image: '/food/pave_lemon.webp' },
       {
@@ -45,7 +46,8 @@ const PRODUCTS: Product[] = [
     ],
     description:
       'Suaves por dentro, ligeramente crujientes por fuera, con dip de Nutella o Arequipe para hundirlas. Imposible comer solo una.',
-    price: '$18.000',
+    price: 18000,
+    selectFlavor: true,
     flavors: [
       {
         label: 'Dip de Nutella',
@@ -70,7 +72,7 @@ const PRODUCTS: Product[] = [
     ],
     description:
       'Bordes dorados, centro suave y relleno de Nutella derretida. Para quienes creen que el chocolate siempre es buena idea.',
-    price: '$14.000',
+    price: 14000,
     flavors: [{ label: 'Relleno de Nutella', color: '#6b4226' }],
     badge: 'Nuevo',
   },
@@ -84,7 +86,7 @@ const PRODUCTS: Product[] = [
     ],
     description:
       'Mini cake esponjoso y húmedo de zanahoria fresca, con nuez de Brasil y nuez pecana. Pídelo con o sin canela.',
-    price: '$16.000',
+    price: 16000,
     flavors: [{ label: 'Con o sin canela' }],
   },
 ]
