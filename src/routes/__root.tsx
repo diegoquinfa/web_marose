@@ -35,6 +35,14 @@ export const Route = createRootRoute({
         href: '/logos/logo192.webp',
       },
     ],
+    scripts: [
+      {
+        src: "https://analytics.ahrefs.com/analytics.js",
+        async: true,
+        "data-key": "lI2sfaqZ/EGYIIBK8/m9xg",
+      },
+    ],
+
   }),
   shellComponent: RootDocument,
 })
