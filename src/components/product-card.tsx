@@ -95,11 +95,6 @@ export function ProductCard({ product }: { product: Product }) {
   })
   const inCart = cartQty > 0
 
-  const handleSelectFlavor = (flavor: Flavor) => {
-    setSelectedFlavor(flavor)
-    if (flavor.image) carouselRef.current?.scrollToImage(flavor.image)
-  }
-
   // Called from the flavor dialog — adds to cart and closes dialog
   const handleChooseFlavor = (flavor: Flavor) => {
     setSelectedFlavor(flavor)
@@ -161,18 +156,11 @@ export function ProductCard({ product }: { product: Product }) {
               <FlavorPill
                 key={flavor.label}
                 flavor={flavor}
-                selected={isFlavorSelectable ? selectedFlavor?.label === flavor.label : undefined}
-                ariaLabel={
-                  isFlavorSelectable
-                    ? `Elegir sabor ${flavor.label}`
-                    : `Ver foto de ${flavor.label}`
-                }
+                ariaLabel={`Ver foto de ${flavor.label}`}
                 onClick={
-                  isFlavorSelectable
-                    ? () => handleSelectFlavor(flavor)
-                    : flavorImage
-                      ? () => carouselRef.current?.scrollToImage(flavorImage)
-                      : undefined
+                  flavorImage
+                    ? () => carouselRef.current?.scrollToImage(flavorImage)
+                    : undefined
                 }
               />
             )
