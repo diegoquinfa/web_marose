@@ -38,7 +38,7 @@ export function CartView({ onGoToDetails }: { onGoToDetails: () => void }) {
               Total
             </span>
             <span className="font-sugar-sans text-xl font-bold text-caramel-swirl">
-              {formatCOP(grandTotal)}
+              {formatCOP(grandTotal)} + Domicilio
             </span>
           </div>
         </>

@@ -93,7 +93,7 @@ const PRODUCTS: Product[] = [
 
 export function Menu() {
   return (
-    <section id="menu" className="px-4 py-20 sm:py-24">
+    <section id="menu" className="px-4 py-9">
       <div className="mx-auto max-w-280">
         <div className="relative mb-12 text-center">
           <HeartDoodle className="mx-auto mb-4 h-7 w-7 text-blush-rose" />

@@ -110,7 +110,7 @@ const NOTES = [
 
 export function HowToOrder() {
   return (
-    <section id="como-pedir" className="relative overflow-hidden px-4 py-20 sm:py-24">
+    <section id="como-pedir" className="relative overflow-hidden px-4 py-9">
       {/* scattered background doodles */}
       <HeartDoodle className="absolute left-[6%] top-16 h-6 w-6 rotate-12 text-blush-rose/50" />
       <StarDoodle className="absolute right-[8%] top-24 h-7 w-7 -rotate-12 text-bubblegum-pop/40" />
