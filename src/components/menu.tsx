@@ -1,5 +1,6 @@
 import { ProductCard, type Product } from './product-card'
 import { SwooshUnderline, HeartDoodle } from './doodles'
+import { Reveal, RevealGroup, RevealItem } from './motion/reveal'
 
 const PRODUCTS: Product[] = [
   {
@@ -95,7 +96,7 @@ export function Menu() {
   return (
     <section id="menu" className="px-4 py-9">
       <div className="mx-auto max-w-280">
-        <div className="relative mb-12 text-center">
+        <Reveal className="relative mb-12 text-center">
           <HeartDoodle className="mx-auto mb-4 h-7 w-7 text-blush-rose" />
           <h2 className="font-fondant-display text-4xl font-semibold text-cocoa-ink sm:text-[40px]">
             Nuestro <span className="text-caramel-swirl">menú</span>
@@ -105,13 +106,15 @@ export function Menu() {
             Todo hecho fresco por encargo. Pide el tuyo por WhatsApp y lo
             preparamos con amor.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <RevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((product) => (
-            <ProductCard key={product.name} product={product} />
+            <RevealItem key={product.name}>
+              <ProductCard product={product} />
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
       </div>
     </section>
   )

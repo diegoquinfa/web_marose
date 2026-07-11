@@ -1,4 +1,5 @@
 import { SparkleDoodle, SwooshUnderline } from "./doodles";
+import { Reveal } from "./motion/reveal";
 import { type Review, ReviewCard } from "./review-card";
 
 const REVIEWS: Review[] = [
@@ -65,7 +66,7 @@ export function ReviewsSection() {
 			className="relative overflow-hidden px-0 py-9"
 		>
 			{/* Header */}
-			<div className="relative mb-12 px-4 text-center">
+			<Reveal className="relative mb-12 px-4 text-center">
 				<SparkleDoodle className="mx-auto mb-4 h-7 w-7 text-blush-rose" />
 				<h2 className="font-fondant-display text-4xl font-semibold text-cocoa-ink sm:text-[40px]">
 					Lo que dicen{" "}
@@ -75,7 +76,7 @@ export function ReviewsSection() {
 				<p className="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-cocoa-ink/75">
 					Opiniones reales de quienes ya probaron nuestros postres.
 				</p>
-			</div>
+			</Reveal>
 
 			{/* Marquee viewport */}
 			<div

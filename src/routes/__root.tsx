@@ -42,7 +42,6 @@ export const Route = createRootRoute({
         "data-key": "lI2sfaqZ/EGYIIBK8/m9xg",
       },
     ],
-
   }),
   shellComponent: RootDocument,
 })
@@ -52,6 +51,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
     <html lang="es" className='bg-blush-canvas'>
       <head>
         <HeadContent />
+        <noscript>
+          <style>{'[data-reveal]{opacity:1!important;transform:none!important}'}</style>
+        </noscript>
       </head>
       <body className='antialiased'>
         {children}

@@ -1,4 +1,5 @@
 import { SwooshUnderline, SparkleDoodle, HeartDoodle, StarDoodle } from './doodles'
+import { Reveal, RevealGroup, RevealItem } from './motion/reveal'
 import { WHATSAPP_NUMBER } from './whatsapp-button'
 
 const STEPS = [
@@ -120,7 +121,7 @@ export function HowToOrder() {
       <div className="relative mx-auto max-w-280">
 
         {/* Header */}
-        <div className="relative mb-16 text-center">
+        <Reveal className="relative mb-16 text-center">
           <span className="inline-block rounded-pill bg-sticker-blush px-4 py-1.5 font-handwritten-sugar text-xl text-bubblegum-pop">
             ¡súper fácil!
           </span>
@@ -131,7 +132,7 @@ export function HowToOrder() {
           <p className="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-cocoa-ink/75">
             En cuatro pasos tienes tus postres en camino.
           </p>
-        </div>
+        </Reveal>
 
         {/* Steps with connecting dotted path */}
         <div className="relative">
@@ -152,65 +153,67 @@ export function HowToOrder() {
             />
           </svg>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+          <RevealGroup className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
             {STEPS.map((step) => (
-              <article
-                key={step.number}
-                className={`group relative flex flex-col items-center rounded-card border-2 border-dashed border-cocoa-hairline bg-cream-card px-6 pb-8 pt-12 text-center shadow-soft transition-all duration-300 hover:rotate-0 hover:border-blush-rose hover:shadow-lift ${step.rotate}`}
-              >
-                {/* number badge - floats on top edge like a sticker */}
-                <span
-                  className={`absolute -top-5 left-1/2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full font-fondant-display text-lg font-bold text-white shadow-pop ring-4 ring-cream-card ${step.badgeBg}`}
+              <RevealItem key={step.number}>
+                <article
+                  className={`group relative flex flex-col items-center rounded-card border-2 border-dashed border-cocoa-hairline bg-cream-card px-6 pb-8 pt-12 text-center shadow-soft transition-all duration-300 hover:rotate-0 hover:border-blush-rose hover:shadow-lift ${step.rotate}`}
                 >
-                  {step.number}
-                </span>
+                  {/* number badge - floats on top edge like a sticker */}
+                  <span
+                    className={`absolute -top-5 left-1/2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full font-fondant-display text-lg font-bold text-white shadow-pop ring-4 ring-cream-card ${step.badgeBg}`}
+                  >
+                    {step.number}
+                  </span>
 
-                {/* icon in tinted scalloped circle */}
-                <div className={`relative mb-5 flex h-20 w-20 items-center justify-center rounded-full ${step.iconBg} ${step.iconColor} transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6`}>
-                  {step.icon}
-                  <SparkleDoodle className="absolute -right-1 -top-1 h-4 w-4 text-bubblegum-pop opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                </div>
+                  {/* icon in tinted scalloped circle */}
+                  <div className={`relative mb-5 flex h-20 w-20 items-center justify-center rounded-full ${step.iconBg} ${step.iconColor} transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6`}>
+                    {step.icon}
+                    <SparkleDoodle className="absolute -right-1 -top-1 h-4 w-4 text-bubblegum-pop opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  </div>
 
-                <h3 className="font-fondant-display text-[19px] font-semibold leading-snug text-cocoa-ink">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-pretty text-[15px] leading-relaxed text-cocoa-ink/70">
-                  {step.description}
-                </p>
+                  <h3 className="font-fondant-display text-[19px] font-semibold leading-snug text-cocoa-ink">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-pretty text-[15px] leading-relaxed text-cocoa-ink/70">
+                    {step.description}
+                  </p>
 
-                {/* handwritten note */}
-                <span className="mt-4 font-handwritten-sugar text-lg leading-none text-bubblegum-pop">
-                  {step.handwritten}
-                </span>
-              </article>
+                  {/* handwritten note */}
+                  <span className="mt-4 font-handwritten-sugar text-lg leading-none text-bubblegum-pop">
+                    {step.handwritten}
+                  </span>
+                </article>
+              </RevealItem>
             ))}
-          </div>
+          </RevealGroup>
         </div>
 
         {/* Notes as sticker chips */}
-        <div className="mt-14 grid gap-4 sm:grid-cols-3">
+        <RevealGroup className="mt-14 grid gap-4 sm:grid-cols-3">
           {NOTES.map((note, i) => (
-            <div
-              key={note.label}
-              className={`flex items-start gap-4 rounded-2xl bg-sticker-blush px-5 py-4 ${i === 1 ? 'sm:-rotate-1' : i === 2 ? 'sm:rotate-1' : 'sm:rotate-0'}`}
-            >
-              <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-paper-white text-bubblegum-pop shadow-soft">
-                {note.icon}
-              </span>
-              <div>
-                <p className="font-fondant-display text-[15px] font-semibold text-cocoa-ink">
-                  {note.label}
-                </p>
-                <p className="mt-0.5 text-pretty text-[13.5px] leading-relaxed text-cocoa-ink/70">
-                  {note.text}
-                </p>
+            <RevealItem key={note.label}>
+              <div
+                className={`flex items-start gap-4 rounded-2xl bg-sticker-blush px-5 py-4 ${i === 1 ? 'sm:-rotate-1' : i === 2 ? 'sm:rotate-1' : 'sm:rotate-0'}`}
+              >
+                <span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-paper-white text-bubblegum-pop shadow-soft">
+                  {note.icon}
+                </span>
+                <div>
+                  <p className="font-fondant-display text-[15px] font-semibold text-cocoa-ink">
+                    {note.label}
+                  </p>
+                  <p className="mt-0.5 text-pretty text-[13.5px] leading-relaxed text-cocoa-ink/70">
+                    {note.text}
+                  </p>
+                </div>
               </div>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </RevealGroup>
 
         {/* CTA */}
-        <div className="mt-12 flex flex-col items-center gap-2">
+        <Reveal className="mt-12 flex flex-col items-center gap-2">
           <span className="font-handwritten-sugar text-2xl text-caramel-swirl">
             ¿ya sabes qué vas a pedir?
           </span>
@@ -225,7 +228,7 @@ export function HowToOrder() {
             </svg>
             Hacer mi pedido
           </a>
-        </div>
+        </Reveal>
 
       </div>
     </section>
