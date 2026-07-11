@@ -67,6 +67,14 @@
   --shadow-soft: 0 10px 30px -12px rgba(74, 49, 33, 0.16);
   --shadow-lift: 0 18px 44px -14px rgba(74, 49, 33, 0.22);
   --shadow-pop: 0 14px 36px -12px rgba(231, 131, 176, 0.35);
+
+  /* Animations */
+  --animate-bump: bump 0.3s ease-in-out;
+}
+
+@keyframes bump {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.35); }
 }
 
 @theme inline {

@@ -1,4 +1,5 @@
-import { WhatsappButton } from './whatsapp-button'
+import { CartTrigger } from '#/components/cart/cart-trigger.tsx'
+import { WhatsappButton } from '#/components/whatsapp-button.tsx'
 
 const LINKS = [
   { href: '#menu', label: 'Menú' },
@@ -34,7 +35,10 @@ export function Navbar() {
           ))}
         </ul>
 
-        <WhatsappButton message="Hola Marose, quiero hacer un pedido" className="hidden sm:inline-flex" />
+        <div className="flex items-center gap-2">
+          <CartTrigger />
+          <WhatsappButton message="Hola Marose, quiero hacer un pedido" className="hidden sm:inline-flex" />
+        </div>
       </nav>
     </header>
   )
