@@ -45,7 +45,7 @@ export function Footer() {
             WhatsApp
           </a>
           <a
-            href="https://instagram.com"
+            href="https://instagram.com/marosectg"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 rounded-pill bg-cream-card px-5 py-2.5 text-[15px] font-semibold text-cocoa-ink shadow-soft transition-transform duration-200 hover:-translate-y-0.5"
