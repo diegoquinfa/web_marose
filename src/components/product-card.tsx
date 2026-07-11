@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import { formatCOP } from '#/lib/format.ts'
 import { useCartStore } from '#/stores/cart-store.ts'
 import {
@@ -71,23 +71,24 @@ function FlavorPill({
   )
 }
 
-const ADDED_FEEDBACK_MS = 1500
-
 export function ProductCard({ product }: { product: Product }) {
   const carouselRef = useRef<ProductImageCarouselHandle>(null)
-  const addLine = useCartStore((state) => state.addLine)
+  const addLine = useCartStore((s) => s.addLine)
+  const incrementLine = useCartStore((s) => s.incrementLine)
+  const decrementLine = useCartStore((s) => s.decrementLine)
 
   const isFlavorSelectable = product.selectFlavor === true
   const [selectedFlavor, setSelectedFlavor] = useState<Flavor | undefined>(
     isFlavorSelectable ? product.flavors?.[0] : undefined,
   )
-  const [justAdded, setJustAdded] = useState(false)
 
-  useEffect(() => {
-    if (!justAdded) return
-    const timeout = setTimeout(() => setJustAdded(false), ADDED_FEEDBACK_MS)
-    return () => clearTimeout(timeout)
-  }, [justAdded])
+  // Look up matching cart line for this product + current flavor
+  const cartLineId = `${product.name}::${isFlavorSelectable ? (selectedFlavor?.label ?? '') : ''}`
+  const cartQty = useCartStore((s) => {
+    const line = s.lines.find((l) => l.id === cartLineId)
+    return line?.qty ?? 0
+  })
+  const inCart = cartQty > 0
 
   const handleSelectFlavor = (flavor: Flavor) => {
     setSelectedFlavor(flavor)
@@ -101,7 +102,6 @@ export function ProductCard({ product }: { product: Product }) {
       unitPrice: product.price,
       imageSrc: (isFlavorSelectable ? selectedFlavor?.image : undefined) ?? product.images[0].src,
     })
-    setJustAdded(true)
   }
 
   return (
@@ -158,15 +158,38 @@ export function ProductCard({ product }: { product: Product }) {
         <span className="font-sugar-sans text-xl font-bold text-caramel-swirl">
           {formatCOP(product.price)}
         </span>
+        {inCart ? (
+          <div className="flex items-center gap-1">
+            <button
+              type="button"
+              onClick={() => decrementLine(cartLineId)}
+              className="flex h-9 w-9 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-lg font-bold transition-all duration-200 hover:shadow-soft"
+              aria-label="Disminuir cantidad"
+            >
+              −
+            </button>
+            <span className="w-6 text-center font-sugar-sans text-[17px] font-bold text-cocoa-ink">
+              {cartQty}
+            </span>
+            <button
+              type="button"
+              onClick={() => incrementLine(cartLineId)}
+              className="flex h-9 w-9 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-lg font-bold transition-all duration-200 hover:shadow-soft"
+              aria-label="Aumentar cantidad"
+            >
+              +
+            </button>
+          </div>
+        ) : (
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            className="rounded-pill bg-cocoa-ink px-5 py-2.5 text-[15px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
+          >
+            Agregar al carrito
+          </button>
+        )}
       </div>
-
-      <button
-        type="button"
-        onClick={handleAddToCart}
-        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-pill bg-cocoa-ink px-6 py-3.5 text-[17px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
-      >
-        {justAdded ? '¡Agregado!' : 'Agregar al carrito'}
-      </button>
     </article>
   )
 }
