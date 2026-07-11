@@ -1,4 +1,4 @@
-const WHATSAPP_NUMBER = '573000000000'
+import { WHATSAPP_NUMBER } from "./whatsapp-button"
 
 function WhatsappGlyph({ className }: { className?: string }) {
   return (

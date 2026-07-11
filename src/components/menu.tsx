@@ -4,49 +4,88 @@ import { SwooshUnderline, HeartDoodle } from './doodles'
 const PRODUCTS: Product[] = [
   {
     name: 'Pavé',
-    image:
-      '/food/pave.webp',
-    alt: 'Pavé cremoso servido en bowl de kraft con ralladura de limón',
+    images: [
+      {
+        src: '/food/pave.webp',
+        alt: 'Pavé cremoso servido en bowl de kraft con ralladura de limón',
+      },
+      {
+        src: '/food/pave_lemon.webp',
+        alt: 'Pavé de limón cremoso con ralladura de limón fresca por encima',
+      },
+      {
+        src: '/food/pave_maracuya.webp',
+        alt: 'Pavé de maracuyá con capa dorada de fruta de la pasión',
+      },
+    ],
     description:
       '8 Oz de capas cremosas y galleta, suave y fresquito. Nuestro clásico para compartir (o no).',
     price: '$15.000',
     flavors: [
-      { label: 'Limón', color: '#a7c94a' },
-      { label: 'Maracuyá', color: '#f0b429' },
+      { label: 'Limón', color: '#a7c94a', image: '/food/pave_lemon.webp' },
+      {
+        label: 'Maracuyá',
+        color: '#f0b429',
+        image: '/food/pave_maracuya.webp',
+      },
+    ],
+  },
+  {
+    name: 'Bowl de 18 mini cookies',
+    images: [
+      {
+        src: '/food/cookie_bowl.webp',
+        alt: 'Bowl con 18 mini cookies de chispas de chocolate recién horneadas',
+      },
+
+      {
+        src: '/food/dips_cookies.webp',
+        alt: 'Dip de Nutella o arequipe para las mini cookies',
+      },
+    ],
+    description:
+      'Suaves por dentro, ligeramente crujientes por fuera, con dip de Nutella o Arequipe para hundirlas. Imposible comer solo una.',
+    price: '$18.000',
+    flavors: [
+      {
+        label: 'Dip de Nutella',
+        color: '#6b4226',
+        image: '/food/dips_cookies.webp',
+      },
+      {
+        label: 'Dip de arequipe',
+        color: '#d98a3d',
+        image: '/food/dips_cookies.webp',
+      },
     ],
     badge: 'Favorito',
   },
   {
-    name: 'Bowl de 8 mini cookies',
-    image:
-      '/food/cookie_bowl.webp',
-    alt: 'Bowl con ocho mini cookies de chispas de chocolate recién horneadas',
-    description:
-      'Ocho mini cookies de chispas de chocolate, servidas con un dip para hundirlas.',
-    price: '$18.000',
-    flavors: [
-      { label: 'Dip de Nutella', color: '#6b4226' },
-      { label: 'Dip de arequipe', color: '#d98a3d' },
-    ],
-  },
-  {
     name: 'Cookie pie',
-    image: '/food/cookie_pie_nutella.webp',
-    alt: 'Cookie pie dorada rellena de Nutella derretida',
+    images: [
+      {
+        src: '/food/cookie_pie_nutella.webp',
+        alt: 'Cookie pie dorada rellena de Nutella derretida',
+      },
+    ],
     description:
-      'Una galleta gigante y esponjosa con relleno de Nutella que se derrite en cada mordida.',
+      'Bordes dorados, centro suave y relleno de Nutella derretida. Para quienes creen que el chocolate siempre es buena idea.',
     price: '$14.000',
     flavors: [{ label: 'Relleno de Nutella', color: '#6b4226' }],
     badge: 'Nuevo',
   },
   {
     name: 'Torta de zanahoria',
-    image: '/food/carrot_pie.webp',
-    alt: 'Porción de torta de zanahoria con frosting de queso crema',
+    images: [
+      {
+        src: '/food/carrot_pie.webp',
+        alt: 'Mini cakes de zanahoria con nueces recién horneados en moldes individuales',
+      },
+    ],
     description:
-      'Húmeda, especiada y con un generoso frosting de queso crema. Un abrazo en cada porción.',
+      'Mini cake esponjoso y húmedo de zanahoria fresca, con nuez de Brasil y nuez pecana. Pídelo con o sin canela.',
     price: '$16.000',
-    flavors: [{ label: 'Queso crema', color: '#d98a3d' }],
+    flavors: [{ label: 'Con o sin canela' }],
   },
 ]
 

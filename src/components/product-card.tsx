@@ -1,23 +1,38 @@
+import { useRef } from 'react'
+import {
+  ProductImageCarousel,
+  type ProductImage,
+  type ProductImageCarouselHandle,
+} from './product-image-carousel'
 import { WhatsappButton } from './whatsapp-button'
 
 type Flavor = {
   label: string
   color?: string
+  image?: string
 }
 
 export type Product = {
   name: string
-  image: string
-  alt: string
+  images: ProductImage[]
   description: string
   price: string
   flavors?: Flavor[]
   badge?: string
 }
 
-function FlavorPill({ flavor }: { flavor: Flavor }) {
-  return (
-    <span className="inline-flex items-center gap-2 rounded-pill bg-sticker-blush px-3.5 py-1.5 text-[13px] font-semibold text-cocoa-ink">
+const FLAVOR_PILL_CLASSES =
+  'inline-flex items-center gap-2 rounded-pill bg-sticker-blush px-3.5 py-1.5 text-[13px] font-semibold text-cocoa-ink'
+
+function FlavorPill({
+  flavor,
+  onClick,
+}: {
+  flavor: Flavor
+  onClick?: () => void
+}) {
+  const content = (
+    <>
       {flavor.color && (
         <span
           className="h-2 w-2 rounded-full"
@@ -26,18 +41,35 @@ function FlavorPill({ flavor }: { flavor: Flavor }) {
         />
       )}
       {flavor.label}
-    </span>
+    </>
+  )
+
+  if (!onClick) {
+    return <span className={FLAVOR_PILL_CLASSES}>{content}</span>
+  }
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label={`Ver foto de ${flavor.label}`}
+      className={`${FLAVOR_PILL_CLASSES} cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft`}
+    >
+      {content}
+    </button>
   )
 }
 
 export function ProductCard({ product }: { product: Product }) {
+  const carouselRef = useRef<ProductImageCarouselHandle>(null)
+
   return (
     <article className="group flex flex-col overflow-hidden rounded-card bg-cream-card p-5 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift sm:p-6">
       <div className="relative overflow-hidden rounded-image">
-        <img
-          src={product.image || '/placeholder.svg'}
-          alt={product.alt}
-          className="aspect-square w-full object-cover"
+        <ProductImageCarousel
+          ref={carouselRef}
+          images={product.images}
+          productName={product.name}
         />
         {product.badge && (
           <span className="absolute left-3 top-3 rounded-pill bg-bubblegum-pop px-3 py-1 text-label font-semibold uppercase tracking-[0.08em] text-paper-white shadow-pop">
@@ -52,9 +84,20 @@ export function ProductCard({ product }: { product: Product }) {
 
       {product.flavors && product.flavors.length > 0 && (
         <div className="mt-3 flex flex-wrap gap-2">
-          {product.flavors.map((flavor) => (
-            <FlavorPill key={flavor.label} flavor={flavor} />
-          ))}
+          {product.flavors.map((flavor) => {
+            const flavorImage = flavor.image
+            return (
+              <FlavorPill
+                key={flavor.label}
+                flavor={flavor}
+                onClick={
+                  flavorImage
+                    ? () => carouselRef.current?.scrollToImage(flavorImage)
+                    : undefined
+                }
+              />
+            )
+          })}
         </div>
       )}
 

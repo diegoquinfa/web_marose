@@ -1,4 +1,5 @@
 import { SwooshUnderline, SparkleDoodle, HeartDoodle, StarDoodle } from './doodles'
+import { WHATSAPP_NUMBER } from './whatsapp-button'
 
 const STEPS = [
   {
@@ -214,7 +215,7 @@ export function HowToOrder() {
             ¿ya sabes qué vas a pedir?
           </span>
           <a
-            href="https://wa.me/573000000000?text=Hola%20Marose%2C%20quiero%20hacer%20un%20pedido%20%F0%9F%8D%AA"
+            href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Hola Marose, quiero hacer un pedido')}`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-3 rounded-pill bg-[#25D366] px-8 py-4 font-fondant-display text-[17px] font-semibold text-white shadow-pop transition-transform duration-200 hover:scale-105 active:scale-100"
