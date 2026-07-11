@@ -1,11 +1,11 @@
-import { useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { formatCOP } from '#/lib/format.ts'
+import { useCartStore } from '#/stores/cart-store.ts'
 import {
   ProductImageCarousel,
   type ProductImage,
   type ProductImageCarouselHandle,
 } from './product-image-carousel'
-import { WhatsappButton } from './whatsapp-button'
 
 type Flavor = {
   label: string
@@ -23,15 +23,19 @@ export type Product = {
   selectFlavor?: boolean
 }
 
-const FLAVOR_PILL_CLASSES =
-  'inline-flex items-center gap-2 rounded-pill bg-sticker-blush px-3.5 py-1.5 text-[13px] font-semibold text-cocoa-ink'
+const FLAVOR_PILL_BASE_CLASSES =
+  'inline-flex items-center gap-2 rounded-pill px-3.5 py-1.5 text-[13px] font-semibold'
 
 function FlavorPill({
   flavor,
   onClick,
+  selected,
+  ariaLabel,
 }: {
   flavor: Flavor
   onClick?: () => void
+  selected?: boolean
+  ariaLabel?: string
 }) {
   const content = (
     <>
@@ -46,24 +50,59 @@ function FlavorPill({
     </>
   )
 
+  const toneClasses = selected
+    ? 'bg-cocoa-ink text-paper-white'
+    : 'bg-sticker-blush text-cocoa-ink'
+
   if (!onClick) {
-    return <span className={FLAVOR_PILL_CLASSES}>{content}</span>
+    return <span className={`${FLAVOR_PILL_BASE_CLASSES} ${toneClasses}`}>{content}</span>
   }
 
   return (
     <button
       type="button"
       onClick={onClick}
-      aria-label={`Ver foto de ${flavor.label}`}
-      className={`${FLAVOR_PILL_CLASSES} cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft`}
+      aria-pressed={selected}
+      aria-label={ariaLabel ?? `Ver foto de ${flavor.label}`}
+      className={`${FLAVOR_PILL_BASE_CLASSES} ${toneClasses} cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft`}
     >
       {content}
     </button>
   )
 }
 
+const ADDED_FEEDBACK_MS = 1500
+
 export function ProductCard({ product }: { product: Product }) {
   const carouselRef = useRef<ProductImageCarouselHandle>(null)
+  const addLine = useCartStore((state) => state.addLine)
+
+  const isFlavorSelectable = product.selectFlavor === true
+  const [selectedFlavor, setSelectedFlavor] = useState<Flavor | undefined>(
+    isFlavorSelectable ? product.flavors?.[0] : undefined,
+  )
+  const [justAdded, setJustAdded] = useState(false)
+
+  useEffect(() => {
+    if (!justAdded) return
+    const timeout = setTimeout(() => setJustAdded(false), ADDED_FEEDBACK_MS)
+    return () => clearTimeout(timeout)
+  }, [justAdded])
+
+  const handleSelectFlavor = (flavor: Flavor) => {
+    setSelectedFlavor(flavor)
+    if (flavor.image) carouselRef.current?.scrollToImage(flavor.image)
+  }
+
+  const handleAddToCart = () => {
+    addLine({
+      productName: product.name,
+      flavorLabel: isFlavorSelectable ? (selectedFlavor?.label ?? null) : null,
+      unitPrice: product.price,
+      imageSrc: (isFlavorSelectable ? selectedFlavor?.image : undefined) ?? product.images[0].src,
+    })
+    setJustAdded(true)
+  }
 
   return (
     <article className="group flex flex-col overflow-hidden rounded-card bg-cream-card p-5 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift sm:p-6">
@@ -92,10 +131,18 @@ export function ProductCard({ product }: { product: Product }) {
               <FlavorPill
                 key={flavor.label}
                 flavor={flavor}
+                selected={isFlavorSelectable ? selectedFlavor?.label === flavor.label : undefined}
+                ariaLabel={
+                  isFlavorSelectable
+                    ? `Elegir sabor ${flavor.label}`
+                    : `Ver foto de ${flavor.label}`
+                }
                 onClick={
-                  flavorImage
-                    ? () => carouselRef.current?.scrollToImage(flavorImage)
-                    : undefined
+                  isFlavorSelectable
+                    ? () => handleSelectFlavor(flavor)
+                    : flavorImage
+                      ? () => carouselRef.current?.scrollToImage(flavorImage)
+                      : undefined
                 }
               />
             )
@@ -113,11 +160,13 @@ export function ProductCard({ product }: { product: Product }) {
         </span>
       </div>
 
-      <WhatsappButton
-        message={`Hola Marose, quiero pedir ${product.name}`}
-        label="Pedir por WhatsApp"
-        className="mt-4 w-full"
-      />
+      <button
+        type="button"
+        onClick={handleAddToCart}
+        className="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-pill bg-cocoa-ink px-6 py-3.5 text-[17px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
+      >
+        {justAdded ? '¡Agregado!' : 'Agregar al carrito'}
+      </button>
     </article>
   )
 }
