@@ -9,6 +9,7 @@ import {
 } from "#/components/ui/dialog.tsx";
 import { formatCOP } from "#/lib/format.ts";
 import { useCartStore } from "#/stores/cart-store.ts";
+import { HeartDoodle } from "./doodles";
 import {
 	type ProductImage,
 	ProductImageCarousel,
@@ -278,29 +279,51 @@ export function ProductCard({ product }: { product: Product }) {
 			{/* Flavor selection dialog for selectFlavor products */}
 			{isFlavorSelectable && product.flavors && product.flavors.length > 0 && (
 				<Dialog open={flavorDialogOpen} onOpenChange={setFlavorDialogOpen}>
-					<DialogContent className="bg-cream-card text-cocoa-ink sm:max-w-md">
-						<DialogHeader>
-							<DialogTitle className="font-fondant-display text-xl text-cocoa-ink">
-								Elegí tu sabor
-							</DialogTitle>
-						</DialogHeader>
-						<div className="grid grid-cols-2 gap-3 py-2">
+					<DialogContent className="gap-0 overflow-hidden rounded-card border-0 bg-cream-card p-0 text-cocoa-ink shadow-lift sm:max-w-md">
+						{/* Decorative top banner */}
+						<div className="relative bg-bubblegum-pop px-6 pb-8 pt-8 text-center">
+							<HeartDoodle className="absolute left-4 top-4 h-6 w-6 text-paper-white/70" />
+							<HeartDoodle className="absolute bottom-3 right-6 h-5 w-5 text-paper-white/60" />
+							<DialogHeader>
+								<DialogTitle className="font-fondant-display text-[28px] font-semibold leading-tight text-paper-white">
+									Elegí tu sabor
+								</DialogTitle>
+							</DialogHeader>
+							<p className="mt-1 font-handwritten-sugar text-2xl text-cream-card">
+								¿Cuál te provoca hoy?
+							</p>
+						</div>
+
+						{/* Flavor cards */}
+						<div className="space-y-3 bg-blush-canvas p-5">
 							{product.flavors.map((flavor) => (
 								<button
 									key={flavor.label}
 									type="button"
 									onClick={() => handleChooseFlavor(flavor)}
-									className="group flex flex-col items-center gap-2 rounded-card bg-sticker-blush p-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft"
+									className="group flex w-full items-center gap-4 rounded-card bg-cream-card p-3 text-left shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
 								>
 									{flavor.image && (
 										<img
 											src={flavor.image}
 											alt={flavor.label}
-											className="h-20 w-20 rounded-image object-cover"
+											className="h-16 w-16 shrink-0 rounded-image object-cover"
 										/>
 									)}
-									<span className="text-center text-[15px] font-semibold text-cocoa-ink">
-										{flavor.label}
+									<div className="flex flex-1 items-center gap-2">
+										{flavor.color && (
+											<span
+												className="h-2.5 w-2.5 shrink-0 rounded-full"
+												style={{ backgroundColor: flavor.color }}
+												aria-hidden="true"
+											/>
+										)}
+										<span className="font-fondant-display text-[18px] font-semibold text-cocoa-ink">
+											{flavor.label}
+										</span>
+									</div>
+									<span className="rounded-pill bg-cocoa-ink px-4 py-2 text-[14px] font-semibold text-paper-white transition-transform duration-200 group-hover:scale-[1.02]">
+										Elegir
 									</span>
 								</button>
 							))}
