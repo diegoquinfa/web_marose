@@ -38,6 +38,7 @@ const bakeryJsonLd = {
 	name: "Marose",
 	image: OG_IMAGE,
 	url: `${SITE_URL}/`,
+	logo: `${SITE_URL}/logos/logo.webp`,
 	telephone: "+57 324 682 2755",
 	priceRange: "$$",
 	servesCuisine: "Postres artesanales",
@@ -47,6 +48,9 @@ const bakeryJsonLd = {
 		addressRegion: "Bolívar",
 		addressCountry: "CO",
 	},
+	sameAs: [
+    "https://instagram.com/marosectg"
+  ],
 	areaServed: {
 		"@type": "City",
 		name: "Cartagena de Indias",
