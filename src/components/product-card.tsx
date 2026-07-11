@@ -2,6 +2,12 @@ import { useRef, useState } from 'react'
 import { formatCOP } from '#/lib/format.ts'
 import { useCartStore } from '#/stores/cart-store.ts'
 import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from '#/components/ui/dialog.tsx'
+import {
   ProductImageCarousel,
   type ProductImage,
   type ProductImageCarouselHandle,
@@ -78,9 +84,8 @@ export function ProductCard({ product }: { product: Product }) {
   const decrementLine = useCartStore((s) => s.decrementLine)
 
   const isFlavorSelectable = product.selectFlavor === true
-  const [selectedFlavor, setSelectedFlavor] = useState<Flavor | undefined>(
-    isFlavorSelectable ? product.flavors?.[0] : undefined,
-  )
+  const [selectedFlavor, setSelectedFlavor] = useState<Flavor | undefined>(undefined)
+  const [flavorDialogOpen, setFlavorDialogOpen] = useState(false)
 
   // Look up matching cart line for this product + current flavor
   const cartLineId = `${product.name}::${isFlavorSelectable ? (selectedFlavor?.label ?? '') : ''}`
@@ -95,6 +100,19 @@ export function ProductCard({ product }: { product: Product }) {
     if (flavor.image) carouselRef.current?.scrollToImage(flavor.image)
   }
 
+  // Called from the flavor dialog — adds to cart and closes dialog
+  const handleChooseFlavor = (flavor: Flavor) => {
+    setSelectedFlavor(flavor)
+    if (flavor.image) carouselRef.current?.scrollToImage(flavor.image)
+    addLine({
+      productName: product.name,
+      flavorLabel: flavor.label,
+      unitPrice: product.price,
+      imageSrc: flavor.image ?? product.images[0].src,
+    })
+    setFlavorDialogOpen(false)
+  }
+
   const handleAddToCart = () => {
     addLine({
       productName: product.name,
@@ -102,6 +120,18 @@ export function ProductCard({ product }: { product: Product }) {
       unitPrice: product.price,
       imageSrc: (isFlavorSelectable ? selectedFlavor?.image : undefined) ?? product.images[0].src,
     })
+  }
+
+  const handleOpenFlavorDialog = () => {
+    setFlavorDialogOpen(true)
+  }
+
+  // Determine button label
+  let buttonLabel = 'Agregar al carrito'
+  let buttonAction = handleAddToCart
+  if (isFlavorSelectable && !inCart) {
+    buttonLabel = 'Elegir sabor'
+    buttonAction = handleOpenFlavorDialog
   }
 
   return (
@@ -183,13 +213,47 @@ export function ProductCard({ product }: { product: Product }) {
         ) : (
           <button
             type="button"
-            onClick={handleAddToCart}
+            onClick={buttonAction}
             className="rounded-pill bg-cocoa-ink px-5 py-2.5 text-[15px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
           >
-            Agregar al carrito
+            {buttonLabel}
           </button>
         )}
       </div>
+
+      {/* Flavor selection dialog for selectFlavor products */}
+      {isFlavorSelectable && product.flavors && product.flavors.length > 0 && (
+        <Dialog open={flavorDialogOpen} onOpenChange={setFlavorDialogOpen}>
+          <DialogContent className="bg-cream-card text-cocoa-ink sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle className="font-fondant-display text-xl text-cocoa-ink">
+                Elegí tu sabor
+              </DialogTitle>
+            </DialogHeader>
+            <div className="grid grid-cols-2 gap-3 py-2">
+              {product.flavors.map((flavor) => (
+                <button
+                  key={flavor.label}
+                  type="button"
+                  onClick={() => handleChooseFlavor(flavor)}
+                  className="group flex flex-col items-center gap-2 rounded-card bg-sticker-blush p-3 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft"
+                >
+                  {flavor.image && (
+                    <img
+                      src={flavor.image}
+                      alt={flavor.label}
+                      className="h-20 w-20 rounded-image object-cover"
+                    />
+                  )}
+                  <span className="text-center text-[15px] font-semibold text-cocoa-ink">
+                    {flavor.label}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </article>
   )
 }
