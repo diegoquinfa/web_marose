@@ -84,6 +84,8 @@ export function Reveal({
 	const transition = useRevealTransition(delay);
 	const trigger = useRevealTrigger(mode);
 
+	return <>{children}</>;
+
 	return (
 		<LazyMotion features={domAnimation} strict>
 			<m.div
@@ -114,6 +116,8 @@ export function RevealGroup({
 	const reduce = useReducedMotion();
 	const trigger = useRevealTrigger(mode, GROUP_VIEWPORT);
 
+	return <>{children}</>;
+
 	return (
 		<LazyMotion features={domAnimation} strict>
 			<m.div
@@ -137,6 +141,8 @@ export function RevealGroup({
  */
 export function RevealItem({ className, children }: RevealItemProps) {
 	const transition = useRevealTransition(0);
+
+	return <>{children}</>;
 
 	return (
 		<m.div
