@@ -27,6 +27,18 @@ const VIEWPORT = {
 	margin: "0px 0px -60px 0px",
 } as const;
 
+/**
+ * Groups can grow far taller than the viewport (e.g. the single-column
+ * product grid on mobile), so a percentage-based `amount` could require more
+ * visible pixels than the screen can ever show — and the reveal would never
+ * fire. Groups trigger as soon as any part of them enters instead.
+ */
+const GROUP_VIEWPORT = {
+	once: true,
+	amount: 0,
+	margin: "0px 0px -60px 0px",
+} as const;
+
 const fadeRise: Variants = {
 	hidden: { opacity: 0, y: 16 },
 	visible: { opacity: 1, y: 0 },
@@ -48,9 +60,12 @@ function useRevealTransition(delay: number) {
 		: { duration: 0.5, ease: "easeOut" as const, delay };
 }
 
-function useRevealTrigger(mode: "view" | "load") {
+function useRevealTrigger(
+	mode: "view" | "load",
+	viewport: typeof VIEWPORT | typeof GROUP_VIEWPORT = VIEWPORT,
+) {
 	return mode === "view"
-		? { whileInView: "visible" as const, viewport: VIEWPORT }
+		? { whileInView: "visible" as const, viewport }
 		: { animate: "visible" as const };
 }
 
@@ -97,7 +112,7 @@ export function RevealGroup({
 	children,
 }: RevealProps) {
 	const reduce = useReducedMotion();
-	const trigger = useRevealTrigger(mode);
+	const trigger = useRevealTrigger(mode, GROUP_VIEWPORT);
 
 	return (
 		<LazyMotion features={domAnimation} strict>
