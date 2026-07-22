@@ -49,9 +49,9 @@ const bakeryJsonLd = {
 		addressCountry: "CO",
 	},
 	sameAs: [
-    "https://instagram.com/marosectg",
-    "https://www.tiktok.com/@marosepostres",
-  ],
+		"https://instagram.com/marosectg",
+		"https://www.tiktok.com/@marosepostres",
+	],
 	areaServed: {
 		"@type": "City",
 		name: "Cartagena de Indias",

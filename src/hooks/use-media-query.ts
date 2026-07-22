@@ -1,7 +1,7 @@
-import { useSyncExternalStore } from 'react'
+import { useSyncExternalStore } from "react";
 
 function getServerSnapshot(): boolean {
-  return false
+	return false;
 }
 
 /**
@@ -9,15 +9,15 @@ function getServerSnapshot(): boolean {
  * `false` (no mismatch); after mount it subscribes to `matchMedia` changes.
  */
 export function useMediaQuery(query: string): boolean {
-  function subscribe(callback: () => void) {
-    const mediaQueryList = window.matchMedia(query)
-    mediaQueryList.addEventListener('change', callback)
-    return () => mediaQueryList.removeEventListener('change', callback)
-  }
+	function subscribe(callback: () => void) {
+		const mediaQueryList = window.matchMedia(query);
+		mediaQueryList.addEventListener("change", callback);
+		return () => mediaQueryList.removeEventListener("change", callback);
+	}
 
-  function getSnapshot(): boolean {
-    return window.matchMedia(query).matches
-  }
+	function getSnapshot(): boolean {
+		return window.matchMedia(query).matches;
+	}
 
-  return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot)
+	return useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot);
 }
