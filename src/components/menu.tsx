@@ -142,7 +142,7 @@ const PRODUCTS: Product[] = [
     ],
     description:
       "Nuestro Brookie Pie une lo mejor de ambos mundos una base de cookie con bordes dorados y centro suave, cubierta con un brownie intenso, húmedo y lleno de chocolate.",
-    price: 14000,
+    price: 18000,
     badge: "Nuevo",
   },
 ];
