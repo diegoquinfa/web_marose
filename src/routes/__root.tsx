@@ -79,6 +79,10 @@ export const Route = createRootRoute({
 		],
 		links: [
 			{
+				rel: "preconnect",
+				href: "https://analytics.ahrefs.com",
+			},
+			{
 				rel: "stylesheet",
 				href: appCss,
 			},
@@ -99,6 +103,13 @@ export const Route = createRootRoute({
 				as: "font",
 				type: "font/woff2",
 				href: "/fonts/Baloo_2/Baloo2-VariableFont_wght.woff2",
+				crossOrigin: "anonymous",
+			},
+			{
+				rel: "preload",
+				as: "font",
+				type: "font/woff2",
+				href: "/fonts/Caveat/Caveat-VariableFont_wght.woff2",
 				crossOrigin: "anonymous",
 			},
 			{
