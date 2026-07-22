@@ -84,8 +84,6 @@ export function Reveal({
 	const transition = useRevealTransition(delay);
 	const trigger = useRevealTrigger(mode);
 
-	return <>{children}</>;
-
 	return (
 		<LazyMotion features={domAnimation} strict>
 			<m.div
