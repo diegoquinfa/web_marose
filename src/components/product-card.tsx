@@ -135,7 +135,7 @@ export function ProductCard({ product }: { product: Product }) {
 	};
 
 	const actionBlock = (
-		<div className="mt-5 flex items-center justify-between gap-3">
+		<div className="mt-5 flex items-center justify-between gap-3 min-h-150">
 			<span className="font-sugar-sans text-xl font-bold text-caramel-swirl">
 				{formatCOP(product.price)}
 			</span>
