@@ -134,8 +134,109 @@ export function ProductCard({ product }: { product: Product }) {
 		setFlavorDialogOpen(true);
 	};
 
+	const actionBlock = (
+		<div className="mt-5 flex items-center justify-between gap-3">
+			<span className="font-sugar-sans text-xl font-bold text-caramel-swirl">
+				{formatCOP(product.price)}
+			</span>
+
+			{isFlavorSelectable && productLines.length > 0 ? (
+				/* Multi-flavor: stacked mini-steppers + "Elegir otro sabor" */
+				<div className="flex flex-col items-end gap-2">
+					{productLines.map((line) => (
+						<div key={line.id} className="flex items-center gap-1">
+							{(() => {
+								const flavor = product.flavors?.find(
+									(f) => f.label === line.flavorLabel,
+								);
+								return flavor?.color ? (
+									<span
+										className="h-2 w-2 shrink-0 rounded-full"
+										style={{ backgroundColor: flavor.color }}
+										aria-hidden="true"
+									/>
+								) : null;
+							})()}
+							<span className="font-sugar-sans text-[13px] font-semibold text-cocoa-ink">
+								{line.flavorLabel ?? ""}
+							</span>
+							<button
+								type="button"
+								onClick={() => decrementLine(line.id)}
+								className="ml-1 flex h-7 w-7 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-sm font-bold transition-all duration-200 hover:shadow-soft"
+								aria-label="Disminuir cantidad"
+							>
+								−
+							</button>
+							<span className="w-5 text-center font-sugar-sans text-[14px] font-bold text-cocoa-ink">
+								{line.qty}
+							</span>
+							<button
+								type="button"
+								onClick={() => incrementLine(line.id)}
+								className="flex h-7 w-7 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-sm font-bold transition-all duration-200 hover:shadow-soft"
+								aria-label="Aumentar cantidad"
+							>
+								+
+							</button>
+						</div>
+					))}
+					<button
+						type="button"
+						onClick={handleOpenFlavorDialog}
+						className="inline-flex items-center gap-1 font-sugar-sans text-[14px] font-semibold text-caramel-swirl transition-all duration-200 hover:underline"
+					>
+						<Plus size={14} />
+						Elegir otro sabor
+					</button>
+				</div>
+			) : isFlavorSelectable ? (
+				/* Selectable but no lines in cart → "Elegir sabor" button */
+				<button
+					type="button"
+					onClick={handleOpenFlavorDialog}
+					className="rounded-pill bg-cocoa-ink px-5 py-2.5 text-[15px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
+				>
+					Elegir sabor
+				</button>
+			) : singleInCart ? (
+				/* Non-selectable, in cart → single stepper */
+				<div className="flex items-center gap-1">
+					<button
+						type="button"
+						onClick={() => decrementLine(singleLineId)}
+						className="flex h-9 w-9 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-lg font-bold transition-all duration-200 hover:shadow-soft"
+						aria-label="Disminuir cantidad"
+					>
+						−
+					</button>
+					<span className="w-6 text-center font-sugar-sans text-[17px] font-bold text-cocoa-ink">
+						{singleQty}
+					</span>
+					<button
+						type="button"
+						onClick={() => incrementLine(singleLineId)}
+						className="flex h-9 w-9 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-lg font-bold transition-all duration-200 hover:shadow-soft"
+						aria-label="Aumentar cantidad"
+					>
+						+
+					</button>
+				</div>
+			) : (
+				/* Non-selectable, not in cart → "Agregar al carrito" button */
+				<button
+					type="button"
+					onClick={handleAddToCart}
+					className="rounded-pill bg-cocoa-ink px-5 py-2.5 text-[15px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
+				>
+					Agregar al carrito
+				</button>
+			)}
+		</div>
+	);
+
 	return (
-		<article className="group flex flex-col overflow-hidden rounded-card bg-cream-card p-5 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift sm:p-6">
+		<article className="group flex h-full flex-col overflow-hidden rounded-card bg-cream-card p-5 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift sm:p-6">
 			<div className="relative overflow-hidden rounded-image">
 				<ProductImageCarousel
 					ref={carouselRef}
@@ -149,7 +250,7 @@ export function ProductCard({ product }: { product: Product }) {
 				)}
 			</div>
 
-			<h3 className="mt-5 font-fondant-display text-[26px] font-semibold leading-tight text-cocoa-ink">
+			<h3 className="mt-5 font-fondant-display text-[26px] font-semibold leading-tight text-cocoa-ink text-balance">
 				{product.name}
 			</h3>
 
@@ -177,104 +278,7 @@ export function ProductCard({ product }: { product: Product }) {
 				{product.description}
 			</p>
 
-			<div className="mt-5 flex items-center justify-between gap-3">
-				<span className="font-sugar-sans text-xl font-bold text-caramel-swirl">
-					{formatCOP(product.price)}
-				</span>
-
-				{isFlavorSelectable && productLines.length > 0 ? (
-					/* Multi-flavor: stacked mini-steppers + "Elegir otro sabor" */
-					<div className="flex flex-col items-end gap-2">
-						{productLines.map((line) => (
-							<div key={line.id} className="flex items-center gap-1">
-								{(() => {
-									const flavor = product.flavors?.find(
-										(f) => f.label === line.flavorLabel,
-									);
-									return flavor?.color ? (
-										<span
-											className="h-2 w-2 shrink-0 rounded-full"
-											style={{ backgroundColor: flavor.color }}
-											aria-hidden="true"
-										/>
-									) : null;
-								})()}
-								<span className="font-sugar-sans text-[13px] font-semibold text-cocoa-ink">
-									{line.flavorLabel ?? ""}
-								</span>
-								<button
-									type="button"
-									onClick={() => decrementLine(line.id)}
-									className="ml-1 flex h-7 w-7 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-sm font-bold transition-all duration-200 hover:shadow-soft"
-									aria-label="Disminuir cantidad"
-								>
-									−
-								</button>
-								<span className="w-5 text-center font-sugar-sans text-[14px] font-bold text-cocoa-ink">
-									{line.qty}
-								</span>
-								<button
-									type="button"
-									onClick={() => incrementLine(line.id)}
-									className="flex h-7 w-7 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-sm font-bold transition-all duration-200 hover:shadow-soft"
-									aria-label="Aumentar cantidad"
-								>
-									+
-								</button>
-							</div>
-						))}
-						<button
-							type="button"
-							onClick={handleOpenFlavorDialog}
-							className="inline-flex items-center gap-1 font-sugar-sans text-[14px] font-semibold text-caramel-swirl transition-all duration-200 hover:underline"
-						>
-							<Plus size={14} />
-							Elegir otro sabor
-						</button>
-					</div>
-				) : isFlavorSelectable ? (
-					/* Selectable but no lines in cart → "Elegir sabor" button */
-					<button
-						type="button"
-						onClick={handleOpenFlavorDialog}
-						className="rounded-pill bg-cocoa-ink px-5 py-2.5 text-[15px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
-					>
-						Elegir sabor
-					</button>
-				) : singleInCart ? (
-					/* Non-selectable, in cart → single stepper */
-					<div className="flex items-center gap-1">
-						<button
-							type="button"
-							onClick={() => decrementLine(singleLineId)}
-							className="flex h-9 w-9 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-lg font-bold transition-all duration-200 hover:shadow-soft"
-							aria-label="Disminuir cantidad"
-						>
-							−
-						</button>
-						<span className="w-6 text-center font-sugar-sans text-[17px] font-bold text-cocoa-ink">
-							{singleQty}
-						</span>
-						<button
-							type="button"
-							onClick={() => incrementLine(singleLineId)}
-							className="flex h-9 w-9 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-lg font-bold transition-all duration-200 hover:shadow-soft"
-							aria-label="Aumentar cantidad"
-						>
-							+
-						</button>
-					</div>
-				) : (
-					/* Non-selectable, not in cart → "Agregar al carrito" button */
-					<button
-						type="button"
-						onClick={handleAddToCart}
-						className="rounded-pill bg-cocoa-ink px-5 py-2.5 text-[15px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
-					>
-						Agregar al carrito
-					</button>
-				)}
-			</div>
+			{actionBlock}
 
 			{/* Flavor selection dialog for selectFlavor products */}
 			{isFlavorSelectable && product.flavors && product.flavors.length > 0 && (
