@@ -165,7 +165,7 @@ export function Menu() {
 
         <RevealGroup className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {PRODUCTS.map((product) => (
-            <RevealItem key={product.name} className="h-full">
+            <RevealItem key={product.name}>
               <ProductCard product={product} />
             </RevealItem>
           ))}
