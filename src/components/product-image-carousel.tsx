@@ -62,7 +62,7 @@ export function ProductImageCarousel({
 			<div
 				ref={trackRef}
 				onScroll={handleScroll}
-				className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth [scrollbar-width:none] motion-reduce:scroll-auto [&::-webkit-scrollbar]:hidden"
+				className="flex snap-x snap-mandatory overflow-x-auto scroll-smooth scrollbar-none motion-reduce:scroll-auto [&::-webkit-scrollbar]:hidden"
 			>
 				{images.map((image, index) => (
 					<img
