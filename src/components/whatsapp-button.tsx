@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
 
-export const WHATSAPP_NUMBER = "573246822755";
+export const WHATSAPP_NUMBER = "573014023272";
 
 export function WhatsappGlyph({ className }: { className?: string }) {
 	return (
