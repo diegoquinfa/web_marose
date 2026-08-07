@@ -22,7 +22,7 @@ function ScrollArea({
 			    drawer), which silently disables viewport clipping. */}
 			<ScrollAreaPrimitive.Viewport
 				data-slot="scroll-area-viewport"
-				className="min-h-0 w-full flex-1 overscroll-contain rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-1"
+				className="min-h-0 w-full flex-1 overscroll-contain rounded-[inherit] transition-[color,box-shadow] outline-none focus-visible:ring-[3px] focus-visible:ring-rose-petal/50 focus-visible:outline-1"
 			>
 				{children}
 			</ScrollAreaPrimitive.Viewport>
@@ -34,7 +34,7 @@ function ScrollArea({
 					aria-hidden="true"
 					className="pointer-events-none absolute inset-x-0 bottom-1 flex justify-center opacity-0 transition-opacity duration-300 group-data-overflow-y-end/scroll-area:opacity-100"
 				>
-					<span className="motion-safe:animate-nudge flex h-6 w-6 items-center justify-center rounded-full bg-cocoa-ink/70 text-paper-white shadow-soft">
+					<span className="motion-safe:animate-nudge flex h-6 w-6 items-center justify-center rounded-full bg-deep-cocoa/90 text-blush-cream shadow-soft ring-1 ring-cocoa-hairline">
 						<ChevronDown className="h-4 w-4" />
 					</span>
 				</div>
@@ -61,7 +61,7 @@ function ScrollBar({
 		>
 			<ScrollAreaPrimitive.Thumb
 				data-slot="scroll-area-thumb"
-				className="relative flex-1 rounded-full bg-cocoa-ink/35"
+				className="relative flex-1 rounded-full bg-rose-mist/50"
 			/>
 		</ScrollAreaPrimitive.Scrollbar>
 	);

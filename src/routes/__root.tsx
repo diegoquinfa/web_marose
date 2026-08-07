@@ -1,6 +1,6 @@
-import { HeadContent, Scripts, createRootRoute } from "@tanstack/react-router";
-import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { TanStackDevtools } from "@tanstack/react-devtools";
+import { createRootRoute, HeadContent, Scripts } from "@tanstack/react-router";
+import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 
 import { NotFound } from "../components/not-found";
 import appCss from "../styles.css?url";
@@ -17,7 +17,7 @@ const OG_IMAGE = `${SITE_URL}/open_graph.webp`;
 const socialMeta: Array<{ name?: string; property?: string; content: string }> =
 	[
 		{ name: "robots", content: "index, follow" },
-		{ name: "theme-color", content: "#fffaf4" },
+		{ name: "theme-color", content: "#251a13" },
 		{ property: "og:type", content: "website" },
 		{ property: "og:site_name", content: "Marose" },
 		{ property: "og:title", content: PAGE_TITLE },
@@ -37,7 +37,7 @@ const bakeryJsonLd = {
 	name: "Marose",
 	image: OG_IMAGE,
 	url: `${SITE_URL}/`,
-	logo: `${SITE_URL}/logos/logo.webp`,
+	logo: `${SITE_URL}/logos/logo-2.webp`,
 	telephone: "+57 324 682 2755",
 	priceRange: "$$",
 	servesCuisine: "Postres artesanales",
@@ -89,13 +89,27 @@ export const Route = createRootRoute({
 			{
 				rel: "icon",
 				type: "image/webp",
-				href: "/logos/logo192.webp",
+				href: "/logos/logo-2.webp",
 			},
 			{
 				rel: "preload",
 				as: "font",
 				type: "font/woff2",
-				href: "/fonts/Nunito/Nunito-VariableFont_wght.woff2",
+				href: "/fonts/Fraunces/Fraunces-VariableFont_opsz,wght.woff2",
+				crossOrigin: "anonymous",
+			},
+			{
+				rel: "preload",
+				as: "font",
+				type: "font/woff2",
+				href: "/fonts/Jost/Jost-VariableFont_wght.woff2",
+				crossOrigin: "anonymous",
+			},
+			{
+				rel: "preload",
+				as: "font",
+				type: "font/woff2",
+				href: "/fonts/Allura/Allura-Regular.woff2",
 				crossOrigin: "anonymous",
 			},
 			{
@@ -103,13 +117,6 @@ export const Route = createRootRoute({
 				as: "font",
 				type: "font/woff2",
 				href: "/fonts/Baloo_2/Baloo2-VariableFont_wght.woff2",
-				crossOrigin: "anonymous",
-			},
-			{
-				rel: "preload",
-				as: "font",
-				type: "font/woff2",
-				href: "/fonts/Caveat/Caveat-VariableFont_wght.woff2",
 				crossOrigin: "anonymous",
 			},
 			{
@@ -134,7 +141,7 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="es" className="bg-blush-canvas">
+		<html lang="es" className="bg-cocoa-noir">
 			<head>
 				<HeadContent />
 				<noscript>

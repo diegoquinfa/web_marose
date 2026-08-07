@@ -3,23 +3,13 @@
   "name": "Marose es una repostería artesanal de Cartagena. Cookies, pavé, cookie pie y torta de zanahoria hechos frescos y con amor para compartir. Pide por WhatsApp.",
   "icons": [
     {
-      "src": "/logos/logo192.webp",
-      "sizes": "192x192",
+      "src": "/logos/logo-2.webp",
+      "sizes": "150x150",
       "type": "image/webp"
-    },
-    {
-      "src": "/logos/logo192.webp",
-      "type": "image/webp",
-      "sizes": "192x192"
-    },
-    {
-      "src": "/logos/logo512.webp",
-      "type": "image/webp",
-      "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#251a13",
+  "background_color": "#251a13"
 }

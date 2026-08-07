@@ -34,7 +34,7 @@ export function DetailsView({
 	}
 
 	const inputBase =
-		"w-full bg-cream-card text-cocoa-ink font-sugar-sans text-[15px] outline-none placeholder:text-cocoa-ink/35";
+		"w-full bg-deep-cocoa text-blush-cream font-patisserie-sans text-[15px] outline-none placeholder:text-rose-mist/60";
 
 	return (
 		<ScrollArea className="min-h-0 flex-1" showOverflowIndicator>
@@ -43,7 +43,7 @@ export function DetailsView({
 				<button
 					type="button"
 					onClick={onBack}
-					className="inline-flex w-fit items-center gap-1.5 rounded-pill px-2 py-1 font-sugar-sans text-[15px] font-semibold text-cocoa-ink transition-colors hover:bg-sticker-blush"
+					className="inline-flex w-fit items-center gap-1.5 rounded-pill px-2 py-1 font-patisserie-sans text-[15px] font-semibold text-blush-cream transition-colors hover:bg-cocoa-hairline/40"
 				>
 					<ArrowLeft className="h-4 w-4" />
 					Volver al carrito
@@ -54,7 +54,7 @@ export function DetailsView({
 					<div className="flex flex-col gap-1.5">
 						<label
 							htmlFor="cart-nombre"
-							className="font-sugar-sans text-label font-semibold uppercase tracking-[0.08em] text-cocoa-ink"
+							className="font-patisserie-sans text-label font-semibold uppercase tracking-[0.08em] text-rose-mist"
 						>
 							Nombre *
 						</label>
@@ -68,7 +68,7 @@ export function DetailsView({
 							className={`${inputBase} rounded-pill border border-cocoa-hairline px-4 py-2.5`}
 						/>
 						{touched && nombreEmpty && (
-							<span className="text-[13px] font-semibold text-bubblegum-pop">
+							<span className="text-[13px] font-semibold text-rose-petal">
 								Por favor ingresá tu nombre
 							</span>
 						)}
@@ -78,7 +78,7 @@ export function DetailsView({
 					<div className="flex flex-col gap-1.5">
 						<label
 							htmlFor="cart-cuando"
-							className="font-sugar-sans text-label font-semibold uppercase tracking-[0.08em] text-cocoa-ink"
+							className="font-patisserie-sans text-label font-semibold uppercase tracking-[0.08em] text-rose-mist"
 						>
 							¿Para cuándo lo necesitás? *
 						</label>
@@ -92,7 +92,7 @@ export function DetailsView({
 							className={`${inputBase} rounded-pill border border-cocoa-hairline px-4 py-2.5`}
 						/>
 						{touched && cuandoEmpty && (
-							<span className="text-[13px] font-semibold text-bubblegum-pop">
+							<span className="text-[13px] font-semibold text-rose-petal">
 								Contanos para cuándo lo necesitás
 							</span>
 						)}
@@ -102,7 +102,7 @@ export function DetailsView({
 					<div className="flex flex-col gap-1.5">
 						<label
 							htmlFor="cart-notas"
-							className="font-sugar-sans text-label font-semibold uppercase tracking-[0.08em] text-cocoa-ink"
+							className="font-patisserie-sans text-label font-semibold uppercase tracking-[0.08em] text-rose-mist"
 						>
 							Detalles extra
 						</label>
@@ -120,7 +120,7 @@ export function DetailsView({
 					<button
 						type="submit"
 						disabled={!canSubmit}
-						className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-pill bg-cocoa-ink px-6 py-3.5 text-[17px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift disabled:pointer-events-none disabled:opacity-50"
+						className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-pill bg-rose-petal px-6 py-3.5 text-[17px] font-semibold text-cocoa-noir shadow-bloom transition-all duration-200 hover:-translate-y-0.5 hover:bg-rose-glow hover:shadow-lift disabled:pointer-events-none disabled:opacity-50"
 					>
 						Enviar pedido por WhatsApp
 					</button>

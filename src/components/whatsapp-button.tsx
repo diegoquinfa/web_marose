@@ -18,12 +18,10 @@ export function WhatsappGlyph({ className }: { className?: string }) {
 export function WhatsappButton({
 	message = "Hola Marose, quiero hacer un pedido",
 	label = "Pedir por WhatsApp",
-	variant = "cocoa",
 	className,
 }: {
 	message?: string;
 	label?: string;
-	variant?: "cocoa" | "bubblegum";
 	className?: string;
 }) {
 	const href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
@@ -34,10 +32,7 @@ export function WhatsappButton({
 			target="_blank"
 			rel="noopener noreferrer"
 			className={cn(
-				"inline-flex items-center justify-center gap-2 rounded-pill px-6 py-3.5 text-[17px] font-semibold text-paper-white transition-transform duration-200 hover:-translate-y-0.5 hover:scale-[1.02]",
-				variant === "cocoa" && "bg-cocoa-ink shadow-soft hover:shadow-lift",
-				variant === "bubblegum" &&
-					"bg-bubblegum-pop font-bold shadow-pop hover:shadow-pop",
+				"inline-flex items-center justify-center gap-2 rounded-pill bg-rose-petal px-6 py-3.5 font-patisserie-sans text-[17px] font-semibold text-cocoa-noir shadow-bloom transition-[transform,background-color] duration-200 hover:-translate-y-0.5 hover:bg-rose-glow focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-petal",
 				className,
 			)}
 		>

@@ -53,9 +53,8 @@ export function ProductImageCarousel({
 	};
 
 	return (
-		<div
+		<section
 			className="group/carousel relative overflow-hidden rounded-image"
-			role="region"
 			aria-roledescription="carrusel"
 			aria-label={`Fotos de ${productName}`}
 		>
@@ -81,7 +80,7 @@ export function ProductImageCarousel({
 				onClick={() => scrollToIndex(activeIndex - 1)}
 				aria-label="Imagen anterior"
 				disabled={activeIndex === 0}
-				className="absolute left-2 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-pill bg-paper-white/90 p-1.5 text-cocoa-ink opacity-0 shadow-soft transition-opacity duration-200 focus-visible:opacity-100 disabled:pointer-events-none group-hover/carousel:opacity-100 group-hover/carousel:disabled:opacity-40 sm:flex"
+				className="absolute left-2 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-pill bg-deep-cocoa/90 p-1.5 text-blush-cream opacity-0 shadow-soft backdrop-blur-sm transition-opacity duration-200 focus-visible:opacity-100 disabled:pointer-events-none group-hover/carousel:opacity-100 group-hover/carousel:disabled:opacity-40 sm:flex"
 			>
 				<ChevronLeft className="h-4 w-4" aria-hidden="true" />
 			</button>
@@ -90,12 +89,12 @@ export function ProductImageCarousel({
 				onClick={() => scrollToIndex(activeIndex + 1)}
 				aria-label="Imagen siguiente"
 				disabled={activeIndex === images.length - 1}
-				className="absolute right-2 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-pill bg-paper-white/90 p-1.5 text-cocoa-ink opacity-0 shadow-soft transition-opacity duration-200 focus-visible:opacity-100 disabled:pointer-events-none group-hover/carousel:opacity-100 group-hover/carousel:disabled:opacity-40 sm:flex"
+				className="absolute right-2 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-pill bg-deep-cocoa/90 p-1.5 text-blush-cream opacity-0 shadow-soft backdrop-blur-sm transition-opacity duration-200 focus-visible:opacity-100 disabled:pointer-events-none group-hover/carousel:opacity-100 group-hover/carousel:disabled:opacity-40 sm:flex"
 			>
 				<ChevronRight className="h-4 w-4" aria-hidden="true" />
 			</button>
 
-			<div className="absolute bottom-2.5 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-pill bg-cocoa-ink/30 px-2 py-1.5 backdrop-blur-sm">
+			<div className="absolute bottom-2.5 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-pill bg-deep-cocoa/60 px-2 py-1.5 backdrop-blur-sm">
 				{images.map((image, index) => (
 					<button
 						key={image.src}
@@ -111,6 +110,6 @@ export function ProductImageCarousel({
 					/>
 				))}
 			</div>
-		</div>
+		</section>
 	);
 }
