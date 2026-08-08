@@ -48,7 +48,7 @@ export function Hero() {
 					<div className="relative">
 						<div
 							aria-hidden="true"
-							className="absolute -inset-x-8 -inset-y-10"
+							className="absolute -inset-x-8 -inset-y-10 max-w-dvw"
 							style={{
 								background:
 									"radial-gradient(circle, rgba(227,164,168,0.18), transparent 70%)",
