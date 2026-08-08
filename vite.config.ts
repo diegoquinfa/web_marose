@@ -22,7 +22,7 @@ const config = defineConfig({
 				"/food/**": {
 					headers: { "Cache-Control": "public, max-age=31536000, immutable" },
 				},
-				"/open-graph.webp": {
+				"/og_logo.webp": {
 					headers: { "Cache-Control": "public, max-age=86400" },
 				},
 			},
