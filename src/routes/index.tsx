@@ -12,7 +12,7 @@ const SITE_URL = "https://marosectg.com";
 const PAGE_TITLE = "Marose · Cookies & postres artesanales — Cartagena";
 const PAGE_DESCRIPTION =
 	"Marose es una repostería artesanal de Cartagena. Cookies, pavé, cookie pie y torta de zanahoria hechos frescos y con amor para compartir. Pide por WhatsApp.";
-const OG_IMAGE = `${SITE_URL}/open_graph.webp`;
+const OG_IMAGE = `${SITE_URL}/open-graph.webp`;
 
 // `property` isn't part of React's MetaHTMLAttributes type, so this is kept
 // as its own typed constant to avoid excess-property errors on the inline
