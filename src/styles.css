@@ -91,16 +91,17 @@
 }
 
 @theme {
-  /* Marose after dark — colors */
+  /* Marose after dark — colors (duotone cocoa ↔ rose-noir) */
   --color-cocoa-noir: #251a13;
-  --color-espresso-truffle: #38271d;
+  --color-espresso-truffle: #3d2b20;
+  --color-rose-noir: #31201e;
   --color-deep-cocoa: #1a120d;
   --color-rose-petal: #e3a4a8;
   --color-rose-glow: #f0bfc2;
   --color-dusty-rose: #b8787d;
   --color-blush-cream: #f7e9e0;
   --color-rose-mist: #cfa9a2;
-  --color-cocoa-hairline: #4d382c;
+  --color-cocoa-hairline: #54352f;
   --color-paper-white: #ffffff;
 
   /* Flavor accents — brightened for dark surfaces */

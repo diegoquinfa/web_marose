@@ -14,7 +14,7 @@ export function ReviewCard({ review, index }: ReviewCardProps) {
 
 	return (
 		<article
-			className={`shrink-0 w-80 rounded-card bg-espresso-truffle p-6 shadow-soft select-none ${rotation}`}
+			className={`shrink-0 w-80 rounded-card bg-rose-noir p-6 shadow-soft select-none ${rotation}`}
 			draggable={false}
 		>
 			<time className="block font-patisserie-sans text-label font-medium uppercase text-rose-mist">

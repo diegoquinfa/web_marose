@@ -236,7 +236,7 @@ export function ProductCard({ product }: { product: Product }) {
 
 	return (
 		<article className="group flex h-full min-h-90 flex-col overflow-hidden rounded-card bg-espresso-truffle p-5 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift sm:p-6">
-			<div className="relative overflow-hidden rounded-image">
+			<div className="relative overflow-hidden rounded-image ring-1 ring-cocoa-hairline">
 				<ProductImageCarousel
 					ref={carouselRef}
 					images={product.images}
@@ -308,7 +308,7 @@ export function ProductCard({ product }: { product: Product }) {
 										<img
 											src={flavor.image}
 											alt={flavor.label}
-											className="h-16 w-16 shrink-0 rounded-image object-cover"
+											className="h-16 w-16 shrink-0 rounded-image object-cover ring-1 ring-cocoa-hairline"
 										/>
 									)}
 									<div className="flex flex-1 items-center gap-2">

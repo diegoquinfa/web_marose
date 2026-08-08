@@ -55,7 +55,7 @@ export function Hero() {
 							}}
 						/>
 						<img
-							src="/logos/banner-2.webp"
+							src="/logos/banner-2.2.webp"
 							alt="Marose — pastelería artesanal en Cartagena"
 							className="relative mx-auto w-full"
 						/>

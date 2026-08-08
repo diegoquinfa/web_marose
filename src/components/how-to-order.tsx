@@ -205,10 +205,10 @@ export function HowToOrder() {
 						{STEPS.map((step) => (
 							<RevealItem key={step.number}>
 								<article
-									className={`group relative flex flex-col items-center rounded-card border-2 border-dashed border-cocoa-hairline bg-espresso-truffle px-6 pb-8 pt-12 text-center shadow-soft transition-all duration-300 hover:rotate-0 hover:border-rose-petal hover:shadow-lift ${step.rotate}`}
+									className={`group relative flex flex-col items-center rounded-card border-2 border-dashed border-cocoa-hairline bg-rose-noir px-6 pb-8 pt-12 text-center shadow-soft transition-all duration-300 hover:rotate-0 hover:border-rose-petal hover:shadow-lift ${step.rotate}`}
 								>
 									{/* number badge - floats on top edge */}
-									<span className="absolute -top-5 left-1/2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full bg-deep-cocoa font-velvet-serif text-xl italic text-rose-petal ring-4 ring-espresso-truffle">
+									<span className="absolute -top-5 left-1/2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full bg-deep-cocoa font-velvet-serif text-xl italic text-rose-petal ring-4 ring-rose-noir">
 										{step.number}
 									</span>
 

@@ -10,14 +10,15 @@ Marose is an artisan patisserie from Cartagena whose new identity lives in the e
 | Name | Value | Token | Role |
 |------|-------|-------|------|
 | Cocoa Noir | `#251a13` | `--color-cocoa-noir` | Page background — the deep warm brown of the new logo; every screen starts here and the darkness IS the brand mood |
-| Espresso Truffle | `#38271d` | `--color-espresso-truffle` | Card and product-tile surfaces — one warm step up from the noir, the base for elevated content |
+| Espresso Truffle | `#3d2b20` | `--color-espresso-truffle` | Card and product-tile surfaces — one warm step up from the noir (~1.8:1 luminance step, so cards genuinely lift), the base for elevated content |
+| Rose Noir | `#31201e` | `--color-rose-noir` | Rose-tinted dark surface for alternating warm sections (review cards, step cards) — the duotone partner of cocoa; same warmth, hue shifted ~10° toward the pink family so the page never reads as flat brown |
 | Deep Cocoa | `#1a120d` | `--color-deep-cocoa` | The darkest surface — footer band, inverted blocks, and any place that needs to sink below the canvas |
 | Rose Petal | `#e3a4a8` | `--color-rose-petal` | THE brand pink — mascot line-art, wordmark color, primary CTA fill, prices, and the single energetic accent. Use with intent; it glows, so it never needs to shout |
 | Rose Glow | `#f0bfc2` | `--color-rose-glow` | Lighter pink for hover states, highlighted accent words, and soft glows around the mascot |
 | Dusty Rose | `#b8787d` | `--color-dusty-rose` | Muted rose for secondary accents — dividers, subtle underlines, inactive states, quiet flourishes |
 | Blush Cream | `#f7e9e0` | `--color-blush-cream` | Primary text on dark — the warm cream of cake frosting; headlines and body copy that must read effortlessly |
 | Rose Mist | `#cfa9a2` | `--color-rose-mist` | Secondary text — descriptions, captions, metadata; softer than Blush Cream, never cool gray |
-| Cocoa Hairline | `#4d382c` | `--color-cocoa-hairline` | Warm hairline for the rare border or divider on dark — always warm brown, never a cool gray |
+| Cocoa Hairline | `#54352f` | `--color-cocoa-hairline` | Warm rose-tinted hairline for the rare border or divider on dark — nudges every ghost pill and divider toward the rose family, never a cool gray |
 | Paper White | `#ffffff` | `--color-paper-white` | Reserved for fine print on pink fills and the highest-contrast moments |
 
 ### Flavor Accents (optional)
@@ -140,12 +141,12 @@ Pill shape (`--radius-button`), Rose Petal (`#e3a4a8`) fill, Cocoa Noir (`#251a1
 ### Ghost CTA (secondary)
 **Role:** Quiet alternate action — "Ver menú", secondary links, promos
 
-Pill shape, transparent fill, 1px Cocoa Hairline (`#4d382c`) border, Blush Cream text in Patisserie Sans 15px weight 500 with +0.08em tracking. On hover: border warms to Dusty Rose and text shifts to Rose Petal. The discreet sibling — never competes with the pink pill; at most one of each per block.
+Pill shape, transparent fill, 1px Cocoa Hairline (`#54352f`) border, Blush Cream text in Patisserie Sans 15px weight 500 with +0.08em tracking. On hover: border warms to Dusty Rose and text shifts to Rose Petal. The discreet sibling — never competes with the pink pill; at most one of each per block.
 
 ### Product Card
 **Role:** Showcase one dessert with photo, flavors, price and order action
 
-Espresso Truffle (`#38271d`) surface, 24px radius, `--shadow-soft`. Product photo at top filling the width, 16px radius — moody, candle-lit, appetizing. Below: product name in Wordmark Sans 24px weight 600 Blush Cream (the playful echo of the MAROSE wordmark); a row of flavor pills; a short description in Patisserie Sans 15–17px Rose Mist; the price in Velvet Serif italic 21px Rose Petal; and the primary WhatsApp pill. 28px inner padding. On hover the card lifts with `--shadow-lift`. No border — the truffle step and soft shadow do the separating.
+Espresso Truffle (`#3d2b20`) surface, 24px radius, `--shadow-soft`. Product photo at top filling the width, 16px radius, framed with a 1px Cocoa Hairline (`#54352f`) ring so mixed photography treatments (dark vs. legacy pink backgrounds) read as intentional — moody, candle-lit, appetizing. Below: product name in Wordmark Sans 24px weight 600 Blush Cream (the playful echo of the MAROSE wordmark); a row of flavor pills; a short description in Patisserie Sans 15–17px Rose Mist; the price in Velvet Serif italic 21px Rose Petal; and the primary WhatsApp pill. 28px inner padding. On hover the card lifts with `--shadow-lift`. No border — the truffle step and soft shadow do the separating.
 
 ### Flavor Pill / Tag
 **Role:** Flavor and status labels — "Limón", "Maracuyá", "Nuevo", "Relleno de Nutella"
@@ -185,7 +186,7 @@ A Deep Cocoa (`#1a120d`) band — darker than the page, a gentle descent. Mascot
 ## Do's and Don'ts
 
 ### Do
-- Start every page on Cocoa Noir (`#251a13`); layer Espresso Truffle (`#38271d`) for cards and Deep Cocoa (`#1a120d`) for the footer.
+- Start every page on Cocoa Noir (`#251a13`); layer Espresso Truffle (`#3d2b20`) for cards and Deep Cocoa (`#1a120d`) for the footer. Use Rose Noir (`#31201e`) for alternating warm sections (reviews, steps) — the duotone rhythm cocoa ↔ rose-noir mirrors the logo's pink-on-brown formula.
 - Round everything: pills and buttons fully (999px), cards at 24px, images at 16px. Soft geometry is still the brand — just refined.
 - Use glow, not gray: `--shadow-soft` / `--shadow-lift` in warm black, `--shadow-bloom` behind pink moments.
 - Keep Blush Cream (`#f7e9e0`) as primary text and Rose Mist for secondary — never cool grays, ever.
@@ -210,14 +211,15 @@ A Deep Cocoa (`#1a120d`) band — darker than the page, a gentle descent. Mascot
 | Level | Name | Value | Purpose |
 |-------|------|-------|---------|
 | 1 | Cocoa Noir | `#251a13` | Default page background — every screen starts in the dark |
-| 2 | Espresso Truffle | `#38271d` | Product tiles and card surfaces, warmly lifted above the noir |
-| 3 | Deep Cocoa | `#1a120d` | Footer band and sunken/inverted blocks — darker than the page |
-| 4 | Rose Petal | `#e3a4a8` | CTA fills, the mascot seal accent and tiny glow moments — never a page surface |
-| 5 | Mascot Glow | `rgba(227,164,168,0.18)` radial | The bloom behind the mascot — light, not surface |
+| 2 | Espresso Truffle | `#3d2b20` | Product tiles and card surfaces, warmly lifted above the noir |
+| 3 | Rose Noir | `#31201e` | Alternating warm sections (reviews, steps) — the rose-shifted duotone surface |
+| 4 | Deep Cocoa | `#1a120d` | Footer band and sunken/inverted blocks — darker than the page |
+| 5 | Rose Petal | `#e3a4a8` | CTA fills, the mascot seal accent and tiny glow moments — never a page surface |
+| 6 | Mascot Glow | `rgba(227,164,168,0.18)` radial | The bloom behind the mascot — light, not surface |
 
 ## Elevation
 
-Marose after dark is lit, not stacked. Elevation is built from deep warm-black shadows (`rgba(0,0,0,0.55–0.65)`), truffle-vs-noir surface steps, and — for the pink moments — a soft rose bloom (`rgba(227,164,168,0.30)`). Cards float like dessert plates under candlelight; buttons glow like the bakery window. Borders are rare and always a warm Cocoa Hairline (`#4d382c`). No cool-gray shadows, no bright outlines — the whole page should feel like the quiet hour when the last cake comes out of the oven.
+Marose after dark is lit, not stacked. Elevation is built from deep warm-black shadows (`rgba(0,0,0,0.55–0.65)`), truffle-vs-noir surface steps, and — for the pink moments — a soft rose bloom (`rgba(227,164,168,0.30)`). Cards float like dessert plates under candlelight; buttons glow like the bakery window. Borders are rare and always a warm Cocoa Hairline (`#54352f`). No cool-gray shadows, no bright outlines — the whole page should feel like the quiet hour when the last cake comes out of the oven.
 
 ## Imagery
 
@@ -231,20 +233,21 @@ Max-width 1120px, centered, with generous dark breathing room (88–112px betwee
 
 **Quick Color Reference**
 - background: #251a13 (Cocoa Noir)
-- card/surface: #38271d (Espresso Truffle)
+- card/surface: #3d2b20 (Espresso Truffle)
+- alternating warm surface: #31201e (Rose Noir)
 - sunken band / footer: #1a120d (Deep Cocoa)
 - primary text: #f7e9e0 (Blush Cream)
 - secondary text: #cfa9a2 (Rose Mist)
 - brand accent / CTA / price: #e3a4a8 (Rose Petal)
 - hover / highlight pink: #f0bfc2 (Rose Glow)
 - muted accent / flourish: #b8787d (Dusty Rose)
-- warm hairline (rare): #4d382c (Cocoa Hairline)
+- warm hairline (rare): #54352f (Cocoa Hairline)
 
 **3 Example Component Prompts**
 
-1. Build a hero banner on a #251a13 full-bleed canvas. Place the MAROSE mascot logo (pink on dark) with a soft radial rose bloom behind it (rgba(227,164,168,0.18) fading to transparent). Above the headline, a label in Jost 13px uppercase +0.14em tracking #b8787d reading "PASTELERÍA ARTESANAL · CARTAGENA". Headline in Fraunces (Velvet Serif) 72px weight 500 #f7e9e0 reading "Hay momentos que merecen" with the words "algo dulce" in Allura (Dulce Script) 56px #e3a4a8 on the second line. Add a pill primary CTA: #e3a4a8 fill, #251a13 text in Jost 17px weight 600 with a WhatsApp glyph, 14px/24px padding, rose bloom shadow (0 14px 40px -12px rgba(227,164,168,0.30)). Beside it a ghost CTA: 1px #4d382c border, #f7e9e0 text. Alongside, a moody dessert photo at 16px radius with a deep soft shadow. 112px vertical padding. No other decoration.
+1. Build a hero banner on a #251a13 full-bleed canvas. Place the MAROSE mascot logo (pink on dark) with a soft radial rose bloom behind it (rgba(227,164,168,0.18) fading to transparent). Above the headline, a label in Jost 13px uppercase +0.14em tracking #b8787d reading "PASTELERÍA ARTESANAL · CARTAGENA". Headline in Fraunces (Velvet Serif) 72px weight 500 #f7e9e0 reading "Hay momentos que merecen" with the words "algo dulce" in Allura (Dulce Script) 56px #e3a4a8 on the second line. Add a pill primary CTA: #e3a4a8 fill, #251a13 text in Jost 17px weight 600 with a WhatsApp glyph, 14px/24px padding, rose bloom shadow (0 14px 40px -12px rgba(227,164,168,0.30)). Beside it a ghost CTA: 1px #54352f border, #f7e9e0 text. Alongside, a moody dessert photo at 16px radius with a deep soft shadow. 112px vertical padding. No other decoration.
 
-2. Build a product card. Espresso Truffle (#38271d) surface, 24px radius, deep soft shadow (0 12px 32px -12px rgba(0,0,0,0.55)), 28px padding. Top: a candle-lit dessert photo at 16px radius. Then the name in Baloo 2 (Wordmark Sans) 24px weight 600 #f7e9e0 ("Pavé"), a row of pill flavor tags (transparent, 1px #4d382c border, Jost 13px uppercase +0.14em #cfa9a2, with a small lime and maracuyá accent dot), a short description in Jost 16px #cfa9a2, a price in Fraunces italic 21px #e3a4a8, and a full-width pill WhatsApp button (#e3a4a8 fill, #251a13 text). The whole card lifts on hover.
+2. Build a product card. Espresso Truffle (#3d2b20) surface, 24px radius, deep soft shadow (0 12px 32px -12px rgba(0,0,0,0.55)), 28px padding. Top: a candle-lit dessert photo at 16px radius. Then the name in Baloo 2 (Wordmark Sans) 24px weight 600 #f7e9e0 ("Pavé"), a row of pill flavor tags (transparent, 1px #54352f border, Jost 13px uppercase +0.14em #cfa9a2, with a small lime and maracuyá accent dot), a short description in Jost 16px #cfa9a2, a price in Fraunces italic 21px #e3a4a8, and a full-width pill WhatsApp button (#e3a4a8 fill, #251a13 text). The whole card lifts on hover.
 
 3. Build a section heading. Small label in Jost 13px uppercase +0.14em #b8787d ("NUESTRO MENÚ"), then a heading in Fraunces 40px weight 500 #f7e9e0 with one word in italic #e3a4a8 ("Postres *inolvidables*"), and a single thin hand-drawn underline flourish in #b8787d beneath. Nothing else — no doodles.
 
@@ -282,14 +285,15 @@ Tagline: *"Hay momentos que merecen algo dulce."* · Location: Cartagena.
 :root {
   /* Colors */
   --color-cocoa-noir: #251a13;
-  --color-espresso-truffle: #38271d;
+  --color-espresso-truffle: #3d2b20;
+  --color-rose-noir: #31201e;
   --color-deep-cocoa: #1a120d;
   --color-rose-petal: #e3a4a8;
   --color-rose-glow: #f0bfc2;
   --color-dusty-rose: #b8787d;
   --color-blush-cream: #f7e9e0;
   --color-rose-mist: #cfa9a2;
-  --color-cocoa-hairline: #4d382c;
+  --color-cocoa-hairline: #54352f;
   --color-paper-white: #ffffff;
 
   /* Flavor accents (optional) */
@@ -355,7 +359,8 @@ Tagline: *"Hay momentos que merecen algo dulce."* · Location: Cartagena.
 
   /* Surfaces */
   --surface-cocoa-noir: #251a13;
-  --surface-espresso-truffle: #38271d;
+  --surface-espresso-truffle: #3d2b20;
+  --surface-rose-noir: #31201e;
   --surface-deep-cocoa: #1a120d;
   --surface-rose-petal: #e3a4a8;
 }
@@ -367,14 +372,15 @@ Tagline: *"Hay momentos que merecen algo dulce."* · Location: Cartagena.
 @theme {
   /* Colors */
   --color-cocoa-noir: #251a13;
-  --color-espresso-truffle: #38271d;
+  --color-espresso-truffle: #3d2b20;
+  --color-rose-noir: #31201e;
   --color-deep-cocoa: #1a120d;
   --color-rose-petal: #e3a4a8;
   --color-rose-glow: #f0bfc2;
   --color-dusty-rose: #b8787d;
   --color-blush-cream: #f7e9e0;
   --color-rose-mist: #cfa9a2;
-  --color-cocoa-hairline: #4d382c;
+  --color-cocoa-hairline: #54352f;
   --color-paper-white: #ffffff;
   --color-flavor-lime: #b8cf6a;
   --color-flavor-maracuya: #f2c14e;
