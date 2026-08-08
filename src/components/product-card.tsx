@@ -9,7 +9,6 @@ import {
 } from "#/components/ui/dialog.tsx";
 import { formatCOP } from "#/lib/format.ts";
 import { useCartStore } from "#/stores/cart-store.ts";
-import { HeartDoodle } from "./doodles";
 import {
 	type ProductImage,
 	ProductImageCarousel,
@@ -33,7 +32,7 @@ export type Product = {
 };
 
 const FLAVOR_PILL_BASE_CLASSES =
-	"inline-flex items-center gap-2 rounded-pill px-3.5 py-1.5 text-[13px] font-semibold";
+	"inline-flex items-center gap-2 rounded-pill border px-3.5 py-1.5 font-patisserie-sans text-[13px] font-medium uppercase tracking-[0.14em]";
 
 function FlavorPill({
 	flavor,
@@ -60,8 +59,8 @@ function FlavorPill({
 	);
 
 	const toneClasses = selected
-		? "bg-cocoa-ink text-paper-white"
-		: "bg-sticker-blush text-cocoa-ink";
+		? "border-rose-petal text-rose-petal"
+		: "border-cocoa-hairline text-rose-mist";
 
 	if (!onClick) {
 		return (
@@ -77,7 +76,7 @@ function FlavorPill({
 			onClick={onClick}
 			aria-pressed={selected}
 			aria-label={ariaLabel ?? `Ver foto de ${flavor.label}`}
-			className={`${FLAVOR_PILL_BASE_CLASSES} ${toneClasses} cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft`}
+			className={`${FLAVOR_PILL_BASE_CLASSES} ${toneClasses} cursor-pointer transition-all duration-200 hover:-translate-y-0.5 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-petal`}
 		>
 			{content}
 		</button>
@@ -136,7 +135,7 @@ export function ProductCard({ product }: { product: Product }) {
 
 	const actionBlock = (
 		<div className="mt-5 flex items-center justify-between gap-3">
-			<span className="font-sugar-sans text-xl font-bold text-caramel-swirl">
+			<span className="font-velvet-serif text-[21px] italic text-rose-petal">
 				{formatCOP(product.price)}
 			</span>
 
@@ -157,24 +156,24 @@ export function ProductCard({ product }: { product: Product }) {
 									/>
 								) : null;
 							})()}
-							<span className="font-sugar-sans text-[13px] font-semibold text-cocoa-ink">
+							<span className="font-patisserie-sans text-[13px] font-medium text-rose-mist">
 								{line.flavorLabel ?? ""}
 							</span>
 							<button
 								type="button"
 								onClick={() => decrementLine(line.id)}
-								className="ml-1 flex h-7 w-7 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-sm font-bold transition-all duration-200 hover:shadow-soft"
+								className="ml-1 flex h-7 w-7 items-center justify-center rounded-pill border border-cocoa-hairline text-blush-cream text-sm font-bold transition-all duration-200 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-petal"
 								aria-label="Disminuir cantidad"
 							>
 								−
 							</button>
-							<span className="w-5 text-center font-sugar-sans text-[14px] font-bold text-cocoa-ink">
+							<span className="w-5 text-center font-patisserie-sans text-[14px] font-semibold text-blush-cream">
 								{line.qty}
 							</span>
 							<button
 								type="button"
 								onClick={() => incrementLine(line.id)}
-								className="flex h-7 w-7 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-sm font-bold transition-all duration-200 hover:shadow-soft"
+								className="flex h-7 w-7 items-center justify-center rounded-pill border border-cocoa-hairline text-blush-cream text-sm font-bold transition-all duration-200 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-petal"
 								aria-label="Aumentar cantidad"
 							>
 								+
@@ -184,7 +183,7 @@ export function ProductCard({ product }: { product: Product }) {
 					<button
 						type="button"
 						onClick={handleOpenFlavorDialog}
-						className="inline-flex items-center gap-1 font-sugar-sans text-[14px] font-semibold text-caramel-swirl transition-all duration-200 hover:underline"
+						className="inline-flex items-center gap-1 font-patisserie-sans text-[14px] font-semibold text-rose-petal transition-all duration-200 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-petal"
 					>
 						<Plus size={14} />
 						Elegir otro sabor
@@ -195,7 +194,7 @@ export function ProductCard({ product }: { product: Product }) {
 				<button
 					type="button"
 					onClick={handleOpenFlavorDialog}
-					className="rounded-pill bg-cocoa-ink px-5 py-2.5 text-[15px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
+					className="rounded-pill bg-rose-petal px-5 py-2.5 text-[15px] font-semibold text-cocoa-noir shadow-bloom transition-all duration-200 hover:-translate-y-0.5 hover:bg-rose-glow hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-glow"
 				>
 					Elegir sabor
 				</button>
@@ -205,18 +204,18 @@ export function ProductCard({ product }: { product: Product }) {
 					<button
 						type="button"
 						onClick={() => decrementLine(singleLineId)}
-						className="flex h-9 w-9 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-lg font-bold transition-all duration-200 hover:shadow-soft"
+						className="flex h-9 w-9 items-center justify-center rounded-pill border border-cocoa-hairline text-blush-cream text-lg font-bold transition-all duration-200 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-petal"
 						aria-label="Disminuir cantidad"
 					>
 						−
 					</button>
-					<span className="w-6 text-center font-sugar-sans text-[17px] font-bold text-cocoa-ink">
+					<span className="w-6 text-center font-patisserie-sans text-[17px] font-semibold text-blush-cream">
 						{singleQty}
 					</span>
 					<button
 						type="button"
 						onClick={() => incrementLine(singleLineId)}
-						className="flex h-9 w-9 items-center justify-center rounded-pill bg-sticker-blush text-cocoa-ink text-lg font-bold transition-all duration-200 hover:shadow-soft"
+						className="flex h-9 w-9 items-center justify-center rounded-pill border border-cocoa-hairline text-blush-cream text-lg font-bold transition-all duration-200 hover:shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-petal"
 						aria-label="Aumentar cantidad"
 					>
 						+
@@ -227,7 +226,7 @@ export function ProductCard({ product }: { product: Product }) {
 				<button
 					type="button"
 					onClick={handleAddToCart}
-					className="rounded-pill bg-cocoa-ink px-5 py-2.5 text-[15px] font-semibold text-paper-white shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
+					className="rounded-pill bg-rose-petal px-5 py-2.5 text-[15px] font-semibold text-cocoa-noir shadow-bloom transition-all duration-200 hover:-translate-y-0.5 hover:bg-rose-glow hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-glow"
 				>
 					Agregar al carrito
 				</button>
@@ -236,21 +235,21 @@ export function ProductCard({ product }: { product: Product }) {
 	);
 
 	return (
-		<article className="group flex h-full min-h-90 flex-col overflow-hidden rounded-card bg-cream-card p-5 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift sm:p-6">
-			<div className="relative overflow-hidden rounded-image">
+		<article className="group flex h-full min-h-90 flex-col overflow-hidden rounded-card bg-espresso-truffle p-5 shadow-soft transition-all duration-200 hover:-translate-y-1 hover:shadow-lift sm:p-6">
+			<div className="relative overflow-hidden rounded-image ring-1 ring-cocoa-hairline">
 				<ProductImageCarousel
 					ref={carouselRef}
 					images={product.images}
 					productName={product.name}
 				/>
 				{product.badge && (
-					<span className="absolute left-3 top-3 rounded-pill bg-bubblegum-pop px-3 py-1 text-label font-semibold uppercase tracking-[0.08em] text-paper-white shadow-pop">
+					<span className="absolute left-3 top-3 rounded-pill bg-rose-petal px-3 py-1 text-label font-semibold uppercase tracking-[0.08em] text-cocoa-noir shadow-bloom">
 						{product.badge}
 					</span>
 				)}
 			</div>
 
-			<h3 className="mt-5 font-fondant-display text-[26px] font-semibold leading-tight text-cocoa-ink text-balance">
+			<h3 className="mt-5 font-wordmark-sans text-[24px] font-semibold leading-tight text-blush-cream text-balance">
 				{product.name}
 			</h3>
 
@@ -274,7 +273,7 @@ export function ProductCard({ product }: { product: Product }) {
 				</div>
 			)}
 
-			<p className="mt-3 flex-1 text-[15px] leading-relaxed text-cocoa-ink/75">
+			<p className="mt-3 flex-1 text-[15px] leading-relaxed text-rose-mist">
 				{product.description}
 			</p>
 
@@ -283,35 +282,33 @@ export function ProductCard({ product }: { product: Product }) {
 			{/* Flavor selection dialog for selectFlavor products */}
 			{isFlavorSelectable && product.flavors && product.flavors.length > 0 && (
 				<Dialog open={flavorDialogOpen} onOpenChange={setFlavorDialogOpen}>
-					<DialogContent className="gap-0 overflow-hidden rounded-card border-0 bg-cream-card p-0 text-cocoa-ink shadow-lift sm:max-w-md">
-						{/* Decorative top banner */}
-						<div className="relative bg-bubblegum-pop px-6 pb-8 pt-8 text-center">
-							<HeartDoodle className="absolute left-4 top-4 h-6 w-6 text-paper-white/70" />
-							<HeartDoodle className="absolute bottom-3 right-6 h-5 w-5 text-paper-white/60" />
+					<DialogContent className="gap-0 overflow-hidden rounded-card border-0 bg-deep-cocoa p-0 text-blush-cream shadow-lift sm:max-w-md">
+						{/* Decorative top header */}
+						<div className="relative bg-deep-cocoa px-6 pb-8 pt-8 text-center">
 							<DialogHeader>
-								<DialogTitle className="font-fondant-display text-[28px] font-semibold leading-tight text-paper-white">
+								<DialogTitle className="font-velvet-serif text-[28px] font-medium leading-tight text-blush-cream">
 									Elegí tu sabor
 								</DialogTitle>
 							</DialogHeader>
-							<p className="mt-1 font-handwritten-sugar text-2xl text-cream-card">
+							<p className="mt-1 font-dulce-script text-2xl text-rose-petal">
 								¿Cuál te provoca hoy?
 							</p>
 						</div>
 
 						{/* Flavor cards */}
-						<div className="space-y-3 bg-blush-canvas p-5">
+						<div className="space-y-3 border-t border-cocoa-hairline bg-deep-cocoa p-5">
 							{product.flavors.map((flavor) => (
 								<button
 									key={flavor.label}
 									type="button"
 									onClick={() => handleChooseFlavor(flavor)}
-									className="group flex w-full items-center gap-4 rounded-card bg-cream-card p-3 text-left shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift"
+									className="group flex w-full items-center gap-4 rounded-card border border-cocoa-hairline bg-espresso-truffle p-3 text-left shadow-soft transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lift focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-petal"
 								>
 									{flavor.image && (
 										<img
 											src={flavor.image}
 											alt={flavor.label}
-											className="h-16 w-16 shrink-0 rounded-image object-cover"
+											className="h-16 w-16 shrink-0 rounded-image object-cover ring-1 ring-cocoa-hairline"
 										/>
 									)}
 									<div className="flex flex-1 items-center gap-2">
@@ -322,11 +319,11 @@ export function ProductCard({ product }: { product: Product }) {
 												aria-hidden="true"
 											/>
 										)}
-										<span className="font-fondant-display text-[18px] font-semibold text-cocoa-ink">
+										<span className="font-wordmark-sans text-[18px] font-semibold text-blush-cream">
 											{flavor.label}
 										</span>
 									</div>
-									<span className="rounded-pill bg-cocoa-ink px-4 py-2 text-[14px] font-semibold text-paper-white transition-transform duration-200 group-hover:scale-[1.02]">
+									<span className="rounded-pill bg-rose-petal px-4 py-2 text-[14px] font-semibold text-cocoa-noir transition-transform duration-200 group-hover:scale-[1.02]">
 										Elegir
 									</span>
 								</button>

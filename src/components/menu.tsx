@@ -1,6 +1,6 @@
-import { ProductCard, type Product } from "./product-card";
-import { SwooshUnderline, HeartDoodle } from "./doodles";
+import { SwooshUnderline } from "./doodles";
 import { Reveal, RevealGroup, RevealItem } from "./motion/reveal";
+import { type Product, ProductCard } from "./product-card";
 
 const PRODUCTS: Product[] = [
 	{
@@ -152,12 +152,11 @@ export function Menu() {
 		<section id="menu" className="px-4 py-9">
 			<div className="mx-auto max-w-280">
 				<Reveal className="relative mb-12 text-center">
-					<HeartDoodle className="mx-auto mb-4 h-7 w-7 text-blush-rose" />
-					<h2 className="font-fondant-display text-4xl font-semibold text-cocoa-ink sm:text-[40px]">
-						Nuestro <span className="text-caramel-swirl">menú</span>
+					<h2 className="font-velvet-serif text-heading font-medium text-blush-cream">
+						Nuestro <span className="italic text-rose-petal">menú</span>
 					</h2>
-					<SwooshUnderline className="mx-auto mt-2 h-4 w-48 text-blush-rose" />
-					<p className="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-cocoa-ink/75">
+					<SwooshUnderline className="mx-auto mt-2 h-4 w-48 text-dusty-rose" />
+					<p className="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-rose-mist">
 						Todo hecho fresco por encargo. Pide el tuyo por WhatsApp y lo
 						preparamos con amor.
 					</p>

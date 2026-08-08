@@ -38,7 +38,7 @@ const bakeryJsonLd = {
 	name: "Marose",
 	image: OG_IMAGE,
 	url: `${SITE_URL}/`,
-	logo: `${SITE_URL}/logos/logo.webp`,
+	logo: `${SITE_URL}/logos/logo-2.webp`,
 	telephone: "+57 324 682 2755",
 	priceRange: "$$",
 	servesCuisine: "Postres artesanales",
@@ -74,7 +74,7 @@ export const Route = createFileRoute("/")({
 
 function Home() {
 	return (
-		<main className="min-h-screen bg-blush-canvas">
+		<main className="min-h-screen bg-cocoa-noir">
 			<Navbar />
 			<Hero />
 			<Menu />

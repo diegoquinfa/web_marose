@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
 import {
-	LazyMotion,
-	type Variants,
 	domAnimation,
+	LazyMotion,
 	m,
 	useReducedMotion,
+	type Variants,
 } from "motion/react";
+import type { ReactNode } from "react";
 
 type RevealProps = {
 	/** `"view"` (default) reveals once on scroll into viewport; `"load"` reveals on mount. */

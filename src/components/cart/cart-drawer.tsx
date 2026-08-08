@@ -6,13 +6,13 @@ import {
 	DrawerTitle,
 } from "#/components/ui/drawer.tsx";
 import { useMediaQuery } from "#/hooks/use-media-query.ts";
-import { useCartStore } from "#/stores/cart-store.ts";
 import {
 	buildOrderMessage,
 	openOrderInWhatsapp,
 } from "#/lib/whatsapp-order.ts";
+import { useCartStore } from "#/stores/cart-store.ts";
 import { CartView } from "./cart-view.tsx";
-import { DetailsView, type DetailsFormData } from "./details-view.tsx";
+import { type DetailsFormData, DetailsView } from "./details-view.tsx";
 
 const INITIAL_FORM: DetailsFormData = {
 	nombre: "",
@@ -66,9 +66,9 @@ export function CartDrawer() {
 			onOpenChange={handleOpenChange}
 			swipeDirection={isDesktop ? "right" : "down"}
 		>
-			<DrawerContent className="bg-cream-card text-cocoa-ink">
+			<DrawerContent className="bg-espresso-truffle text-blush-cream">
 				<DrawerHeader>
-					<DrawerTitle className="font-fondant-display text-[24px] font-semibold text-cocoa-ink">
+					<DrawerTitle className="font-wordmark-sans text-[24px] font-semibold text-blush-cream">
 						Tu pedido
 					</DrawerTitle>
 				</DrawerHeader>

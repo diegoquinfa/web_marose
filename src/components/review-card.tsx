@@ -14,13 +14,13 @@ export function ReviewCard({ review, index }: ReviewCardProps) {
 
 	return (
 		<article
-			className={`shrink-0 w-72 rounded-card bg-cream-card p-5 shadow-soft select-none ${rotation}`}
+			className={`shrink-0 w-80 rounded-card bg-rose-noir p-6 shadow-soft select-none ${rotation}`}
 			draggable={false}
 		>
-			<time className="block font-handwritten-sugar text-lg text-caramel-swirl">
+			<time className="block font-patisserie-sans text-label font-medium uppercase text-rose-mist">
 				{review.timestamp}
 			</time>
-			<p className="mt-2 text-pretty font-sugar-sans text-[15px] leading-relaxed text-cocoa-ink/80">
+			<p className="mt-2 line-clamp-3 text-pretty font-patisserie-sans text-body-sm leading-relaxed text-blush-cream">
 				{review.comment}
 			</p>
 		</article>

@@ -51,17 +51,20 @@ function InstagramGlyph({ className }: { className?: string }) {
 
 export function Footer() {
 	return (
-		<footer id="contacto" className="mt-20 px-4">
-			<div className="mx-auto max-w-280 rounded-t-card bg-sticker-blush px-6 py-14 text-center sm:px-12">
-				<div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-cream-card shadow-soft">
+		<footer
+			id="contacto"
+			className="mt-20 border-t border-cocoa-hairline bg-deep-cocoa px-4 py-14 text-center sm:px-12"
+		>
+			<div className="mx-auto max-w-280">
+				<div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-cocoa-hairline bg-espresso-truffle shadow-soft">
 					<img
-						src="/logos/logo192.webp"
+						src="/logos/logo-2.webp"
 						alt="Sello de Marose"
 						className="h-full w-full rounded-full object-cover"
 					/>
 				</div>
 
-				<p className="mt-5 font-handwritten-sugar text-3xl text-caramel-swirl">
+				<p className="mt-5 font-dulce-script text-4xl text-rose-petal">
 					Hecho con amor · Cartagena
 				</p>
 
@@ -70,7 +73,7 @@ export function Footer() {
 						href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola Marose, quiero hacer un pedido")}`}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="inline-flex items-center gap-2 rounded-pill bg-cocoa-ink px-5 py-2.5 text-[15px] font-semibold text-paper-white shadow-soft transition-transform duration-200 hover:-translate-y-0.5"
+						className="inline-flex items-center gap-2 rounded-pill border border-cocoa-hairline px-5 py-2.5 font-patisserie-sans text-[15px] font-medium text-blush-cream transition-colors duration-200 hover:border-rose-petal hover:text-rose-petal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-petal"
 					>
 						<WhatsappGlyph className="h-4 w-4" />
 						WhatsApp
@@ -79,7 +82,7 @@ export function Footer() {
 						href="https://instagram.com/marosectg"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="inline-flex items-center gap-2 rounded-pill bg-cream-card px-5 py-2.5 text-[15px] font-semibold text-cocoa-ink shadow-soft transition-transform duration-200 hover:-translate-y-0.5"
+						className="inline-flex items-center gap-2 rounded-pill border border-cocoa-hairline px-5 py-2.5 font-patisserie-sans text-[15px] font-medium text-blush-cream transition-colors duration-200 hover:border-rose-petal hover:text-rose-petal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-petal"
 					>
 						<InstagramGlyph className="h-4 w-4" />
 						Instagram
@@ -88,14 +91,14 @@ export function Footer() {
 						href="https://www.tiktok.com/@marosepostres"
 						target="_blank"
 						rel="noopener noreferrer"
-						className="inline-flex items-center gap-2 rounded-pill bg-cream-card px-5 py-2.5 text-[15px] font-semibold text-cocoa-ink shadow-soft transition-transform duration-200 hover:-translate-y-0.5"
+						className="inline-flex items-center gap-2 rounded-pill border border-cocoa-hairline px-5 py-2.5 font-patisserie-sans text-[15px] font-medium text-blush-cream transition-colors duration-200 hover:border-rose-petal hover:text-rose-petal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-petal"
 					>
 						<TiktokGlyph className="h-4 w-4" />
 						TikTok
 					</a>
 				</div>
 
-				<p className="mt-8 text-[13px] text-cocoa-ink/60">
+				<p className="mt-8 text-[13px] text-rose-mist">
 					© {new Date().getFullYear()} Marose · Repostería artesanal
 				</p>
 			</div>

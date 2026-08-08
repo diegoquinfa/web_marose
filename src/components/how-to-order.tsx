@@ -1,9 +1,4 @@
-import {
-	SwooshUnderline,
-	SparkleDoodle,
-	HeartDoodle,
-	StarDoodle,
-} from "./doodles";
+import { SwooshUnderline } from "./doodles";
 import { Reveal, RevealGroup, RevealItem } from "./motion/reveal";
 import { WHATSAPP_NUMBER } from "./whatsapp-button";
 
@@ -15,9 +10,6 @@ const STEPS = [
 			"Explora el menú y escoge tu favorito… o déjate tentar por más de uno.",
 		handwritten: "¡el más difícil!",
 		rotate: "-rotate-2",
-		iconBg: "bg-sticker-blush",
-		iconColor: "text-bubblegum-pop",
-		badgeBg: "bg-bubblegum-pop",
 		icon: (
 			<svg
 				viewBox="0 0 24 24"
@@ -44,9 +36,6 @@ const STEPS = [
 			"Escríbenos por WhatsApp con el producto, la cantidad y la fecha de entrega.",
 		handwritten: "respondemos rapidito",
 		rotate: "rotate-1",
-		iconBg: "bg-[#e8f5d8]",
-		iconColor: "text-flavor-lime",
-		badgeBg: "bg-flavor-lime",
 		icon: (
 			<svg
 				viewBox="0 0 24 24"
@@ -70,9 +59,6 @@ const STEPS = [
 			"Con el pago confirmado tu pedido queda reservado y lo preparamos con dedicación.",
 		handwritten: "hecho con amor",
 		rotate: "-rotate-1",
-		iconBg: "bg-[#fdeed3]",
-		iconColor: "text-flavor-maracuya",
-		badgeBg: "bg-flavor-maracuya",
 		icon: (
 			<svg
 				viewBox="0 0 24 24"
@@ -96,9 +82,6 @@ const STEPS = [
 			"Te lo llevamos según disponibilidad en Cartagena, con cada detalle cuidado.",
 		handwritten: "¡a disfrutar!",
 		rotate: "rotate-2",
-		iconBg: "bg-[#f3e3d3]",
-		iconColor: "text-caramel-swirl",
-		badgeBg: "bg-caramel-swirl",
 		icon: (
 			<svg
 				viewBox="0 0 24 24"
@@ -184,23 +167,17 @@ const NOTES = [
 export function HowToOrder() {
 	return (
 		<section id="como-pedir" className="relative overflow-hidden px-4 py-9">
-			{/* scattered background doodles */}
-			<HeartDoodle className="absolute left-[6%] top-16 h-6 w-6 rotate-12 text-blush-rose/50" />
-			<StarDoodle className="absolute right-[8%] top-24 h-7 w-7 -rotate-12 text-bubblegum-pop/40" />
-			<SparkleDoodle className="absolute bottom-24 left-[10%] h-6 w-6 text-flavor-maracuya/40" />
-			<HeartDoodle className="absolute bottom-40 right-[6%] h-5 w-5 -rotate-6 text-bubblegum-pop/40" />
-
 			<div className="relative mx-auto max-w-280">
 				{/* Header */}
 				<Reveal className="relative mb-16 text-center">
-					<span className="inline-block rounded-pill bg-sticker-blush px-4 py-1.5 font-handwritten-sugar text-xl text-bubblegum-pop">
+					<span className="inline-block rounded-pill border border-cocoa-hairline bg-deep-cocoa px-4 py-1.5 font-patisserie-sans text-[13px] font-medium uppercase tracking-[0.14em] text-dusty-rose">
 						¡súper fácil!
 					</span>
-					<h2 className="mt-3 font-fondant-display text-4xl font-semibold text-cocoa-ink sm:text-[40px]">
-						¿Cómo <span className="text-caramel-swirl">pedir?</span>
+					<h2 className="mt-3 font-velvet-serif text-heading font-medium text-blush-cream">
+						¿Cómo <span className="italic text-rose-petal">pedir?</span>
 					</h2>
-					<SwooshUnderline className="mx-auto mt-2 h-4 w-44 text-bubblegum-pop" />
-					<p className="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-cocoa-ink/75">
+					<SwooshUnderline className="mx-auto mt-2 h-4 w-44 text-dusty-rose" />
+					<p className="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-rose-mist">
 						En cuatro pasos tienes tus postres en camino.
 					</p>
 				</Reveal>
@@ -212,7 +189,7 @@ export function HowToOrder() {
 						viewBox="0 0 1000 60"
 						fill="none"
 						aria-hidden="true"
-						className="absolute left-1/2 top-8 hidden w-[88%] -translate-x-1/2 text-blush-rose lg:block"
+						className="absolute left-1/2 top-8 hidden w-[88%] -translate-x-1/2 text-dusty-rose lg:block"
 						preserveAspectRatio="none"
 					>
 						<path
@@ -228,32 +205,27 @@ export function HowToOrder() {
 						{STEPS.map((step) => (
 							<RevealItem key={step.number}>
 								<article
-									className={`group relative flex flex-col items-center rounded-card border-2 border-dashed border-cocoa-hairline bg-cream-card px-6 pb-8 pt-12 text-center shadow-soft transition-all duration-300 hover:rotate-0 hover:border-blush-rose hover:shadow-lift ${step.rotate}`}
+									className={`group relative flex flex-col items-center rounded-card border-2 border-dashed border-cocoa-hairline bg-rose-noir px-6 pb-8 pt-12 text-center shadow-soft transition-all duration-300 hover:rotate-0 hover:border-rose-petal hover:shadow-lift ${step.rotate}`}
 								>
-									{/* number badge - floats on top edge like a sticker */}
-									<span
-										className={`absolute -top-5 left-1/2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full font-fondant-display text-lg font-bold text-white shadow-pop ring-4 ring-cream-card ${step.badgeBg}`}
-									>
+									{/* number badge - floats on top edge */}
+									<span className="absolute -top-5 left-1/2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full bg-deep-cocoa font-velvet-serif text-xl italic text-rose-petal ring-4 ring-rose-noir">
 										{step.number}
 									</span>
 
-									{/* icon in tinted scalloped circle */}
-									<div
-										className={`relative mb-5 flex h-20 w-20 items-center justify-center rounded-full ${step.iconBg} ${step.iconColor} transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6`}
-									>
+									{/* icon in dark disc */}
+									<div className="relative mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-deep-cocoa text-rose-mist transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
 										{step.icon}
-										<SparkleDoodle className="absolute -right-1 -top-1 h-4 w-4 text-bubblegum-pop opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
 									</div>
 
-									<h3 className="font-fondant-display text-[19px] font-semibold leading-snug text-cocoa-ink">
+									<h3 className="font-wordmark-sans text-[19px] font-semibold leading-snug text-blush-cream">
 										{step.title}
 									</h3>
-									<p className="mt-2 text-pretty text-[15px] leading-relaxed text-cocoa-ink/70">
+									<p className="mt-2 text-pretty text-[15px] leading-relaxed text-rose-mist">
 										{step.description}
 									</p>
 
-									{/* handwritten note */}
-									<span className="mt-4 font-handwritten-sugar text-lg leading-none text-bubblegum-pop">
+									{/* handwritten note — sans whisper, script reserved for the final CTA */}
+									<span className="mt-4 font-patisserie-sans text-[15px] leading-none text-rose-mist">
 										{step.handwritten}
 									</span>
 								</article>
@@ -262,21 +234,21 @@ export function HowToOrder() {
 					</RevealGroup>
 				</div>
 
-				{/* Notes as sticker chips */}
+				{/* Notes as quiet chips */}
 				<RevealGroup className="mt-14 grid gap-4 sm:grid-cols-3">
 					{NOTES.map((note, i) => (
 						<RevealItem key={note.label}>
 							<div
-								className={`flex items-start gap-4 rounded-2xl bg-sticker-blush px-5 py-4 ${i === 1 ? "sm:-rotate-1" : i === 2 ? "sm:rotate-1" : "sm:rotate-0"}`}
+								className={`flex items-start gap-4 rounded-card border border-cocoa-hairline bg-deep-cocoa px-5 py-4 ${i === 1 ? "sm:-rotate-1" : i === 2 ? "sm:rotate-1" : "sm:rotate-0"}`}
 							>
-								<span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-paper-white text-bubblegum-pop shadow-soft">
+								<span className="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-espresso-truffle text-rose-mist">
 									{note.icon}
 								</span>
 								<div>
-									<p className="font-fondant-display text-[15px] font-semibold text-cocoa-ink">
+									<p className="font-wordmark-sans text-[15px] font-semibold text-blush-cream">
 										{note.label}
 									</p>
-									<p className="mt-0.5 text-pretty text-[13.5px] leading-relaxed text-cocoa-ink/70">
+									<p className="mt-0.5 text-pretty text-[13.5px] leading-relaxed text-rose-mist">
 										{note.text}
 									</p>
 								</div>
@@ -287,14 +259,14 @@ export function HowToOrder() {
 
 				{/* CTA */}
 				<Reveal className="mt-12 flex flex-col items-center gap-2">
-					<span className="font-handwritten-sugar text-2xl text-caramel-swirl">
+					<span className="font-dulce-script text-2xl text-rose-petal">
 						¿ya sabes qué vas a pedir?
 					</span>
 					<a
 						href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("Hola Marose, quiero hacer un pedido")}`}
 						target="_blank"
 						rel="noopener noreferrer"
-						className="inline-flex items-center gap-3 rounded-pill bg-[#25D366] px-8 py-4 font-fondant-display text-[17px] font-semibold text-white shadow-pop transition-transform duration-200 hover:scale-105 active:scale-100"
+						className="inline-flex items-center gap-3 rounded-pill bg-rose-petal px-8 py-4 font-patisserie-sans text-[17px] font-semibold text-cocoa-noir shadow-bloom transition-all duration-200 hover:-translate-y-0.5 hover:bg-rose-glow active:translate-y-0"
 					>
 						<svg
 							viewBox="0 0 24 24"

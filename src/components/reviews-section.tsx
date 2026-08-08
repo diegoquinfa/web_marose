@@ -1,4 +1,4 @@
-import { SparkleDoodle, SwooshUnderline } from "./doodles";
+import { SwooshUnderline } from "./doodles";
 import { Reveal } from "./motion/reveal";
 import { type Review, ReviewCard } from "./review-card";
 
@@ -67,13 +67,12 @@ export function ReviewsSection() {
 		>
 			{/* Header */}
 			<Reveal className="relative mb-12 px-4 text-center">
-				<SparkleDoodle className="mx-auto mb-4 h-7 w-7 text-blush-rose" />
-				<h2 className="font-fondant-display text-4xl font-semibold text-cocoa-ink sm:text-[40px]">
+				<h2 className="font-velvet-serif text-heading font-medium text-blush-cream">
 					Lo que dicen{" "}
-					<span className="text-caramel-swirl">nuestros clientes</span>
+					<span className="italic text-rose-petal">nuestros clientes</span>
 				</h2>
-				<SwooshUnderline className="mx-auto mt-2 h-4 w-52 text-bubblegum-pop" />
-				<p className="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-cocoa-ink/75">
+				<SwooshUnderline className="mx-auto mt-2 h-4 w-52 text-dusty-rose" />
+				<p className="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-rose-mist">
 					Opiniones reales de quienes ya probaron nuestros postres.
 				</p>
 			</Reveal>
@@ -83,7 +82,7 @@ export function ReviewsSection() {
 				className="overflow-hidden motion-reduce:overflow-x-auto motion-reduce:px-4"
 				draggable={false}
 			>
-				<div className="flex w-max gap-5 animate-[marquee_60s_linear_infinite] hover:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:w-fit motion-reduce:gap-4">
+				<div className="flex w-max gap-6 animate-[marquee_60s_linear_infinite] hover:[animation-play-state:paused] motion-reduce:animate-none motion-reduce:w-fit motion-reduce:gap-6">
 					{renderTrack()}
 					{renderTrack()}
 				</div>
