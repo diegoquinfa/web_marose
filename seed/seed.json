@@ -1,0 +1,16 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": { "name": "Marose", "description": "Marose bakery site", "author": "Marose" },
+	"settings": { "title": "Marose" },
+	"collections": [
+		{
+			"slug": "pages",
+			"label": "Páginas",
+			"labelSingular": "Página",
+			"urlPattern": "/{slug}",
+			"supports": ["drafts", "revisions", "preview", "seo"],
+			"fields": [{ "slug": "title", "label": "Título", "type": "string", "required": true }]
+		}
+	]
+}

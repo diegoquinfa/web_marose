@@ -1,0 +1,43 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "marose-web",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-10-01",
+	"compatibility_flags": ["nodejs_compat"],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "marose-web-db",
+		},
+	],
+	"r2_buckets": [
+		{
+			"binding": "MEDIA",
+			"bucket_name": "marose-web-media",
+		},
+	],
+	// EmDash object cache. Wrangler provisions the namespace on first deploy.
+	"kv_namespaces": [
+		{
+			"binding": "CACHE",
+		},
+	],
+	"send_email": [{ "name": "EMAIL" }],
+	"images": {
+		"binding": "IMAGES",
+	},
+	// Scheduled publishing, backups, and maintenance.
+	"triggers": {
+		"crons": ["* * * * *"],
+	},
+	"vars": {
+		"EMDASH_SITE_URL": "https://marosectg.com",
+	},
+	"observability": {
+		"enabled": true,
+	},
+	// Enable after the first deploy, once marosectg.com is an active zone in this account:
+	// "routes": [{ "pattern": "marosectg.com", "custom_domain": true }],
+	// Run the Worker next to the D1 primary (fill region after the database exists):
+	// "placement": { "mode": "targeted", "region": "<d1-primary-region>" },
+}
