@@ -8,6 +8,7 @@
 		{
 			"binding": "DB",
 			"database_name": "marose-web-db",
+			"database_id": "d0059fa5-704e-483b-ba5f-761140c720a8",
 		},
 	],
 	"r2_buckets": [
@@ -16,10 +17,16 @@
 			"bucket_name": "marose-web-media",
 		},
 	],
-	// EmDash object cache. Wrangler provisions the namespace on first deploy.
 	"kv_namespaces": [
+		// EmDash object cache (marose-web-cache).
 		{
 			"binding": "CACHE",
+			"id": "94a8111faf8a48f199c85141c1e77210",
+		},
+		// Astro sessions (marose-web-session), used by the Cloudflare adapter.
+		{
+			"binding": "SESSION",
+			"id": "c8d7720381fc4877b4543fd8a1534c53",
 		},
 	],
 	"send_email": [{ "name": "EMAIL" }],
