@@ -1,16 +1,1442 @@
 {
 	"$schema": "https://emdashcms.com/seed.schema.json",
 	"version": "1",
-	"meta": { "name": "Marose", "description": "Marose bakery site", "author": "Marose" },
-	"settings": { "title": "Marose" },
+	"meta": {
+		"name": "Marose",
+		"description": "Repostería artesanal en Cartagena: menú, opiniones y datos del negocio",
+		"author": "Marose"
+	},
+	"settings": {
+		"title": "Marose",
+		"tagline": "Hay momentos que merecen algo dulce.",
+		"timezone": "America/Bogota",
+		"seo": {
+			"titleSeparator": "·"
+		}
+	},
+	"blockTypes": [
+		{
+			"slug": "hero",
+			"label": "Portada",
+			"description": "La apertura de la página: título grande, frase en cursiva, botón de WhatsApp e imagen principal",
+			"category": "Secciones Marose",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "eyebrow",
+							"label": "Texto pequeño superior",
+							"type": "string"
+						},
+						{
+							"slug": "heading",
+							"label": "Título",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "heading_script",
+							"label": "Frase en cursiva",
+							"type": "string",
+							"validation": {
+								"maxLength": 30
+							}
+						},
+						{
+							"slug": "subtitle",
+							"label": "Descripción",
+							"type": "text"
+						},
+						{
+							"slug": "image",
+							"label": "Imagen principal",
+							"type": "image"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Texto del botón de WhatsApp",
+							"type": "string"
+						},
+						{
+							"slug": "cta_message",
+							"label": "Mensaje de WhatsApp",
+							"type": "string"
+						},
+						{
+							"slug": "secondary_label",
+							"label": "Texto del botón secundario",
+							"type": "string"
+						},
+						{
+							"slug": "secondary_href",
+							"label": "Enlace del botón secundario (empieza con /, https://, mailto:, tel: o #)",
+							"type": "string",
+							"defaultValue": "#menu",
+							"validation": {
+								"pattern": "^(?:$|(?:https?://|mailto:|tel:|/(?!/)|#).+)$"
+							}
+						},
+						{
+							"slug": "anchor",
+							"label": "ID de sección (minúsculas, ej: menu)",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "menu_grid",
+			"label": "Menú de productos",
+			"description": "La cuadrícula de productos publicados, ordenada por «Orden en el menú»",
+			"category": "Secciones Marose",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Título",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "heading_accent",
+							"label": "Palabra resaltada",
+							"type": "string"
+						},
+						{
+							"slug": "subtitle",
+							"label": "Descripción",
+							"type": "text"
+						},
+						{
+							"slug": "show_unavailable",
+							"label": "Mostrar productos agotados",
+							"type": "boolean",
+							"defaultValue": false
+						},
+						{
+							"slug": "anchor",
+							"label": "ID de sección (minúsculas, ej: menu)",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "reviews",
+			"label": "Opiniones de clientes",
+			"description": "Las opiniones marcadas como «Mostrar en la página», de la más reciente a la más antigua",
+			"category": "Secciones Marose",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Título",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "heading_accent",
+							"label": "Palabra resaltada",
+							"type": "string"
+						},
+						{
+							"slug": "subtitle",
+							"label": "Descripción",
+							"type": "text"
+						},
+						{
+							"slug": "max_items",
+							"label": "Cuántas mostrar",
+							"type": "integer",
+							"defaultValue": 8
+						},
+						{
+							"slug": "speed",
+							"label": "Velocidad",
+							"type": "select",
+							"defaultValue": "Normal",
+							"validation": {
+								"options": [
+									"Lenta",
+									"Normal",
+									"Rápida"
+								]
+							}
+						},
+						{
+							"slug": "anchor",
+							"label": "ID de sección (minúsculas, ej: menu)",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "how_to_order",
+			"label": "Cómo pedir",
+			"description": "Los pasos para pedir por WhatsApp, con sus avisos y el botón final",
+			"category": "Secciones Marose",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "badge",
+							"label": "Etiqueta",
+							"type": "string"
+						},
+						{
+							"slug": "heading",
+							"label": "Título",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "heading_accent",
+							"label": "Palabra resaltada",
+							"type": "string"
+						},
+						{
+							"slug": "subtitle",
+							"label": "Descripción",
+							"type": "text"
+						},
+						{
+							"slug": "steps",
+							"label": "Pasos",
+							"type": "repeater",
+							"validation": {
+								"maxItems": 6,
+								"subFields": [
+									{
+										"slug": "title",
+										"label": "Título del paso",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "description",
+										"label": "Descripción del paso",
+										"type": "text",
+										"required": true
+									},
+									{
+										"slug": "note",
+										"label": "Nota corta",
+										"type": "string"
+									},
+									{
+										"slug": "icon",
+										"label": "Ícono",
+										"type": "select",
+										"required": true,
+										"options": [
+											"Antojo",
+											"Mensaje",
+											"Confirmación",
+											"Regalo",
+											"Entrega",
+											"Calendario"
+										]
+									}
+								]
+							}
+						},
+						{
+							"slug": "notes",
+							"label": "Avisos",
+							"type": "repeater",
+							"validation": {
+								"maxItems": 4,
+								"subFields": [
+									{
+										"slug": "label",
+										"label": "Título del aviso",
+										"type": "string",
+										"required": true
+									},
+									{
+										"slug": "text",
+										"label": "Texto del aviso",
+										"type": "text",
+										"required": true
+									},
+									{
+										"slug": "icon",
+										"label": "Ícono",
+										"type": "select",
+										"required": true,
+										"options": [
+											"Calendario",
+											"Reloj",
+											"Ubicación",
+											"Corazón"
+										]
+									}
+								]
+							}
+						},
+						{
+							"slug": "cta_script",
+							"label": "Frase en cursiva",
+							"type": "string",
+							"validation": {
+								"maxLength": 30
+							}
+						},
+						{
+							"slug": "cta_label",
+							"label": "Texto del botón",
+							"type": "string",
+							"defaultValue": "Hacer mi pedido"
+						},
+						{
+							"slug": "cta_message",
+							"label": "Mensaje de WhatsApp",
+							"type": "string"
+						},
+						{
+							"slug": "anchor",
+							"label": "ID de sección (minúsculas, ej: menu)",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "about",
+			"label": "Nosotros",
+			"description": "La historia de la marca, con la mascota en círculo y la firma en cursiva",
+			"category": "Secciones Marose",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Título",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "heading_accent",
+							"label": "Palabra resaltada",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Texto",
+							"type": "portableText",
+							"required": true
+						},
+						{
+							"slug": "signoff_script",
+							"label": "Firma en cursiva",
+							"type": "string",
+							"validation": {
+								"maxLength": 40
+							}
+						},
+						{
+							"slug": "image",
+							"label": "Imagen (círculo)",
+							"type": "image"
+						},
+						{
+							"slug": "anchor",
+							"label": "ID de sección (minúsculas, ej: menu)",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "cta_banner",
+			"label": "Llamado a la acción",
+			"description": "Un cierre con título, texto y botón de WhatsApp",
+			"category": "Secciones Marose",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Título",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "text",
+							"label": "Texto",
+							"type": "text"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Texto del botón",
+							"type": "string"
+						},
+						{
+							"slug": "cta_message",
+							"label": "Mensaje de WhatsApp",
+							"type": "string"
+						},
+						{
+							"slug": "anchor",
+							"label": "ID de sección (minúsculas, ej: menu)",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "text_block",
+			"label": "Texto libre",
+			"description": "Un bloque de texto enriquecido para contenido suelto (títulos, párrafos, enlaces)",
+			"category": "Secciones Marose",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "heading",
+							"label": "Título",
+							"type": "string"
+						},
+						{
+							"slug": "body",
+							"label": "Texto",
+							"type": "portableText",
+							"required": true
+						},
+						{
+							"slug": "anchor",
+							"label": "ID de sección (minúsculas, ej: menu)",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"slug": "error_message",
+			"label": "Mensaje de error (404)",
+			"description": "El contenido de la página 404: código, título, frase en cursiva y botones",
+			"category": "Secciones Marose",
+			"currentVersion": 1,
+			"versions": [
+				{
+					"version": 1,
+					"fields": [
+						{
+							"slug": "code",
+							"label": "Código",
+							"type": "string",
+							"defaultValue": "404"
+						},
+						{
+							"slug": "heading",
+							"label": "Título",
+							"type": "string",
+							"required": true
+						},
+						{
+							"slug": "heading_script",
+							"label": "Frase en cursiva",
+							"type": "string",
+							"validation": {
+								"maxLength": 30
+							}
+						},
+						{
+							"slug": "body",
+							"label": "Texto",
+							"type": "text"
+						},
+						{
+							"slug": "home_label",
+							"label": "Texto del botón de inicio",
+							"type": "string",
+							"defaultValue": "Volver al inicio"
+						},
+						{
+							"slug": "cta_label",
+							"label": "Texto del botón de WhatsApp",
+							"type": "string",
+							"defaultValue": "Escríbenos"
+						},
+						{
+							"slug": "cta_message",
+							"label": "Mensaje de WhatsApp",
+							"type": "string"
+						},
+						{
+							"slug": "anchor",
+							"label": "ID de sección (minúsculas, ej: menu)",
+							"type": "string",
+							"validation": {
+								"pattern": "^(?:$|[a-z][a-z0-9_-]*)$"
+							}
+						}
+					]
+				}
+			]
+		}
+	],
 	"collections": [
 		{
 			"slug": "pages",
 			"label": "Páginas",
 			"labelSingular": "Página",
+			"description": "Las páginas del sitio, armadas con secciones que puedes ordenar, ocultar y repetir",
+			"icon": "browsers",
+			"group": "Contenido del sitio",
+			"sortOrder": 1,
 			"urlPattern": "/{slug}",
-			"supports": ["drafts", "revisions", "preview", "seo"],
-			"fields": [{ "slug": "title", "label": "Título", "type": "string", "required": true }]
+			"supports": [
+				"drafts",
+				"revisions",
+				"preview",
+				"seo"
+			],
+			"fields": [
+				{
+					"slug": "title",
+					"label": "Título",
+					"type": "string",
+					"required": true
+				},
+				{
+					"slug": "sections",
+					"label": "Secciones",
+					"type": "blocks",
+					"validation": {
+						"allowedTypes": [
+							"hero",
+							"menu_grid",
+							"reviews",
+							"how_to_order",
+							"about",
+							"cta_banner",
+							"text_block",
+							"error_message"
+						],
+						"maxItems": 20
+					}
+				}
+			]
+		},
+		{
+			"slug": "products",
+			"label": "Productos",
+			"labelSingular": "Producto",
+			"description": "Los postres del menú: fotos, precio, sabores y disponibilidad",
+			"icon": "cookie",
+			"group": "Contenido del sitio",
+			"sortOrder": 2,
+			"routable": false,
+			"titleField": "name",
+			"supports": [
+				"drafts",
+				"revisions",
+				"search"
+			],
+			"admin": {
+				"listColumns": [
+					"price",
+					"badge",
+					"available",
+					"sort_order"
+				]
+			},
+			"fields": [
+				{
+					"slug": "name",
+					"label": "Nombre",
+					"type": "string",
+					"required": true,
+					"searchable": true
+				},
+				{
+					"slug": "description",
+					"label": "Descripción",
+					"type": "text",
+					"required": true,
+					"validation": {
+						"maxLength": 300
+					}
+				},
+				{
+					"slug": "price",
+					"label": "Precio (COP, sin puntos)",
+					"type": "integer",
+					"required": true,
+					"validation": {
+						"min": 0
+					}
+				},
+				{
+					"slug": "photos",
+					"label": "Fotos",
+					"type": "repeater",
+					"validation": {
+						"minItems": 1,
+						"maxItems": 6,
+						"subFields": [
+							{
+								"slug": "image",
+								"label": "Foto",
+								"type": "image",
+								"required": true
+							},
+							{
+								"slug": "alt",
+								"label": "Describe la foto",
+								"type": "string"
+							}
+						]
+					}
+				},
+				{
+					"slug": "badge",
+					"label": "Etiqueta",
+					"type": "select",
+					"validation": {
+						"options": [
+							"Favorito",
+							"Nuevo",
+							"Edición limitada",
+							"Agotado"
+						]
+					}
+				},
+				{
+					"slug": "requires_flavor",
+					"label": "¿El cliente debe elegir sabor?",
+					"type": "boolean"
+				},
+				{
+					"slug": "flavors",
+					"label": "Sabores u opciones",
+					"type": "repeater",
+					"validation": {
+						"maxItems": 8,
+						"subFields": [
+							{
+								"slug": "label",
+								"label": "Nombre del sabor",
+								"type": "string",
+								"required": true
+							},
+							{
+								"slug": "color",
+								"label": "Color de la etiqueta",
+								"type": "select",
+								"options": [
+									"Limón",
+									"Maracuyá",
+									"Nutella",
+									"Arequipe",
+									"Chocolate",
+									"Fresa",
+									"Canela",
+									"Neutro"
+								]
+							},
+							{
+								"slug": "image",
+								"label": "Foto de este sabor",
+								"type": "image"
+							}
+						]
+					}
+				},
+				{
+					"slug": "available",
+					"label": "Disponible",
+					"type": "boolean",
+					"defaultValue": true,
+					"indexed": true
+				},
+				{
+					"slug": "sort_order",
+					"label": "Orden en el menú",
+					"type": "integer",
+					"indexed": true
+				}
+			]
+		},
+		{
+			"slug": "reviews",
+			"label": "Opiniones",
+			"labelSingular": "Opinión",
+			"description": "Los comentarios de clientes que se muestran en la página",
+			"icon": "chat-circle-text",
+			"group": "Contenido del sitio",
+			"sortOrder": 3,
+			"routable": false,
+			"supports": [
+				"drafts"
+			],
+			"admin": {
+				"listColumns": [
+					"review_date",
+					"source",
+					"featured"
+				]
+			},
+			"fields": [
+				{
+					"slug": "comment",
+					"label": "Comentario",
+					"type": "text",
+					"required": true,
+					"validation": {
+						"maxLength": 240
+					}
+				},
+				{
+					"slug": "author",
+					"label": "Nombre del cliente (opcional)",
+					"type": "string"
+				},
+				{
+					"slug": "review_date",
+					"label": "Fecha",
+					"type": "datetime",
+					"indexed": true
+				},
+				{
+					"slug": "source",
+					"label": "¿Dónde lo dijo?",
+					"type": "select",
+					"validation": {
+						"options": [
+							"WhatsApp",
+							"Instagram",
+							"TikTok",
+							"Google"
+						]
+					}
+				},
+				{
+					"slug": "featured",
+					"label": "Mostrar en la página",
+					"type": "boolean",
+					"defaultValue": true,
+					"indexed": true
+				}
+			]
+		},
+		{
+			"slug": "business_info",
+			"label": "Información del negocio",
+			"labelSingular": "Información del negocio",
+			"description": "WhatsApp, redes y datos de contacto. Edita la única entrada; no crees otra",
+			"icon": "storefront",
+			"group": "Configuración",
+			"sortOrder": 4,
+			"routable": false,
+			"titleField": "label",
+			"supports": [
+				"revisions"
+			],
+			"admin": {
+				"quickCreate": false
+			},
+			"fields": [
+				{
+					"slug": "label",
+					"label": "Nombre interno",
+					"type": "string"
+				},
+				{
+					"slug": "whatsapp_number",
+					"label": "Número de WhatsApp para pedidos (con 57 adelante, sin + ni espacios)",
+					"type": "string",
+					"required": true,
+					"validation": {
+						"pattern": "^57\\d{10}$"
+					}
+				},
+				{
+					"slug": "whatsapp_default_message",
+					"label": "Mensaje inicial de WhatsApp",
+					"type": "string"
+				},
+				{
+					"slug": "order_greeting",
+					"label": "Saludo del pedido del carrito",
+					"type": "string"
+				},
+				{
+					"slug": "phone_display",
+					"label": "Teléfono visible / Google",
+					"type": "string"
+				},
+				{
+					"slug": "city",
+					"label": "Ciudad",
+					"type": "string"
+				},
+				{
+					"slug": "region",
+					"label": "Departamento",
+					"type": "string"
+				},
+				{
+					"slug": "country",
+					"label": "País",
+					"type": "string"
+				},
+				{
+					"slug": "delivery_note",
+					"label": "Nota de domicilio",
+					"type": "string"
+				},
+				{
+					"slug": "instagram_url",
+					"label": "Instagram",
+					"type": "url"
+				},
+				{
+					"slug": "tiktok_url",
+					"label": "TikTok",
+					"type": "url"
+				},
+				{
+					"slug": "footer_tagline",
+					"label": "Frase del pie de página (cursiva)",
+					"type": "string",
+					"validation": {
+						"maxLength": 40
+					}
+				},
+				{
+					"slug": "footer_legal",
+					"label": "Texto legal del pie",
+					"type": "string"
+				},
+				{
+					"slug": "price_range",
+					"label": "Rango de precio",
+					"type": "string"
+				},
+				{
+					"slug": "cuisine",
+					"label": "Tipo de cocina",
+					"type": "string"
+				}
+			]
 		}
-	]
+	],
+	"menus": [
+		{
+			"name": "primary",
+			"label": "Menú principal",
+			"items": [
+				{
+					"type": "custom",
+					"label": "Menú",
+					"url": "/#menu"
+				},
+				{
+					"type": "custom",
+					"label": "Nosotros",
+					"url": "/#nosotros"
+				},
+				{
+					"type": "custom",
+					"label": "Contacto",
+					"url": "/#contacto"
+				}
+			]
+		}
+	],
+	"content": {
+		"pages": [
+			{
+				"id": "page-inicio",
+				"slug": "inicio",
+				"status": "published",
+				"data": {
+					"title": "Inicio",
+					"sections": [
+						{
+							"_type": "hero",
+							"_version": 1,
+							"_key": "inicio-hero",
+							"anchor": "top",
+							"eyebrow": "Pastelería artesanal · Cartagena",
+							"heading": "Hay momentos que merecen",
+							"heading_script": "algo dulce",
+							"subtitle": "Pavé, mini cookies con dip, cookie pie y torta de zanahoria. Todo recién horneado y listo para endulzar tu día.",
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/logos/banner-2.2.webp",
+									"alt": "Marose — pastelería artesanal en Cartagena",
+									"filename": "banner-2.2.webp"
+								}
+							},
+							"cta_label": "Pedir por WhatsApp",
+							"cta_message": "Hola Marose, quiero pedir postres",
+							"secondary_label": "Ver menú",
+							"secondary_href": "#menu"
+						},
+						{
+							"_type": "menu_grid",
+							"_version": 1,
+							"_key": "inicio-menu-grid",
+							"anchor": "menu",
+							"heading": "Nuestro",
+							"heading_accent": "menú",
+							"subtitle": "Todo hecho fresco por encargo. Pide el tuyo por WhatsApp y lo preparamos con amor.",
+							"show_unavailable": false
+						},
+						{
+							"_type": "reviews",
+							"_version": 1,
+							"_key": "inicio-reviews",
+							"heading": "Lo que dicen",
+							"subtitle": "Opiniones reales de quienes ya probaron nuestros postres.",
+							"max_items": 8,
+							"speed": "Normal",
+							"heading_accent": "nuestros clientes"
+						},
+						{
+							"_type": "how_to_order",
+							"_version": 1,
+							"_key": "inicio-how-to-order",
+							"anchor": "como-pedir",
+							"badge": "¡súper fácil!",
+							"heading": "¿Cómo",
+							"subtitle": "En cuatro pasos tienes tus postres en camino.",
+							"steps": [
+								{
+									"title": "Elige tu antojo",
+									"description": "Explora el menú y escoge tu favorito… o déjate tentar por más de uno.",
+									"note": "¡el más difícil!",
+									"icon": "Antojo"
+								},
+								{
+									"title": "Envíanos tu pedido",
+									"description": "Escríbenos por WhatsApp con el producto, la cantidad y la fecha de entrega.",
+									"note": "respondemos rapidito",
+									"icon": "Mensaje"
+								},
+								{
+									"title": "Confirmamos",
+									"description": "Con el pago confirmado tu pedido queda reservado y lo preparamos con dedicación.",
+									"note": "hecho con amor",
+									"icon": "Confirmación"
+								},
+								{
+									"title": "Recibe y disfruta",
+									"description": "Te lo llevamos según disponibilidad en Cartagena, con cada detalle cuidado.",
+									"note": "¡a disfrutar!",
+									"icon": "Regalo"
+								}
+							],
+							"notes": [
+								{
+									"label": "Pedidos todos los días",
+									"text": "Recibimos tu pedido cualquier día de la semana.",
+									"icon": "Calendario"
+								},
+								{
+									"label": "Pide con anticipación",
+									"text": "Así aseguras disponibilidad — todo se hornea fresco.",
+									"icon": "Reloj"
+								},
+								{
+									"label": "Domicilio en Cartagena",
+									"text": "El valor varía según la zona de entrega.",
+									"icon": "Ubicación"
+								}
+							],
+							"cta_script": "¿ya sabes qué vas a pedir?",
+							"cta_label": "Hacer mi pedido",
+							"cta_message": "Hola Marose, quiero hacer un pedido",
+							"heading_accent": "pedir?"
+						},
+						{
+							"_type": "about",
+							"_version": 1,
+							"_key": "inicio-about",
+							"anchor": "nosotros",
+							"heading": "Hecho con",
+							"heading_accent": "amor",
+							"body": [
+								{
+									"_type": "block",
+									"_key": "inicio-about-body-1",
+									"style": "normal",
+									"children": [
+										{
+											"_type": "span",
+											"_key": "inicio-about-body-1-span-1",
+											"text": "Marose nació en Cartagena de una idea simple: hornear postres ricos, bonitos y honestos. Usamos ingredientes frescos, recetas caseras y muchísimo cariño en cada bowl, cada galleta y cada torta."
+										}
+									]
+								}
+							],
+							"signoff_script": "gracias por endulzar tu día con nosotros",
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/logos/logo-2.webp",
+									"alt": "Mascota de Marose: un pancito con gorro de chef y batidora",
+									"filename": "logo-2.webp"
+								}
+							}
+						}
+					]
+				}
+			},
+			{
+				"id": "page-no-encontrado",
+				"slug": "no-encontrado",
+				"status": "published",
+				"data": {
+					"title": "Página no encontrada",
+					"sections": [
+						{
+							"_type": "error_message",
+							"_version": 1,
+							"_key": "no-encontrado-error",
+							"code": "404",
+							"heading": "¡Ups! Se nos cayó el postre",
+							"heading_script": "esta página no existe",
+							"body": "Parece que te perdiste entre los cookies. Volvamos al inicio o escríbenos por WhatsApp y te ayudamos con tu pedido.",
+							"home_label": "Volver al inicio",
+							"cta_label": "Escríbenos",
+							"cta_message": "Hola Marose, tengo una duda sobre mi pedido"
+						}
+					]
+				}
+			}
+		],
+		"products": [
+			{
+				"id": "product-pave",
+				"status": "published",
+				"data": {
+					"name": "Pavé",
+					"description": "8 Oz de capas cremosas y galleta, suave y fresquito. Nuestro clásico para compartir (o no).",
+					"price": 15000,
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/pave.webp",
+									"alt": "Pavé cremoso servido en bowl de kraft con ralladura de limón",
+									"filename": "pave.webp"
+								}
+							},
+							"alt": "Pavé cremoso servido en bowl de kraft con ralladura de limón"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/pave_lemon.webp",
+									"alt": "Pavé de limón cremoso con ralladura de limón fresca por encima",
+									"filename": "pave_lemon.webp"
+								}
+							},
+							"alt": "Pavé de limón cremoso con ralladura de limón fresca por encima"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/pave_maracuya.webp",
+									"alt": "Pavé de maracuyá con capa dorada de fruta de la pasión",
+									"filename": "pave_maracuya.webp"
+								}
+							},
+							"alt": "Pavé de maracuyá con capa dorada de fruta de la pasión"
+						}
+					],
+					"requires_flavor": true,
+					"flavors": [
+						{
+							"label": "Limón",
+							"color": "Limón",
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/pave_lemon.webp",
+									"alt": "Pavé de limón cremoso con ralladura de limón fresca por encima",
+									"filename": "pave_lemon.webp"
+								}
+							}
+						},
+						{
+							"label": "Maracuyá",
+							"color": "Maracuyá",
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/pave_maracuya.webp",
+									"alt": "Pavé de maracuyá con capa dorada de fruta de la pasión",
+									"filename": "pave_maracuya.webp"
+								}
+							}
+						}
+					],
+					"available": true,
+					"sort_order": 10
+				}
+			},
+			{
+				"id": "product-bowl-mini-cookies",
+				"status": "published",
+				"data": {
+					"name": "Bowl de 18 mini cookies",
+					"description": "Suaves por dentro, ligeramente crujientes por fuera, con dip de Nutella o Arequipe para hundirlas. Imposible comer solo una.",
+					"price": 18000,
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/cookie_bowl.webp",
+									"alt": "Bowl con 18 mini cookies de chispas de chocolate recién horneadas",
+									"filename": "cookie_bowl.webp"
+								}
+							},
+							"alt": "Bowl con 18 mini cookies de chispas de chocolate recién horneadas"
+						},
+						{
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/dips_cookies.webp",
+									"alt": "Dip de Nutella o arequipe para las mini cookies",
+									"filename": "dips_cookies.webp"
+								}
+							},
+							"alt": "Dip de Nutella o arequipe para las mini cookies"
+						}
+					],
+					"badge": "Favorito",
+					"requires_flavor": true,
+					"flavors": [
+						{
+							"label": "Dip de Nutella",
+							"color": "Nutella",
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/dips_cookies.webp",
+									"alt": "Dip de Nutella o arequipe para las mini cookies",
+									"filename": "dips_cookies.webp"
+								}
+							}
+						},
+						{
+							"label": "Dip de arequipe",
+							"color": "Arequipe",
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/dips_cookies.webp",
+									"alt": "Dip de Nutella o arequipe para las mini cookies",
+									"filename": "dips_cookies.webp"
+								}
+							}
+						}
+					],
+					"available": true,
+					"sort_order": 20
+				}
+			},
+			{
+				"id": "product-cookie-pie",
+				"status": "published",
+				"data": {
+					"name": "Cookie pie",
+					"description": "Bordes dorados, centro suave y relleno de Nutella derretida. Para quienes creen que el chocolate siempre es buena idea.",
+					"price": 14000,
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/cookie_pie_nutella.webp",
+									"alt": "Cookie pie dorada rellena de Nutella derretida",
+									"filename": "cookie_pie_nutella.webp"
+								}
+							},
+							"alt": "Cookie pie dorada rellena de Nutella derretida"
+						}
+					],
+					"requires_flavor": false,
+					"flavors": [
+						{
+							"label": "Relleno de Nutella",
+							"color": "Nutella"
+						}
+					],
+					"available": true,
+					"sort_order": 30
+				}
+			},
+			{
+				"id": "product-torta-zanahoria",
+				"status": "published",
+				"data": {
+					"name": "Torta de zanahoria",
+					"description": "Mini cake esponjoso y húmedo de zanahoria fresca, con nuez de Brasil y nuez pecana. Pídelo con o sin canela.",
+					"price": 16000,
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/carrot_pie.webp",
+									"alt": "Mini cakes de zanahoria con nueces recién horneados en moldes individuales",
+									"filename": "carrot_pie.webp"
+								}
+							},
+							"alt": "Mini cakes de zanahoria con nueces recién horneados en moldes individuales"
+						}
+					],
+					"requires_flavor": false,
+					"flavors": [
+						{
+							"label": "Con o sin canela",
+							"color": "Neutro"
+						}
+					],
+					"available": true,
+					"sort_order": 40
+				}
+			},
+			{
+				"id": "product-brownie-bites",
+				"status": "published",
+				"data": {
+					"name": "Bowl de 8 Brownie Bites",
+					"description": "Disfruta de 8 cubitos (4 × 4 cm) de brownie con un interior suave, húmedo y chocolatoso, acompañados de un cremoso dip de Nutella para que disfrutes cada bocado a tu gusto.",
+					"price": 20000,
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/brownie_bites.webp",
+									"alt": "Bowl con 8 Brownie Bites, cubitos de 4x4 cm, con dip de Nutella",
+									"filename": "brownie_bites.webp"
+								}
+							},
+							"alt": "Bowl con 8 Brownie Bites, cubitos de 4x4 cm, con dip de Nutella"
+						}
+					],
+					"badge": "Nuevo",
+					"requires_flavor": false,
+					"flavors": [
+						{
+							"label": "Dip de Nutella",
+							"color": "Nutella"
+						}
+					],
+					"available": true,
+					"sort_order": 50
+				}
+			},
+			{
+				"id": "product-red-velvet-bites",
+				"status": "published",
+				"data": {
+					"name": "Bowl de 12 Red Velvet Bites",
+					"description": "Disfruta 12 Red Velvet Bites de 4 × 4 cm, preparados artesanalmente con un bizcocho suave, húmedo y de delicado sabor a cacao. Acompáñalos con el dip que más te guste: Nutella o arequipe.",
+					"price": 20000,
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/red_velvet_bites.webp",
+									"alt": "Bowl con 12 Red Velvet Bites de 4 × 4 cm",
+									"filename": "red_velvet_bites.webp"
+								}
+							},
+							"alt": "Bowl con 12 Red Velvet Bites de 4 × 4 cm"
+						}
+					],
+					"badge": "Nuevo",
+					"requires_flavor": true,
+					"flavors": [
+						{
+							"label": "Dip de Nutella",
+							"color": "Nutella"
+						},
+						{
+							"label": "Dip de arequipe",
+							"color": "Arequipe"
+						}
+					],
+					"available": true,
+					"sort_order": 60
+				}
+			},
+			{
+				"id": "product-brookie-pie",
+				"status": "published",
+				"data": {
+					"name": "Brookie pie",
+					"description": "Nuestro Brookie Pie une lo mejor de ambos mundos una base de cookie con bordes dorados y centro suave, cubierta con un brownie intenso, húmedo y lleno de chocolate.",
+					"price": 18000,
+					"photos": [
+						{
+							"image": {
+								"$media": {
+									"url": "https://raw.githubusercontent.com/diegoquinfa/web_marose/521333b/public/food/brookie_pie.webp",
+									"alt": "Brookie pie con base de cookie cubierto de brownie",
+									"filename": "brookie_pie.webp"
+								}
+							},
+							"alt": "Brookie pie con base de cookie cubierto de brownie"
+						}
+					],
+					"badge": "Nuevo",
+					"requires_flavor": false,
+					"available": true,
+					"sort_order": 70
+				}
+			}
+		],
+		"reviews": [
+			{
+				"id": "review-1",
+				"status": "published",
+				"data": {
+					"comment": "El pavé de limón es una cosa de otro nivel 🍋 cremoso, fresquito… lo pedí para compartir y no alcanzó, tocó pedir otro.",
+					"review_date": "2026-10-12T10:30:00-05:00",
+					"source": "WhatsApp",
+					"featured": true
+				}
+			},
+			{
+				"id": "review-2",
+				"status": "published",
+				"data": {
+					"comment": "Las mini cookies llegaron perfectas, suaves por dentro y con el dip de Nutella derretida… mi familia las devoró en minutos.",
+					"review_date": "2026-10-07T19:15:00-05:00",
+					"source": "WhatsApp",
+					"featured": true
+				}
+			},
+			{
+				"id": "review-3",
+				"status": "published",
+				"data": {
+					"comment": "Pedí el pavé de maracuyá y wow, esa capa dorada por encima es adictiva. Se lo regalé a mi mamá y ya me pidió otro 😂",
+					"review_date": "2026-10-11T16:45:00-05:00",
+					"source": "WhatsApp",
+					"featured": true
+				}
+			},
+			{
+				"id": "review-4",
+				"status": "published",
+				"data": {
+					"comment": "La torta de zanahoria está buenísima, húmeda y con las nueces tostadas… se nota que todo es fresco de verdad.",
+					"review_date": "2026-10-07T09:20:00-05:00",
+					"source": "WhatsApp",
+					"featured": true
+				}
+			},
+			{
+				"id": "review-5",
+				"status": "published",
+				"data": {
+					"comment": "El cookie pie de Nutella es pecado delicioso 🍫 lo pedí para el cumple de mi hermana y todos quedaron pidiendo la receta.",
+					"review_date": "2026-10-10T20:05:00-05:00",
+					"source": "WhatsApp",
+					"featured": true
+				}
+			},
+			{
+				"id": "review-6",
+				"status": "published",
+				"data": {
+					"comment": "Me encantó la presentación, todo llega súper cuidado y la nota escrita a mano es un detalle hermoso. Se nota el amor.",
+					"review_date": "2026-10-09T13:40:00-05:00",
+					"source": "WhatsApp",
+					"featured": true
+				}
+			},
+			{
+				"id": "review-7",
+				"status": "published",
+				"data": {
+					"comment": "Pedí el bowl de mini cookies con dip de arequipe y es que no se puede parar de comer. Perfectos para compartir… o no.",
+					"review_date": "2026-09-30T18:10:00-05:00",
+					"source": "WhatsApp",
+					"featured": true
+				}
+			},
+			{
+				"id": "review-8",
+				"status": "published",
+				"data": {
+					"comment": "Ya es la tercera vez que pido y siempre quedo feliz. El pavé limón es mi favorito, esa ralladura fresca por encima es todo.",
+					"review_date": "2026-09-23T11:55:00-05:00",
+					"source": "WhatsApp",
+					"featured": true
+				}
+			}
+		],
+		"business_info": [
+			{
+				"id": "business-info-marose",
+				"status": "published",
+				"data": {
+					"label": "Marose",
+					"whatsapp_number": "573014023272",
+					"whatsapp_default_message": "Hola Marose, quiero hacer un pedido",
+					"order_greeting": "Hola Marose 🤎",
+					"phone_display": "+57 301 402 3272",
+					"city": "Cartagena de Indias",
+					"region": "Bolívar",
+					"country": "CO",
+					"delivery_note": "El valor del domicilio varía según la zona de entrega.",
+					"instagram_url": "https://instagram.com/marosectg",
+					"tiktok_url": "https://www.tiktok.com/@marosepostres",
+					"footer_tagline": "Hecho con amor · Cartagena",
+					"footer_legal": "Repostería artesanal",
+					"price_range": "$$",
+					"cuisine": "Postres artesanales"
+				}
+			}
+		]
+	}
 }
