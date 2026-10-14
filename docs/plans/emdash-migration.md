@@ -138,7 +138,7 @@ All labels, descriptions, and options are in **Spanish** because editors read th
 | `description` | Descripción | text, required, maxLength 300 | |
 | `price` | Precio (COP, sin puntos) | integer, required, min 0 | Rendered with `formatCOP` |
 | `photos` | Fotos | repeater (min 1, max 6): `image` (image, required), `alt` (string, "Describe la foto") | The first photo is the cart thumbnail |
-| `badge` | Etiqueta | select: `—`, Favorito, Nuevo, Edición limitada, Agotado | "Agotado" disables the add-to-cart button |
+| `badge` | Etiqueta | select (required, default "Sin etiqueta"): Sin etiqueta, Favorito, Nuevo, Edición limitada, Agotado | An optional select cannot be cleared in the admin, so "Sin etiqueta" is the explicit empty value. "Agotado" disables the add-to-cart button |
 | `requires_flavor` | ¿El cliente debe elegir sabor? | boolean | Opens the flavor dialog |
 | `flavors` | Sabores u opciones | repeater (max 8): `label` (string, req), `color` (select: Limón, Maracuyá, Nutella, Arequipe, Chocolate, Fresa, Canela, Neutro), `image` (image, "Foto de este sabor", optional) | `lib/flavor-colors.ts` maps names to hex |
 | `available` | Disponible | boolean, default true, indexed | Hidden from the menu when off |
@@ -313,3 +313,10 @@ Legend: 🧑 = main session (orchestrator) · 🤖 = subagent. Parallel lanes ha
 | Cached page served to editors without the toolbar | Documented behavior. Editors use Preview links. |
 | Seed media URLs break if the repo goes private | URLs are pinned to a SHA and only used once at setup. Fallback is the REST multipart upload script. |
 | D1 latency for distant visitors | Workers Cache serves most hits. Targeted Placement near D1. |
+
+## 14. Post-execution adjustments (2026-10-14)
+
+- **Content locale:** `i18n: { defaultLocale: "es", locales: ["es"] }` in `astro.config.mjs` (no routing block, because prefixing breaks the admin) plus `defaultLocale: "es"` in the seed. Without an `i18n` block EmDash defaults content to `en`.
+- **Site URL from the environment:** `src/lib/site-url.ts` reads `EMDASH_SITE_URL` at runtime via `cloudflare:workers`. It drives canonical URLs, SEO, JSON-LD, and the email sender domain (`no-reply@<domain>`), logo, and links. Nothing hardcodes the domain.
+- **Email:** no `replyTo`.
+- **Empty select values:** `products.badge` uses "Sin etiqueta", `reviews.source` uses "No especificado", and `flavors.color` defaults to "Neutro". Optional selects cannot be cleared in the admin once set.

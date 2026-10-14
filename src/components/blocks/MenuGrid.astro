@@ -29,6 +29,9 @@ type ProductRow = {
 	sort_order?: number | null;
 };
 
+/** Badge select value meaning "no badge" (see seed products.badge). */
+const NO_BADGE = "Sin etiqueta";
+
 const { value } = Astro.props;
 
 const { entries, cacheHint } = await getEmDashCollection("products", {
@@ -65,7 +68,7 @@ const products: ProductView[] = entries
 			description: data.description ?? "",
 			price: data.price ?? 0,
 			photos,
-			badge: data.badge ?? null,
+			badge: data.badge && data.badge !== NO_BADGE ? data.badge : null,
 			requiresFlavor: data.requires_flavor === true,
 			flavors,
 			soldOut: data.badge === "Agotado",

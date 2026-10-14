@@ -2,6 +2,7 @@
 import { getContentSeo, getEmDashEntry, getSeoMeta } from "emdash";
 import PageSections from "@/components/PageSections.astro";
 import Base from "@/layouts/Base.astro";
+import { getSiteUrl } from "@/lib/site-url";
 
 const HOME_SLUG = "inicio";
 const HOME_TITLE = "Marose · Cookies & postres artesanales — Cartagena";
@@ -10,7 +11,7 @@ const { entry: page, cacheHint } = await getEmDashEntry("pages", HOME_SLUG);
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 
 const seo = page
-	? getSeoMeta(page, { siteUrl: Astro.url.origin, path: "/" })
+	? getSeoMeta(page, { siteUrl: getSiteUrl(Astro.url.origin), path: "/" })
 	: null;
 const seoTitle = (page && getContentSeo(page)?.title) || HOME_TITLE;
 ---
@@ -20,7 +21,7 @@ const seoTitle = (page && getContentSeo(page)?.title) || HOME_TITLE;
 	pageTitle={seoTitle}
 	description={seo?.description}
 	image={seo?.ogImage}
-	canonical={`${Astro.url.origin}/`}
+	canonical={`${getSiteUrl(Astro.url.origin)}/`}
 	robots={seo?.robots}
 	content={page ? { collection: "pages", id: page.data.id, slug: page.id } : undefined}
 >

@@ -1,6 +1,7 @@
 {
 	"$schema": "https://emdashcms.com/seed.schema.json",
 	"version": "1",
+	"defaultLocale": "es",
 	"meta": {
 		"name": "Marose",
 		"description": "Repostería artesanal en Cartagena: menú, opiniones y datos del negocio",
@@ -641,12 +642,15 @@
 					"type": "select",
 					"validation": {
 						"options": [
+							"Sin etiqueta",
 							"Favorito",
 							"Nuevo",
 							"Edición limitada",
 							"Agotado"
 						]
-					}
+					},
+					"defaultValue": "Sin etiqueta",
+					"required": true
 				},
 				{
 					"slug": "requires_flavor",
@@ -679,7 +683,8 @@
 									"Fresa",
 									"Canela",
 									"Neutro"
-								]
+								],
+								"defaultValue": "Neutro"
 							},
 							{
 								"slug": "image",
@@ -750,12 +755,15 @@
 					"type": "select",
 					"validation": {
 						"options": [
+							"No especificado",
 							"WhatsApp",
 							"Instagram",
 							"TikTok",
 							"Google"
 						]
-					}
+					},
+					"defaultValue": "No especificado",
+					"required": true
 				},
 				{
 					"slug": "featured",
@@ -1119,7 +1127,8 @@
 						}
 					],
 					"available": true,
-					"sort_order": 10
+					"sort_order": 10,
+					"badge": "Sin etiqueta"
 				}
 			},
 			{
@@ -1208,7 +1217,8 @@
 						}
 					],
 					"available": true,
-					"sort_order": 30
+					"sort_order": 30,
+					"badge": "Sin etiqueta"
 				}
 			},
 			{
@@ -1238,7 +1248,8 @@
 						}
 					],
 					"available": true,
-					"sort_order": 40
+					"sort_order": 40,
+					"badge": "Sin etiqueta"
 				}
 			},
 			{

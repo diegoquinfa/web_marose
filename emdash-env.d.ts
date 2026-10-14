@@ -146,7 +146,7 @@ export interface Product {
   description: string;
   price: number;
   photos?: { "image": { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } }; "alt"?: string | null }[];
-  badge?: "Favorito" | "Nuevo" | "Edición limitada" | "Agotado";
+  badge: "Sin etiqueta" | "Favorito" | "Nuevo" | "Edición limitada" | "Agotado";
   requires_flavor?: boolean;
   flavors?: { "label": string; "color"?: "Limón" | "Maracuyá" | "Nutella" | "Arequipe" | "Chocolate" | "Fresa" | "Canela" | "Neutro" | null; "image"?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown>; darkVariant?: { id: string; src?: string; alt?: string; width?: number; height?: number; filename?: string; mimeType?: string; blurhash?: string; dominantColor?: string; focalX?: number; focalY?: number; provider?: string; previewUrl?: string; meta?: Record<string, unknown> } } | null }[];
   available?: boolean;
@@ -166,7 +166,7 @@ export interface Review {
   comment: string;
   author?: string;
   review_date?: string;
-  source?: "WhatsApp" | "Instagram" | "TikTok" | "Google";
+  source: "No especificado" | "WhatsApp" | "Instagram" | "TikTok" | "Google";
   featured?: boolean;
   createdAt: Date;
   updatedAt: Date;

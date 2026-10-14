@@ -31,6 +31,7 @@ Entra a **Productos**.
 | Cambiar el precio | Abre el producto, cambia **Precio** (solo números, sin puntos: `15000`) y publica |
 | Ocultarlo por un tiempo | Desactiva **Disponible** |
 | Mostrar que no hay | En **Etiqueta** elige **Agotado**. Se ve en el menú, pero no se puede pedir |
+| Quitar la etiqueta | En **Etiqueta** elige **Sin etiqueta** |
 | Destacarlo | En **Etiqueta** elige **Favorito** o **Nuevo** |
 | Cambiar el orden | **Orden en el menú**: los números más bajos salen primero (10, 20, 30…) |
 

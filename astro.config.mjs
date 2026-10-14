@@ -7,8 +7,6 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 import emdash from "emdash/astro";
 
-const SITE_URL = "https://marosectg.com";
-
 /**
  * Marose email provider: Cloudflare Email Sending wrapped in the brand layout.
  * See src/plugins/marose-email.ts.
@@ -28,6 +26,12 @@ function maroseEmail(options) {
 
 export default defineConfig({
 	output: "server",
+	// Single-language site in Spanish. EmDash reads this for the content locale.
+	// Keep the default routing: prefixing the default locale breaks /_emdash/admin.
+	i18n: {
+		defaultLocale: "es",
+		locales: ["es"],
+	},
 	adapter: cloudflare(),
 	cache: {
 		provider: cacheCloudflare(),
@@ -55,12 +59,8 @@ export default defineConfig({
 				locales: ["es-419"],
 			},
 			plugins: [
-				maroseEmail({
-					from: { email: "no-reply@marosectg.com", name: "Marose" },
-					replyTo: "hola@marosectg.com",
-					logoUrl: `${SITE_URL}/brand/admin-logo.webp`,
-					siteUrl: SITE_URL,
-				}),
+				// Sender domain, logo, and links come from EMDASH_SITE_URL at runtime.
+				maroseEmail({ fromLocalPart: "no-reply", fromName: "Marose" }),
 			],
 		}),
 	],

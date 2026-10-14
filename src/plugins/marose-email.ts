@@ -4,18 +4,21 @@
  * Wraps the official Cloudflare Email Sending provider so every outgoing
  * message, including EmDash system emails (magic links, invites, recovery)
  * that skip `email:beforeSend`, is delivered with the Marose HTML layout.
+ *
+ * The domain comes from the `EMDASH_SITE_URL` runtime variable: the sender is
+ * `<fromLocalPart>@<domain>` and the logo/footer link point at the site URL.
  */
-import {
-	type CloudflareEmailConfig,
-	createCloudflareEmailDeliver,
-} from "@emdash-cms/cloudflare/plugins/cloudflare-email";
+import { createCloudflareEmailDeliver } from "@emdash-cms/cloudflare/plugins/cloudflare-email";
 import { definePlugin } from "emdash";
+import { getSiteDomain, getSiteUrl } from "../lib/site-url";
 
-export type MaroseEmailConfig = CloudflareEmailConfig & {
-	/** Absolute URL of the logo shown at the top of every email. */
-	logoUrl: string;
-	/** Public site URL linked from the footer. */
-	siteUrl: string;
+export type MaroseEmailConfig = {
+	/** Name of the `send_email` binding. Defaults to "EMAIL". */
+	binding?: string;
+	/** Local part of the sender address. Defaults to "no-reply". */
+	fromLocalPart?: string;
+	/** Display name of the sender. Defaults to "Marose". */
+	fromName?: string;
 };
 
 type Message = {
@@ -70,7 +73,7 @@ function textToHtml(text: string): string {
 
 export function renderMaroseEmail(
 	message: Message,
-	config: Pick<MaroseEmailConfig, "logoUrl" | "siteUrl">,
+	config: { logoUrl: string; siteUrl: string },
 ): string {
 	const content = message.html ?? textToHtml(message.text);
 	return `<!doctype html>
@@ -90,8 +93,7 @@ ${content}
 </table></td></tr></table></body></html>`;
 }
 
-export function createPlugin(config: MaroseEmailConfig) {
-	const deliver = createCloudflareEmailDeliver(config);
+export function createPlugin(config: MaroseEmailConfig = {}) {
 	return definePlugin({
 		id: "marose-email",
 		version: "1.0.0",
@@ -100,7 +102,18 @@ export function createPlugin(config: MaroseEmailConfig) {
 			"email:deliver": {
 				exclusive: true,
 				handler: async (event, ctx) => {
-					const html = renderMaroseEmail(event.message, config);
+					const siteUrl = getSiteUrl();
+					const deliver = createCloudflareEmailDeliver({
+						binding: config.binding,
+						from: {
+							email: `${config.fromLocalPart ?? "no-reply"}@${getSiteDomain()}`,
+							name: config.fromName ?? "Marose",
+						},
+					});
+					const html = renderMaroseEmail(event.message, {
+						logoUrl: `${siteUrl}/brand/admin-logo.webp`,
+						siteUrl,
+					});
 					await deliver({ ...event, message: { ...event.message, html } }, ctx);
 				},
 			},

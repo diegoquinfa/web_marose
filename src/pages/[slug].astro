@@ -2,6 +2,7 @@
 import { decodeSlug, getEmDashEntry, getSeoMeta } from "emdash";
 import PageSections from "@/components/PageSections.astro";
 import Base from "@/layouts/Base.astro";
+import { getSiteUrl } from "@/lib/site-url";
 
 const slug = decodeSlug(Astro.params.slug);
 if (!slug || slug === "no-encontrado") return Astro.rewrite("/404");
@@ -12,7 +13,7 @@ if (!page) return Astro.rewrite("/404");
 if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
 
 const seo = getSeoMeta(page, {
-	siteUrl: Astro.url.origin,
+	siteUrl: getSiteUrl(Astro.url.origin),
 	path: `/${page.id}`,
 });
 ---

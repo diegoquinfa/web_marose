@@ -6,6 +6,7 @@ import Footer from "@/components/Footer.astro";
 import Navbar from "@/components/Navbar.astro";
 import { CartDrawer } from "@/islands/cart/cart-drawer";
 import { getBusinessInfo } from "@/lib/business";
+import { getSiteUrl } from "@/lib/site-url";
 import "../styles/global.css";
 
 interface Props {
@@ -46,7 +47,8 @@ const fullTitle = title
 		: `${title} ${separator} ${siteTitle}`
 	: siteTitle;
 const logoUrl = settings?.logo?.url || FALLBACK_LOGO;
-const ogImage = new URL(image || FALLBACK_OG, Astro.url.origin).href;
+const origin = getSiteUrl(Astro.url.origin);
+const ogImage = new URL(image || FALLBACK_OG, origin).href;
 const pageDescription = description || settings?.tagline || DEFAULT_DESCRIPTION;
 
 const links = (menuResult.data?.items ?? []).map((item) => ({
@@ -62,14 +64,13 @@ const pageCtx = createPublicPageContext({
 	title: fullTitle,
 	pageTitle: pageTitle ?? title ?? siteTitle,
 	description: pageDescription,
-	canonical: canonical ?? `${Astro.url.origin}${Astro.url.pathname}`,
+	canonical: canonical ?? `${origin}${Astro.url.pathname}`,
 	image: ogImage,
 	content,
 	seo: { ogImage, robots },
 	siteName: siteTitle,
 });
 
-const origin = Astro.url.origin;
 const bakeryJsonLd = {
 	"@context": "https://schema.org",
 	"@type": "Bakery",
