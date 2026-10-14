@@ -1,6 +1,13 @@
 # Migration Plan — TanStack Start → EmDash CMS on Cloudflare
 
-> Status: PLAN (not started) · Owner: Diego · Created: 2026-10-14
+> Status: IN PROGRESS (P0–P5, P7, P8 executed on `feat/emdash-migration`; P6 deploy pending confirmation) · Owner: Diego · Created: 2026-10-14
+>
+> Execution notes (2026-10-14):
+> - Admin locale code is `es-419` (`es` does not exist; the build lists `es-419` and `es-ES`).
+> - `wrangler@4.151.0` / `@cloudflare/vite-plugin@1.64.0` depend on an unpublished `miniflare` beta. They are pinned to `4.150.0` / `1.63.2` via `pnpm-workspace.yaml` overrides.
+> - P7 done early: `src/plugins/marose-email.ts` wraps `createCloudflareEmailDeliver` with the brand layout.
+> - WhatsApp `573014023272` confirmed as the only business number. JSON-LD now uses it too.
+> - `marosectg.com` already uses Cloudflare nameservers (proxied).
 > Source of truth for the content inventory: subagent report (Engram `marose/emdash-migration/plan`).
 
 ## 0. Goal and non-goals
@@ -291,8 +298,8 @@ Legend: 🧑 = main session (orchestrator) · 🤖 = subagent. Parallel lanes ha
 
 ## 12. Open questions (blocking P0)
 
-1. **Phone numbers:** the code orders to WhatsApp `+57 301 402 3272`, but the Google JSON-LD says `+57 324 682 2755`. Which is correct? Are they two different lines?
-2. **Domain:** is `marosectg.com` already an active zone in this Cloudflare account? Where is the current site hosted (needed for cutover and rollback)?
+1. ~~Phone numbers~~ → resolved: `573014023272` is the only number.
+2. **Domain:** `marosectg.com` uses Cloudflare nameservers. Still to confirm: is it in the *same* account as the Worker, and where does the current origin run (rollback target)?
 3. **Email:** sender address (`no-reply@marosectg.com`?) and the real inbox for replies.
 4. **Editors:** who gets access (emails) and with which role (Admin vs Editor)?
 
