@@ -43,8 +43,9 @@
 	"observability": {
 		"enabled": true,
 	},
-	// Enable after the first deploy, once marosectg.com is an active zone in this account:
-	// "routes": [{ "pattern": "marosectg.com", "custom_domain": true }],
+	// Serve only on the custom domain: no duplicate workers.dev copy of the site/admin.
+	"workers_dev": false,
+	"routes": [{ "pattern": "marosectg.com", "custom_domain": true }],
 	// Run the Worker next to the D1 primary (fill region after the database exists):
 	// "placement": { "mode": "targeted", "region": "<d1-primary-region>" },
 }
