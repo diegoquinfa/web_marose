@@ -1,0 +1,29 @@
+---
+import { getEmDashEntry } from "emdash";
+import PageSections from "@/components/PageSections.astro";
+import Base from "@/layouts/Base.astro";
+
+const { entry: page } = await getEmDashEntry("pages", "no-encontrado");
+Astro.response.status = 404;
+---
+
+<Base title="Página no encontrada" robots="noindex">
+	{
+		page?.data.sections?.length ? (
+			<PageSections value={page.data.sections} />
+		) : (
+			<section class="mx-auto max-w-2xl px-6 py-32 text-center">
+				<p class="font-velvet-serif text-display text-rose-petal">404</p>
+				<h1 class="mt-4 font-velvet-serif text-heading text-blush-cream">
+					¡Ups! Se nos cayó el postre
+				</h1>
+				<a
+					href="/"
+					class="mt-8 inline-flex rounded-pill bg-rose-petal px-6 py-3 text-cocoa-noir"
+				>
+					Volver al inicio
+				</a>
+			</section>
+		)
+	}
+</Base>

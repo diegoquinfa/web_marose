@@ -1,0 +1,29 @@
+---
+import { type BlockComponentProps, PortableText } from "emdash/ui";
+import type { TextBlockBlock } from "@/components/blocks/types";
+
+type Props = BlockComponentProps<TextBlockBlock>;
+
+const { value } = Astro.props;
+---
+
+<section id={value.anchor || undefined} class="px-4 py-9">
+	<div class="mx-auto max-w-280">
+		<div data-reveal class="mx-auto max-w-[68ch]">
+			{
+				value.heading && (
+					<h2 class="font-velvet-serif text-heading font-medium text-blush-cream">
+						{value.heading}
+					</h2>
+				)
+			}
+			{
+				value.body && (
+					<div class="mt-4 text-pretty text-[17px] leading-relaxed text-rose-mist [&>p+p]:mt-4 [&_a]:underline [&_a]:underline-offset-4 [&_a]:transition-colors [&_a:hover]:text-rose-petal [&_strong]:font-semibold [&_strong]:text-blush-cream">
+						<PortableText value={value.body} />
+					</div>
+				)
+			}
+		</div>
+	</div>
+</section>

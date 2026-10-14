@@ -1,0 +1,47 @@
+---
+import { type BlockComponentProps } from "emdash/ui";
+import type { CtaBannerBlock } from "@/components/blocks/types";
+import Swoosh from "@/components/Swoosh.astro";
+import WhatsappButton from "@/components/WhatsappButton.astro";
+import { getBusinessInfo } from "@/lib/business";
+
+type Props = BlockComponentProps<CtaBannerBlock>;
+
+const { value } = Astro.props;
+const business = await getBusinessInfo();
+---
+
+<section id={value.anchor || undefined} class="px-4 py-4">
+	<div class="mx-auto max-w-280">
+		<div
+			data-reveal
+			class="relative overflow-hidden rounded-card bg-espresso-truffle px-6 py-14 text-center shadow-soft sm:px-12 sm:py-16"
+		>
+			<div
+				aria-hidden="true"
+				class="pointer-events-none absolute inset-0"
+				style="background: radial-gradient(circle at 50% 0%, rgba(227,164,168,0.16), transparent 65%)"
+			/>
+			<div class="relative">
+				<h2 class="font-velvet-serif text-heading font-medium text-blush-cream">
+					{value.heading}
+				</h2>
+				<Swoosh class="mx-auto mt-2 h-4 w-48 text-dusty-rose" />
+				{
+					value.text && (
+						<p class="mx-auto mt-4 max-w-lg text-pretty text-[17px] leading-relaxed text-rose-mist">
+							{value.text}
+						</p>
+					)
+				}
+				<div class="mt-8 flex justify-center">
+					<WhatsappButton
+						number={business.whatsappNumber}
+						message={value.cta_message || business.whatsappDefaultMessage}
+						label={value.cta_label ?? "Pedir por WhatsApp"}
+					/>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

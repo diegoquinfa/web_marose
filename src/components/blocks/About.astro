@@ -1,0 +1,57 @@
+---
+import { type BlockComponentProps, Image, PortableText } from "emdash/ui";
+import type { AboutBlock } from "@/components/blocks/types";
+
+type Props = BlockComponentProps<AboutBlock>;
+
+const { value } = Astro.props;
+---
+
+<section id={value.anchor || undefined} class="px-4 py-4">
+	<div class="mx-auto max-w-280">
+		<div
+			class="relative overflow-hidden rounded-card bg-espresso-truffle px-6 py-14 shadow-soft sm:px-12 sm:py-16"
+		>
+			<div class="grid items-center gap-10 md:grid-cols-[auto_1fr]">
+				{
+					value.image && (
+						<div
+							data-reveal
+							class="mx-auto flex h-40 w-40 items-center justify-center rounded-full bg-deep-cocoa shadow-soft ring-1 ring-cocoa-hairline sm:h-48 sm:w-48"
+						>
+							<Image
+								image={value.image}
+								class="h-full w-full rounded-full object-cover"
+							/>
+						</div>
+					)
+				}
+
+				<div data-reveal style="--reveal-delay: 90ms" class="text-center md:text-left">
+					<h2 class="font-velvet-serif text-heading font-medium text-blush-cream">
+						{value.heading}
+						{
+							value.heading_accent && (
+								<span class="italic text-rose-petal"> {value.heading_accent}</span>
+							)
+						}
+					</h2>
+					{
+						value.body && (
+							<div class="mt-4 text-pretty text-[17px] leading-relaxed text-rose-mist [&>p+p]:mt-4">
+								<PortableText value={value.body} />
+							</div>
+						)
+					}
+					{
+						value.signoff_script && (
+							<p class="mt-4 font-dulce-script text-3xl text-rose-petal">
+								{value.signoff_script}
+							</p>
+						)
+					}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

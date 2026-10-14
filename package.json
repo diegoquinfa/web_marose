@@ -2,9 +2,6 @@
 	"name": "web_marose",
 	"private": true,
 	"type": "module",
-	"imports": {
-		"#/*": "./src/*"
-	},
 	"emdash": {
 		"seed": "seed/seed.json"
 	},

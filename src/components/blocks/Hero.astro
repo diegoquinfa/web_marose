@@ -1,0 +1,99 @@
+---
+import { sanitizeHref } from "emdash";
+import { type BlockComponentProps, Image } from "emdash/ui";
+import type { HeroBlock } from "@/components/blocks/types";
+import WhatsappButton from "@/components/WhatsappButton.astro";
+import { getBusinessInfo } from "@/lib/business";
+
+type Props = BlockComponentProps<HeroBlock>;
+
+const { value } = Astro.props;
+const business = await getBusinessInfo();
+
+const secondaryHref = value.secondary_href
+	? sanitizeHref(value.secondary_href)
+	: "#menu";
+---
+
+<section id={value.anchor || undefined} class="bg-cocoa-noir px-4 py-16 sm:py-20 lg:pt-24 lg:pb-20">
+	<div class="relative mx-auto grid max-w-280 items-center gap-10 lg:grid-cols-2 lg:gap-14">
+		<div class="text-center lg:text-left">
+			{
+				value.eyebrow && (
+					<span
+						data-reveal
+						class="font-patisserie-sans text-label font-medium uppercase text-dusty-rose"
+					>
+						{value.eyebrow}
+					</span>
+				)
+			}
+			<h1
+				data-reveal
+				style="--reveal-delay: 90ms"
+				class="mt-5 text-balance font-velvet-serif text-5xl font-medium leading-[1.05] text-blush-cream sm:text-6xl lg:text-[88px]"
+			>
+				{value.heading}
+				{value.heading_script && <br />}
+				{
+					value.heading_script && (
+						<span class="block pb-2 font-dulce-script text-[0.72em] font-normal leading-[1.35] text-rose-petal">
+							{value.heading_script}
+						</span>
+					)
+				}
+			</h1>
+			{
+				value.subtitle && (
+					<p
+						data-reveal
+						style="--reveal-delay: 180ms"
+						class="mx-auto mt-5 max-w-md text-pretty text-body text-rose-mist lg:mx-0"
+					>
+						{value.subtitle}
+					</p>
+				)
+			}
+			<div
+				data-reveal
+				style="--reveal-delay: 270ms"
+				class="mt-8 flex flex-col items-center gap-3 sm:flex-row lg:justify-start"
+			>
+				<WhatsappButton
+					number={business.whatsappNumber}
+					message={value.cta_message || business.whatsappDefaultMessage}
+					label={value.cta_label ?? undefined}
+				/>
+				{
+					value.secondary_label && (
+						<a
+							href={secondaryHref}
+							class="inline-flex items-center justify-center gap-2 rounded-pill border border-cocoa-hairline px-6 py-3.5 font-patisserie-sans text-[15px] font-medium tracking-[0.08em] text-blush-cream transition-colors duration-200 hover:border-dusty-rose hover:text-rose-petal focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-petal"
+						>
+							{value.secondary_label}
+						</a>
+					)
+				}
+			</div>
+		</div>
+
+		{
+			value.image && (
+				<div
+					data-reveal
+					style="--reveal-delay: 150ms"
+					class="relative mx-auto w-full max-w-md sm:max-w-lg lg:max-w-xl"
+				>
+					<div class="relative">
+						<div
+							aria-hidden="true"
+							class="absolute -inset-x-8 -inset-y-10 max-w-dvw"
+							style="background: radial-gradient(circle, rgba(227,164,168,0.18), transparent 70%)"
+						/>
+						<Image image={value.image} priority class="relative mx-auto w-full" />
+					</div>
+				</div>
+			)
+		}
+	</div>
+</section>

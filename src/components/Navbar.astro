@@ -1,0 +1,57 @@
+---
+import WhatsappButton from "@/components/WhatsappButton.astro";
+import { CartTrigger } from "@/islands/cart/cart-trigger";
+import { getBusinessInfo } from "@/lib/business";
+
+interface Props {
+	siteTitle: string;
+	logoUrl: string;
+	links: { label: string; url: string; target?: string | null }[];
+}
+
+const { siteTitle, logoUrl, links } = Astro.props;
+const business = await getBusinessInfo();
+---
+
+<header class="sticky top-4 z-50 px-4">
+	<nav
+		class="mx-auto flex max-w-280 items-center justify-between gap-4 rounded-pill bg-deep-cocoa/80 px-4 py-3 shadow-soft backdrop-blur-md sm:px-6"
+	>
+		<a href="/" class="flex items-center gap-3">
+			<img
+				src={logoUrl}
+				alt={siteTitle}
+				class="h-11 w-11 rounded-full object-cover"
+			/>
+			<span class="font-wordmark-sans text-2xl font-semibold text-blush-cream">
+				{siteTitle}
+			</span>
+		</a>
+
+		<ul class="hidden items-center gap-8 md:flex">
+			{
+				links.map((link) => (
+					<li>
+						<a
+							href={link.url}
+							target={link.target ?? undefined}
+							rel={link.target === "_blank" ? "noopener noreferrer" : undefined}
+							class="font-patisserie-sans text-[15px] font-medium text-blush-cream/80 transition-colors hover:text-blush-cream focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-rose-petal"
+						>
+							{link.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+
+		<div class="flex items-center gap-2">
+			<CartTrigger client:load />
+			<WhatsappButton
+				number={business.whatsappNumber}
+				message={business.whatsappDefaultMessage}
+				class="hidden sm:inline-flex"
+			/>
+		</div>
+	</nav>
+</header>

@@ -1,0 +1,179 @@
+---
+import { getMenuWithCacheHint, getSiteSettingsWithCacheHint } from "emdash";
+import { createPublicPageContext } from "emdash/page";
+import { EmDashBodyEnd, EmDashBodyStart, EmDashHead } from "emdash/ui";
+import Footer from "@/components/Footer.astro";
+import Navbar from "@/components/Navbar.astro";
+import { CartDrawer } from "@/islands/cart/cart-drawer";
+import { getBusinessInfo } from "@/lib/business";
+import "../styles/global.css";
+
+interface Props {
+	title?: string;
+	pageTitle?: string | null;
+	description?: string | null;
+	image?: string | null;
+	canonical?: string | null;
+	robots?: string | null;
+	content?: { collection: string; id: string; slug?: string | null };
+}
+
+const DEFAULT_DESCRIPTION =
+	"Marose es una repostería artesanal de Cartagena. Cookies, pavé, cookie pie y torta de zanahoria hechos frescos y con amor para compartir. Pide por WhatsApp.";
+const FALLBACK_LOGO = "/brand/favicon.webp";
+const FALLBACK_OG = "/og_logo.webp";
+
+const { title, pageTitle, description, image, canonical, robots, content } =
+	Astro.props;
+
+const [settingsResult, menuResult, business] = await Promise.all([
+	getSiteSettingsWithCacheHint(),
+	getMenuWithCacheHint("primary"),
+	getBusinessInfo(),
+]);
+
+if (Astro.cache?.enabled) {
+	Astro.cache.set(settingsResult.cacheHint);
+	Astro.cache.set(menuResult.cacheHint);
+}
+
+const settings = settingsResult.data;
+const siteTitle = settings?.title?.trim() || "Marose";
+const separator = settings?.seo?.titleSeparator?.trim() || "·";
+const fullTitle = title
+	? title.includes(siteTitle)
+		? title
+		: `${title} ${separator} ${siteTitle}`
+	: siteTitle;
+const logoUrl = settings?.logo?.url || FALLBACK_LOGO;
+const ogImage = new URL(image || FALLBACK_OG, Astro.url.origin).href;
+const pageDescription = description || settings?.tagline || DEFAULT_DESCRIPTION;
+
+const links = (menuResult.data?.items ?? []).map((item) => ({
+	label: item.label,
+	url: item.url,
+	target: item.target,
+}));
+
+const pageCtx = createPublicPageContext({
+	Astro,
+	kind: content ? "content" : "custom",
+	pageType: "website",
+	title: fullTitle,
+	pageTitle: pageTitle ?? title ?? siteTitle,
+	description: pageDescription,
+	canonical: canonical ?? `${Astro.url.origin}${Astro.url.pathname}`,
+	image: ogImage,
+	content,
+	seo: { ogImage, robots },
+	siteName: siteTitle,
+});
+
+const origin = Astro.url.origin;
+const bakeryJsonLd = {
+	"@context": "https://schema.org",
+	"@type": "Bakery",
+	name: siteTitle,
+	image: ogImage,
+	url: `${origin}/`,
+	logo: new URL(logoUrl, origin).href,
+	telephone: business.phoneDisplay,
+	priceRange: business.priceRange,
+	servesCuisine: business.cuisine,
+	address: {
+		"@type": "PostalAddress",
+		addressLocality: business.city,
+		addressRegion: business.region,
+		addressCountry: business.country,
+	},
+	sameAs: [business.instagramUrl, business.tiktokUrl].filter(Boolean),
+	areaServed: { "@type": "City", name: business.city },
+};
+
+const fonts = [
+	"/fonts/Fraunces/Fraunces-VariableFont_opsz,wght.woff2",
+	"/fonts/Jost/Jost-VariableFont_wght.woff2",
+	"/fonts/Allura/Allura-Regular.woff2",
+	"/fonts/Baloo_2/Baloo2-VariableFont_wght.woff2",
+];
+---
+
+<!doctype html>
+<html lang="es" class="bg-cocoa-noir">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{fullTitle}</title>
+		<meta name="theme-color" content="#251a13" />
+		<meta property="og:locale" content="es_CO" />
+		<link rel="icon" type="image/webp" href={logoUrl} />
+		<link rel="manifest" href="/manifest.json" />
+		<link rel="preconnect" href="https://analytics.ahrefs.com" />
+		{
+			fonts.map((href) => (
+				<link
+					rel="preload"
+					as="font"
+					type="font/woff2"
+					href={href}
+					crossorigin="anonymous"
+				/>
+			))
+		}
+		<EmDashHead page={pageCtx} />
+		<script
+			type="application/ld+json"
+			set:html={JSON.stringify(bakeryJsonLd)}
+		/>
+		<script
+			is:inline
+			async
+			src="https://analytics.ahrefs.com/analytics.js"
+			data-key="lI2sfaqZ/EGYIIBK8/m9xg"></script>
+		<noscript>
+			<style>
+				[data-reveal] {
+					opacity: 1 !important;
+					transform: none !important;
+				}
+			</style>
+		</noscript>
+	</head>
+	<body class="antialiased">
+		<EmDashBodyStart page={pageCtx} />
+		<main class="min-h-screen bg-cocoa-noir">
+			<Navbar siteTitle={siteTitle} logoUrl={logoUrl} links={links} />
+			<slot />
+			<Footer logoUrl={logoUrl} />
+		</main>
+		<CartDrawer
+			client:idle
+			order={{
+				whatsappNumber: business.whatsappNumber,
+				greeting: business.greeting,
+			}}
+		/>
+		<EmDashBodyEnd page={pageCtx} />
+
+		<script>
+			// Fade-and-rise reveal for [data-reveal] elements (replaces motion/react).
+			const items = document.querySelectorAll<HTMLElement>("[data-reveal]");
+			const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+			if (reduce.matches || !("IntersectionObserver" in window)) {
+				for (const el of items) el.dataset.revealed = "";
+			} else {
+				const observer = new IntersectionObserver(
+					(entries) => {
+						for (const entry of entries) {
+							if (!entry.isIntersecting) continue;
+							(entry.target as HTMLElement).dataset.revealed = "";
+							observer.unobserve(entry.target);
+						}
+					},
+					{ threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+				);
+				for (const el of items) observer.observe(el);
+			}
+		</script>
+	</body>
+</html>

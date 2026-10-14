@@ -1,0 +1,115 @@
+---
+import type { WhereValue } from "emdash";
+import { getEmDashCollection } from "emdash";
+import { type BlockComponentProps } from "emdash/ui";
+import type { ReviewsBlock } from "@/components/blocks/types";
+import Swoosh from "@/components/Swoosh.astro";
+import { relativeTime } from "@/lib/relative-time";
+
+type Props = BlockComponentProps<ReviewsBlock>;
+
+type ReviewRow = {
+	comment?: string | null;
+	author?: string | null;
+	review_date?: string | null;
+	featured?: boolean | null;
+	source?: string | null;
+};
+
+const { value } = Astro.props;
+
+const maxItems =
+	typeof value.max_items === "number" && value.max_items > 0
+		? value.max_items
+		: 8;
+
+const SPEED_CLASSES: Record<string, string> = {
+	Lenta: "animate-[marquee_90s_linear_infinite]",
+	Normal: "animate-[marquee_60s_linear_infinite]",
+	Rápida: "animate-[marquee_35s_linear_infinite]",
+};
+const marqueeClass =
+	(value.speed && SPEED_CLASSES[value.speed]) || SPEED_CLASSES.Normal;
+
+const { entries, cacheHint } = await getEmDashCollection("reviews", {
+	// The query layer coerces booleans to 0/1, but the exported `WhereValue`
+	// type only advertises strings/ranges, so the cast keeps the runtime
+	// behavior the contract asks for (`featured = true`).
+	where: { featured: true } as unknown as Record<string, WhereValue>,
+	orderBy: { review_date: "desc" },
+	limit: maxItems,
+});
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const reviews = entries.map((entry) => {
+	const data = entry.data as unknown as ReviewRow;
+	const date = data.review_date ? new Date(data.review_date) : new Date();
+	return {
+		id: entry.id,
+		timestamp: relativeTime(date),
+		comment: data.comment ?? "",
+		author: data.author ?? null,
+	};
+});
+
+// Duplicated once for a seamless -50% marquee loop, exactly like the legacy
+// `renderTrack()` called twice inside the same flex row.
+const track = [...reviews, ...reviews];
+---
+
+<section
+	id={value.anchor || undefined}
+	aria-label="Opiniones de nuestros clientes"
+	class="relative overflow-hidden px-0 py-9"
+>
+	<div data-reveal class="relative mb-12 px-4 text-center">
+		<h2 class="font-velvet-serif text-heading font-medium text-blush-cream">
+			{value.heading}
+				{
+					value.heading_accent && (
+						<span class="italic text-rose-petal"> {value.heading_accent}</span>
+					)
+				}
+		</h2>
+		<Swoosh class="mx-auto mt-2 h-4 w-52 text-dusty-rose" />
+		{
+			value.subtitle && (
+				<p class="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-rose-mist">
+					{value.subtitle}
+				</p>
+			)
+		}
+	</div>
+
+	<div
+		class="overflow-hidden motion-reduce:overflow-x-auto motion-reduce:px-4"
+		draggable="false"
+	>
+		<div
+			class={`flex w-max gap-6 hover:[animation-play-state:paused] motion-reduce:w-fit motion-reduce:animate-none motion-reduce:gap-6 ${marqueeClass}`}
+		>
+			{
+				track.map((review, index) => (
+					<article
+						draggable="false"
+						class={`w-80 shrink-0 select-none rounded-card bg-rose-noir p-6 shadow-soft ${
+							index % 2 === 0 ? "-rotate-1" : "rotate-1"
+						}`}
+					>
+						<time class="block font-patisserie-sans text-label font-medium uppercase text-rose-mist">
+							{review.timestamp}
+						</time>
+						<p class="mt-2 line-clamp-3 text-pretty font-patisserie-sans text-body-sm leading-relaxed text-blush-cream">
+							{review.comment}
+						</p>
+						{review.author && (
+							<p class="mt-3 font-wordmark-sans text-[13px] font-semibold text-rose-petal">
+								{review.author}
+							</p>
+						)}
+					</article>
+				))
+			}
+		</div>
+	</div>
+</section>

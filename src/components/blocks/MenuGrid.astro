@@ -1,0 +1,107 @@
+---
+import type { ImageValue } from "emdash";
+import { getEmDashCollection } from "emdash";
+import { type BlockComponentProps } from "emdash/ui";
+import type { MenuGridBlock } from "@/components/blocks/types";
+import Swoosh from "@/components/Swoosh.astro";
+import { ProductCard } from "@/islands/product-card";
+import { flavorColor } from "@/lib/flavor-colors";
+import { mediaUrl } from "@/lib/media";
+import type { ProductView } from "@/lib/types";
+
+type Props = BlockComponentProps<MenuGridBlock>;
+
+type ProductRow = {
+	name?: string | null;
+	description?: string | null;
+	price?: number | null;
+	photos?: { image?: ImageValue | null; alt?: string | null }[] | null;
+	badge?: string | null;
+	requires_flavor?: boolean | null;
+	flavors?:
+		| {
+				label?: string | null;
+				color?: string | null;
+				image?: ImageValue | null;
+		  }[]
+		| null;
+	available?: boolean | null;
+	sort_order?: number | null;
+};
+
+const { value } = Astro.props;
+
+const { entries, cacheHint } = await getEmDashCollection("products", {
+	orderBy: { sort_order: "asc" },
+});
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const showUnavailable = value.show_unavailable === true;
+
+const products: ProductView[] = entries
+	.filter((entry) => {
+		if (showUnavailable) return true;
+		return (entry.data as unknown as ProductRow).available !== false;
+	})
+	.map((entry) => {
+		const data = entry.data as unknown as ProductRow;
+		const photos = (data.photos ?? [])
+			.map((row) => ({
+				src: mediaUrl(row.image),
+				alt: row.alt ?? "",
+				width: row.image?.width,
+				height: row.image?.height,
+			}))
+			.filter((photo) => photo.src.length > 0);
+		const flavors = (data.flavors ?? []).map((row) => ({
+			label: row.label ?? "",
+			color: flavorColor(row.color),
+			image: row.image ? mediaUrl(row.image) : null,
+		}));
+
+		return {
+			id: entry.id,
+			name: data.name ?? "",
+			description: data.description ?? "",
+			price: data.price ?? 0,
+			photos,
+			badge: data.badge ?? null,
+			requiresFlavor: data.requires_flavor === true,
+			flavors,
+			soldOut: data.badge === "Agotado",
+		} satisfies ProductView;
+	});
+---
+
+<section id={value.anchor || undefined} class="px-4 py-9">
+	<div class="mx-auto max-w-280">
+		<div data-reveal class="relative mb-12 text-center">
+			<h2 class="font-velvet-serif text-heading font-medium text-blush-cream">
+				{value.heading}
+				{
+					value.heading_accent && (
+						<span class="italic text-rose-petal"> {value.heading_accent}</span>
+					)
+				}
+			</h2>
+			<Swoosh class="mx-auto mt-2 h-4 w-48 text-dusty-rose" />
+			{
+				value.subtitle && (
+					<p class="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-rose-mist">
+						{value.subtitle}
+					</p>
+				)
+			}
+		</div>
+
+		<div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			{
+				products.map((product, index) => (
+					<div data-reveal style={`--reveal-delay: ${(index % 3) * 90}ms`}>
+						<ProductCard client:visible product={product} />
+					</div>
+				))
+			}
+		</div>
+	</div>
+</section>

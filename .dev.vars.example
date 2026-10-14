@@ -1,0 +1,2 @@
+# Local overrides for wrangler.jsonc vars (copy to .dev.vars)
+EMDASH_SITE_URL=http://localhost:4321

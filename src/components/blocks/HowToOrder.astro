@@ -1,0 +1,150 @@
+---
+import { type BlockComponentProps } from "emdash/ui";
+import type { HowToOrderBlock } from "@/components/blocks/types";
+import Icon from "@/components/Icon.astro";
+import Swoosh from "@/components/Swoosh.astro";
+import WhatsappButton from "@/components/WhatsappButton.astro";
+import { getBusinessInfo } from "@/lib/business";
+
+type Props = BlockComponentProps<HowToOrderBlock>;
+
+const { value } = Astro.props;
+const business = await getBusinessInfo();
+
+const steps = value.steps ?? [];
+const notes = value.notes ?? [];
+
+// Legacy tilts, applied per index (0-based): -2deg, +1deg, -1deg, +2deg.
+const STEP_ROTATIONS = ["-rotate-2", "rotate-1", "-rotate-1", "rotate-2"];
+const NOTE_ROTATIONS = ["sm:rotate-0", "sm:-rotate-1", "sm:rotate-1"];
+---
+
+<section id={value.anchor || undefined} class="relative overflow-hidden px-4 py-9">
+	<div class="relative mx-auto max-w-280">
+		<div data-reveal class="relative mb-16 text-center">
+			{
+				value.badge && (
+					<span class="inline-block rounded-pill border border-cocoa-hairline bg-deep-cocoa px-4 py-1.5 font-patisserie-sans text-[13px] font-medium uppercase tracking-[0.14em] text-dusty-rose">
+						{value.badge}
+					</span>
+				)
+			}
+			<h2 class="mt-3 font-velvet-serif text-heading font-medium text-blush-cream">
+				{value.heading}
+				{
+					value.heading_accent && (
+						<span class="italic text-rose-petal"> {value.heading_accent}</span>
+					)
+				}
+			</h2>
+			<Swoosh class="mx-auto mt-2 h-4 w-44 text-dusty-rose" />
+			{
+				value.subtitle && (
+					<p class="mx-auto mt-4 max-w-md text-pretty text-[17px] leading-relaxed text-rose-mist">
+						{value.subtitle}
+					</p>
+				)
+			}
+		</div>
+
+		{
+			steps.length > 0 && (
+				<div class="relative">
+					<svg
+						viewBox="0 0 1000 60"
+						fill="none"
+						aria-hidden="true"
+						class="absolute left-1/2 top-8 hidden w-[88%] -translate-x-1/2 text-dusty-rose lg:block"
+						preserveAspectRatio="none"
+					>
+						<path
+							d="M10 40 C 150 5, 280 55, 380 30 S 620 10, 720 35 S 930 50, 990 20"
+							stroke="currentColor"
+							stroke-width="2.5"
+							stroke-linecap="round"
+							stroke-dasharray="1 10"
+						/>
+					</svg>
+
+					<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-5">
+						{steps.map((step, index) => (
+							<div data-reveal style={`--reveal-delay: ${(index % 4) * 90}ms`}>
+								<article
+									class={`group relative flex flex-col items-center rounded-card border-2 border-dashed border-cocoa-hairline bg-rose-noir px-6 pb-8 pt-12 text-center shadow-soft transition-all duration-300 hover:rotate-0 hover:border-rose-petal hover:shadow-lift ${
+										STEP_ROTATIONS[index % 4]
+									}`}
+								>
+									<span class="absolute -top-5 left-1/2 flex h-11 w-11 -translate-x-1/2 items-center justify-center rounded-full bg-deep-cocoa font-velvet-serif text-xl italic text-rose-petal ring-4 ring-rose-noir">
+										{index + 1}
+									</span>
+
+									<div class="relative mb-5 flex h-20 w-20 items-center justify-center rounded-full bg-deep-cocoa text-rose-mist transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6">
+										<Icon name={step.icon} class="h-8 w-8" />
+									</div>
+
+									<h3 class="font-wordmark-sans text-[19px] font-semibold leading-snug text-blush-cream">
+										{step.title}
+									</h3>
+									<p class="mt-2 text-pretty text-[15px] leading-relaxed text-rose-mist">
+										{step.description}
+									</p>
+									{
+										step.note && (
+											<span class="mt-4 font-patisserie-sans text-[15px] leading-none text-rose-mist">
+												{step.note}
+											</span>
+										)
+									}
+								</article>
+							</div>
+						))}
+					</div>
+				</div>
+			)
+		}
+
+		{
+			notes.length > 0 && (
+				<div class="mt-14 grid gap-4 sm:grid-cols-3">
+					{notes.map((note, index) => (
+						<div data-reveal style={`--reveal-delay: ${(index % 3) * 90}ms`}>
+							<div
+								class={`flex items-start gap-4 rounded-card border border-cocoa-hairline bg-deep-cocoa px-5 py-4 ${
+									NOTE_ROTATIONS[index % 3]
+								}`}
+							>
+								<span class="mt-0.5 flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-espresso-truffle text-rose-mist">
+									<Icon name={note.icon} class="h-6 w-6" />
+								</span>
+								<div>
+									<p class="font-wordmark-sans text-[15px] font-semibold text-blush-cream">
+										{note.label}
+									</p>
+									<p class="mt-0.5 text-pretty text-[13.5px] leading-relaxed text-rose-mist">
+										{note.text}
+									</p>
+								</div>
+							</div>
+						</div>
+					))}
+				</div>
+			)
+		}
+
+		<div data-reveal class="mt-12 flex flex-col items-center gap-2">
+			{
+				value.cta_script && (
+					<span class="font-dulce-script text-2xl text-rose-petal">
+						{value.cta_script}
+					</span>
+				)
+			}
+			<WhatsappButton
+				number={business.whatsappNumber}
+				message={value.cta_message || business.whatsappDefaultMessage}
+				label={value.cta_label ?? "Hacer mi pedido"}
+				class="px-8 py-4"
+			/>
+		</div>
+	</div>
+</section>

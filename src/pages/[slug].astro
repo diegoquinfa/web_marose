@@ -1,0 +1,32 @@
+---
+import { decodeSlug, getEmDashEntry, getSeoMeta } from "emdash";
+import PageSections from "@/components/PageSections.astro";
+import Base from "@/layouts/Base.astro";
+
+const slug = decodeSlug(Astro.params.slug);
+if (!slug || slug === "no-encontrado") return Astro.rewrite("/404");
+
+const { entry: page, cacheHint } = await getEmDashEntry("pages", slug);
+if (!page) return Astro.rewrite("/404");
+
+if (Astro.cache?.enabled) Astro.cache.set(cacheHint);
+
+const seo = getSeoMeta(page, {
+	siteUrl: Astro.url.origin,
+	path: `/${page.id}`,
+});
+---
+
+<Base
+	title={seo.title}
+	pageTitle={page.data.title}
+	description={seo.description}
+	image={seo.ogImage}
+	canonical={seo.canonical}
+	robots={seo.robots}
+	content={{ collection: "pages", id: page.data.id, slug: page.id }}
+>
+	<div {...page.edit.sections}>
+		<PageSections value={page.data.sections ?? []} />
+	</div>
+</Base>
